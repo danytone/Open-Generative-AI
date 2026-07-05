@@ -1,0 +1,5 @@
+apps/CastBridge/Pods/
+apps/CastBridge/*.xcworkspace
+apps/CastBridge/*.xcuserdata/
+apps/CastBridge/DerivedData/
+**/.DS_Store
