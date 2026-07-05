@@ -18,7 +18,7 @@ struct ContentView: View {
           Label("Cast", systemImage: "tv")
         }
     }
-    .tint(.accentColor)
+    .tint(Color.accentColor)
   }
 }
 

@@ -133,7 +133,7 @@ struct MediaRowView: View {
       HStack(spacing: 12) {
         Image(systemName: item.isContainer ? "folder.fill" : "play.rectangle.fill")
           .font(.title2)
-          .foregroundStyle(item.isContainer ? .yellow : .accentColor)
+          .foregroundStyle(item.isContainer ? Color.yellow : Color.accentColor)
           .frame(width: 36)
 
         VStack(alignment: .leading, spacing: 4) {
@@ -167,7 +167,7 @@ struct MediaRowView: View {
             .foregroundStyle(.tertiary)
         } else {
           Image(systemName: "airplayvideo")
-            .foregroundStyle(.accentColor)
+            .foregroundStyle(Color.accentColor)
         }
       }
       .contentShape(Rectangle())

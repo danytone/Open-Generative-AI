@@ -34,7 +34,7 @@ struct CastMiniController: View {
   var body: some View {
     HStack(spacing: 12) {
       Image(systemName: "tv.fill")
-        .foregroundStyle(.accentColor)
+        .foregroundStyle(Color.accentColor)
 
       VStack(alignment: .leading, spacing: 2) {
         Text(castManager.deviceName ?? "Chromecast")

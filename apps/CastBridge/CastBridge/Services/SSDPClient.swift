@@ -12,9 +12,7 @@ final class SSDPClient: @unchecked Sendable {
 
     func discover(timeout: TimeInterval = 5) async throws -> [URL] {
         try await withCheckedThrowingContinuation { continuation in
-            var resumed = false
-            var discoveredLocations = Set<URL>()
-            let lock = NSLock()
+            let session = DiscoverySession()
 
             let endpoint = NWEndpoint.hostPort(
                 host: NWEndpoint.Host(SSDPClient.multicastHost),
@@ -34,9 +32,7 @@ final class SSDPClient: @unchecked Sendable {
                       let location = self.parseLocation(from: response) else {
                     return
                 }
-                lock.lock()
-                discoveredLocations.insert(location)
-                lock.unlock()
+                session.addLocation(location)
             }
 
             group.stateUpdateHandler = { state in
@@ -46,10 +42,7 @@ final class SSDPClient: @unchecked Sendable {
                         self.sendMSearch(on: group, searchTarget: target)
                     }
                 case .failed(let error):
-                    lock.lock()
-                    defer { lock.unlock() }
-                    guard !resumed else { return }
-                    resumed = true
+                    guard session.markResumed() else { return }
                     group.cancel()
                     continuation.resume(throwing: UPnPError.discoveryFailed(error.localizedDescription))
                 default:
@@ -60,12 +53,9 @@ final class SSDPClient: @unchecked Sendable {
             group.start(queue: .global(qos: .userInitiated))
 
             DispatchQueue.global().asyncAfter(deadline: .now() + timeout) {
-                lock.lock()
-                defer { lock.unlock() }
-                guard !resumed else { return }
-                resumed = true
+                guard session.markResumed() else { return }
                 group.cancel()
-                continuation.resume(returning: Array(discoveredLocations))
+                continuation.resume(returning: session.locations())
             }
         }
     }
@@ -96,5 +86,31 @@ final class SSDPClient: @unchecked Sendable {
             }
         }
         return nil
+    }
+}
+
+private final class DiscoverySession: @unchecked Sendable {
+    private let lock = NSLock()
+    private var resumed = false
+    private var discoveredLocations = Set<URL>()
+
+    func addLocation(_ location: URL) {
+        lock.lock()
+        discoveredLocations.insert(location)
+        lock.unlock()
+    }
+
+    func markResumed() -> Bool {
+        lock.lock()
+        defer { lock.unlock() }
+        guard !resumed else { return false }
+        resumed = true
+        return true
+    }
+
+    func locations() -> [URL] {
+        lock.lock()
+        defer { lock.unlock() }
+        return Array(discoveredLocations)
     }
 }
