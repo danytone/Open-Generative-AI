@@ -21,6 +21,7 @@
 		A10000010000000000000012 /* ManualStreamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000010000000000000012 /* ManualStreamView.swift */; };
 		A10000010000000000000013 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A20000010000000000000013 /* Assets.xcassets */; };
 		A10000010000000000000014 /* CastBridgeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000010000000000000014 /* CastBridgeTests.swift */; };
+		A10000010000000000000016 /* PlayerControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000010000000000000016 /* PlayerControlsView.swift */; };
 
 /* End PBXBuildFile section */
 
@@ -40,6 +41,7 @@
 		A20000010000000000000013 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A20000010000000000000014 /* CastBridgeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CastBridgeTests.swift; sourceTree = "<group>"; };
 		A20000010000000000000015 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A20000010000000000000016 /* PlayerControlsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerControlsView.swift; sourceTree = "<group>"; };
 		A30000010000000000000001 /* CastBridge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CastBridge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A30000010000000000000002 /* CastBridgeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CastBridgeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 
@@ -129,6 +131,7 @@
 				A20000010000000000000010 /* MediaBrowserView.swift */,
 				A20000010000000000000011 /* CastViews.swift */,
 				A20000010000000000000012 /* ManualStreamView.swift */,
+				A20000010000000000000016 /* PlayerControlsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -254,6 +257,7 @@
 				A10000010000000000000010 /* MediaBrowserView.swift in Sources */,
 				A10000010000000000000011 /* CastViews.swift in Sources */,
 				A10000010000000000000012 /* ManualStreamView.swift in Sources */,
+				A10000010000000000000016 /* PlayerControlsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

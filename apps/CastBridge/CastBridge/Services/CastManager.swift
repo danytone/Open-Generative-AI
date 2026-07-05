@@ -12,14 +12,22 @@ final class CastManager: NSObject, ObservableObject {
     @Published private(set) var isConnected = false
     @Published private(set) var deviceName: String?
     @Published private(set) var isPlaying = false
+    @Published private(set) var isBuffering = false
     @Published private(set) var currentMediaTitle: String?
     @Published private(set) var discoveredDeviceCount = 0
+    @Published private(set) var streamPosition: TimeInterval = 0
+    @Published private(set) var streamDuration: TimeInterval = 0
+    @Published private(set) var deviceVolume: Float = 1.0
+    @Published private(set) var isMuted: Bool = false
     @Published var lastError: String?
 
     #if canImport(GoogleCast)
     private var sessionManager: GCKSessionManager?
     private var discoveryManager: GCKDiscoveryManager?
+    private lazy var volumeController = GCKUIDeviceVolumeController()
     #endif
+
+    private var progressTask: Task<Void, Never>?
 
     private override init() {
         super.init()
@@ -73,8 +81,12 @@ final class CastManager: NSObject, ObservableObject {
         builder.metadata = createMetadata(title: title, subtitle: subtitle)
         builder.streamDuration = 0
 
+        streamPosition = 0
+        streamDuration = 0
+
         let request = session.remoteMediaClient?.loadMedia(builder.build())
         request?.delegate = self
+        startProgressTicker()
         #else
         lastError = "Google Cast SDK non installato. Esegui 'pod install' e ricompila il progetto."
         #endif
@@ -97,8 +109,74 @@ final class CastManager: NSObject, ObservableObject {
         _ = sessionManager?.currentCastSession?.remoteMediaClient?.stop()
         currentMediaTitle = nil
         isPlaying = false
+        streamPosition = 0
+        streamDuration = 0
+        stopProgressTicker()
         #endif
     }
+
+    /// Absolute seek to a position in seconds within the current media item.
+    func seek(to seconds: TimeInterval) {
+        #if canImport(GoogleCast)
+        guard let client = sessionManager?.currentCastSession?.remoteMediaClient else { return }
+        let clamped = max(0, min(seconds, streamDuration))
+        let options = GCKMediaSeekOptions()
+        options.interval = clamped
+        options.relative = false
+        let request = client.seek(with: options)
+        request.delegate = self
+        // Optimistic UI update so the slider doesn't snap back while the
+        // request round-trips to the receiver.
+        streamPosition = clamped
+        #endif
+    }
+
+    /// Relative seek (e.g. -10 or +30 seconds) from the current position.
+    func skip(by seconds: TimeInterval) {
+        seek(to: streamPosition + seconds)
+    }
+
+    func setVolume(_ value: Float) {
+        #if canImport(GoogleCast)
+        let clamped = max(0, min(value, 1))
+        volumeController.setVolume(clamped)
+        deviceVolume = clamped
+        #endif
+    }
+
+    func toggleMute() {
+        #if canImport(GoogleCast)
+        isMuted.toggle()
+        volumeController.setMuted(isMuted)
+        #endif
+    }
+
+    #if canImport(GoogleCast)
+    private func startProgressTicker() {
+        progressTask?.cancel()
+        progressTask = Task { [weak self] in
+            while !Task.isCancelled {
+                await MainActor.run {
+                    self?.refreshProgress()
+                }
+                try? await Task.sleep(nanoseconds: 500_000_000)
+            }
+        }
+    }
+
+    private func stopProgressTicker() {
+        progressTask?.cancel()
+        progressTask = nil
+    }
+
+    private func refreshProgress() {
+        guard let client = sessionManager?.currentCastSession?.remoteMediaClient else { return }
+        streamPosition = client.approximateStreamPosition()
+        if let duration = client.mediaStatus?.mediaInformation?.streamDuration, duration.isFinite, duration > 0 {
+            streamDuration = duration
+        }
+    }
+    #endif
 
     private func mimeTypeForURL(_ url: URL) -> String {
         switch url.pathExtension.lowercased() {
@@ -139,6 +217,10 @@ extension CastManager: GCKSessionManagerListener {
         Task { @MainActor in
             isConnected = true
             deviceName = session.device.friendlyName
+            deviceVolume = session.currentDeviceVolume
+            isMuted = session.currentDeviceMuted
+            (session as? GCKCastSession)?.remoteMediaClient?.add(self)
+            startProgressTicker()
         }
     }
 
@@ -147,6 +229,9 @@ extension CastManager: GCKSessionManagerListener {
             isConnected = false
             deviceName = nil
             isPlaying = false
+            streamPosition = 0
+            streamDuration = 0
+            stopProgressTicker()
             if let error {
                 lastError = error.localizedDescription
             }
@@ -157,21 +242,44 @@ extension CastManager: GCKSessionManagerListener {
         Task { @MainActor in
             isConnected = true
             deviceName = session.device.friendlyName
+            deviceVolume = session.currentDeviceVolume
+            isMuted = session.currentDeviceMuted
+            (session as? GCKCastSession)?.remoteMediaClient?.add(self)
+            startProgressTicker()
+        }
+    }
+
+    nonisolated func sessionManager(
+        _ sessionManager: GCKSessionManager,
+        session: GCKSession,
+        didReceiveDeviceVolume volume: Float,
+        muted: Bool
+    ) {
+        Task { @MainActor in
+            deviceVolume = volume
+            isMuted = muted
         }
     }
 }
 
 extension CastManager: GCKRequestDelegate {
-    nonisolated func requestDidComplete(_ request: GCKRequest) {
-        Task { @MainActor in
-            isPlaying = true
-        }
-    }
-
     nonisolated func request(_ request: GCKRequest, didFailWithError error: GCKError) {
         Task { @MainActor in
             lastError = error.localizedDescription
-            isPlaying = false
+        }
+    }
+}
+
+extension CastManager: GCKRemoteMediaClientListener {
+    nonisolated func remoteMediaClient(_ client: GCKRemoteMediaClient, didUpdate mediaStatus: GCKMediaStatus?) {
+        Task { @MainActor in
+            guard let mediaStatus else { return }
+            isPlaying = mediaStatus.playerState == .playing
+            isBuffering = mediaStatus.playerState == .buffering || mediaStatus.playerState == .loading
+            streamPosition = mediaStatus.streamPosition
+            if let duration = mediaStatus.mediaInformation?.streamDuration, duration.isFinite, duration > 0 {
+                streamDuration = duration
+            }
         }
     }
 }

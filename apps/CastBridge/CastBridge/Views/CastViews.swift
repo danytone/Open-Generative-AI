@@ -30,41 +30,68 @@ struct CastButtonRepresentable: UIViewRepresentable {
 
 struct CastMiniController: View {
   @EnvironmentObject private var castManager: CastManager
+  @State private var isExpanded = false
 
   var body: some View {
-    HStack(spacing: 12) {
-      Image(systemName: "tv.fill")
-        .foregroundStyle(Color.accentColor)
-
-      VStack(alignment: .leading, spacing: 2) {
-        Text(castManager.deviceName ?? "Chromecast")
-          .font(.caption)
-          .foregroundStyle(.secondary)
-        Text(castManager.currentMediaTitle ?? "In riproduzione")
-          .font(.subheadline)
-          .lineLimit(1)
+    VStack(spacing: 0) {
+      if castManager.streamDuration > 0 {
+        ProgressView(value: castManager.streamPosition, total: castManager.streamDuration)
+          .progressViewStyle(.linear)
+          .tint(Color.accentColor)
       }
 
-      Spacer()
+      HStack(spacing: 12) {
+        Image(systemName: "tv.fill")
+          .foregroundStyle(Color.accentColor)
 
-      Button {
-        if castManager.isPlaying {
-          castManager.pause()
-        } else {
-          castManager.play()
+        VStack(alignment: .leading, spacing: 2) {
+          Text(castManager.deviceName ?? "Chromecast")
+            .font(.caption)
+            .foregroundStyle(.secondary)
+          Text(castManager.currentMediaTitle ?? "In riproduzione")
+            .font(.subheadline)
+            .lineLimit(1)
         }
-      } label: {
-        Image(systemName: castManager.isPlaying ? "pause.fill" : "play.fill")
-      }
 
-      Button(role: .destructive) {
-        castManager.stop()
-      } label: {
-        Image(systemName: "stop.fill")
+        Spacer()
+
+        Button {
+          castManager.skip(by: -10)
+        } label: {
+          Image(systemName: "gobackward.10")
+        }
+
+        Button {
+          if castManager.isPlaying {
+            castManager.pause()
+          } else {
+            castManager.play()
+          }
+        } label: {
+          Image(systemName: castManager.isPlaying ? "pause.fill" : "play.fill")
+        }
+
+        Button {
+          castManager.skip(by: 30)
+        } label: {
+          Image(systemName: "goforward.30")
+        }
+
+        Button {
+          isExpanded.toggle()
+        } label: {
+          Image(systemName: isExpanded ? "chevron.down" : "chevron.up")
+        }
+      }
+      .padding(.horizontal, 16)
+      .padding(.vertical, 10)
+
+      if isExpanded {
+        PlayerControlsView()
+          .padding(.horizontal, 16)
+          .padding(.bottom, 12)
       }
     }
-    .padding(.horizontal, 16)
-    .padding(.vertical, 10)
     .background(.ultraThinMaterial)
   }
 }
@@ -108,26 +135,17 @@ struct CastStatusView: View {
 
         Section("Riproduzione") {
           if let title = castManager.currentMediaTitle {
-            HStack {
-              Text("Titolo")
-              Spacer()
-              Text(title)
-                .foregroundStyle(.secondary)
-                .multilineTextAlignment(.trailing)
+            Text(title)
+              .font(.subheadline.weight(.medium))
+
+            if castManager.isConnected {
+              PlayerControlsView()
+                .listRowInsets(EdgeInsets())
+                .padding(.vertical, 4)
             }
           } else {
             Text("Nessun contenuto in riproduzione")
               .foregroundStyle(.secondary)
-          }
-
-          if castManager.isConnected {
-            HStack {
-              Button("Play") { castManager.play() }
-              Spacer()
-              Button("Pausa") { castManager.pause() }
-              Spacer()
-              Button("Stop", role: .destructive) { castManager.stop() }
-            }
           }
         }
 
