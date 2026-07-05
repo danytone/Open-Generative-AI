@@ -3,29 +3,64 @@ import SwiftUI
 struct ServerListView: View {
   @StateObject private var viewModel = UPnPDiscoveryViewModel()
   @EnvironmentObject private var castManager: CastManager
+  @FocusState private var urlFieldFocused: Bool
 
   var body: some View {
     NavigationStack {
       List {
         Section {
-          HStack {
-            TextField("http://192.168.1.1", text: $viewModel.manualServerURL)
-              .textInputAutocapitalization(.never)
-              .autocorrectionDisabled()
-              .keyboardType(.URL)
-            Button("Aggiungi") {
-              Task { await viewModel.addManualServer() }
+          VStack(alignment: .leading, spacing: 10) {
+            Text("URL del server")
+              .font(.caption)
+              .foregroundStyle(.secondary)
+
+            HStack {
+              TextField("Incolla qui l'URL", text: $viewModel.manualServerURL)
+                .textInputAutocapitalization(.never)
+                .autocorrectionDisabled()
+                .keyboardType(.URL)
+                .focused($urlFieldFocused)
+
+              if !viewModel.manualServerURL.isEmpty {
+                Button {
+                  viewModel.clearManualURL()
+                } label: {
+                  Image(systemName: "xmark.circle.fill")
+                    .foregroundStyle(.secondary)
+                }
+                .buttonStyle(.plain)
+              }
             }
-            .disabled(
-              viewModel.manualServerURL.trimmingCharacters(in: .whitespaces).isEmpty
-                || viewModel.isAddingManual
-            )
+
+            HStack {
+              Button {
+                urlFieldFocused = true
+              } label: {
+                Label("Modifica URL", systemImage: "pencil")
+              }
+              .buttonStyle(.bordered)
+
+              Spacer()
+
+              Button {
+                Task { await viewModel.addManualServer() }
+              } label: {
+                if viewModel.isAddingManual {
+                  ProgressView()
+                } else {
+                  Text("Aggiungi")
+                }
+              }
+              .buttonStyle(.borderedProminent)
+              .disabled(viewModel.manualServerURL.trimmingCharacters(in: .whitespaces).isEmpty)
+            }
           }
+          .padding(.vertical, 4)
 
           if viewModel.isDiscovering {
             HStack {
               ProgressView()
-              Text("Ricerca automatica in corso…")
+              Text("Ricerca automatica…")
                 .foregroundStyle(.secondary)
               Spacer()
               Button("Stop") {
@@ -43,12 +78,12 @@ struct ServerListView: View {
         } header: {
           Text("Aggiungi server")
         } footer: {
-          Text("Puoi aggiungere il router anche durante la ricerca. Trova l'IP in Impostazioni → Wi‑Fi → (i) → Router.")
+          Text("Il campo sopra è vuoto all'avvio: scrivi tu l'URL. Se hai già trovato il server Vodafone una volta, dovrebbe comparire in lista sotto.")
         }
 
         Section {
           if viewModel.servers.isEmpty {
-            Text("Nessun server in lista.")
+            Text("Nessun server in lista. Usa “Cerca” o aggiungi l'URL manualmente.")
               .foregroundStyle(.secondary)
           } else {
             ForEach(viewModel.servers) { server in

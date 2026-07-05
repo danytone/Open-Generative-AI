@@ -1,6 +1,23 @@
 import Foundation
 import Combine
 
+private enum ServerStore {
+    private static let key = "castbridge.savedServers"
+
+    static func load() -> [UPnPMediaServer] {
+        guard let data = UserDefaults.standard.data(forKey: key),
+              let servers = try? JSONDecoder().decode([UPnPMediaServer].self, from: data) else {
+            return []
+        }
+        return servers
+    }
+
+    static func save(_ servers: [UPnPMediaServer]) {
+        guard let data = try? JSONEncoder().encode(servers) else { return }
+        UserDefaults.standard.set(data, forKey: key)
+    }
+}
+
 @MainActor
 final class UPnPDiscoveryViewModel: ObservableObject {
     @Published private(set) var servers: [UPnPMediaServer] = []
@@ -15,6 +32,10 @@ final class UPnPDiscoveryViewModel: ObservableObject {
 
     init(session: URLSession = .shared) {
         self.session = session
+        servers = ServerStore.load()
+        if !servers.isEmpty {
+            statusMessage = "Server salvati caricati. Tocca un server per aprirlo."
+        }
     }
 
     func discover() {
