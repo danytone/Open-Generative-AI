@@ -1,23 +1,6 @@
 import Foundation
 import Combine
 
-private enum ServerStore {
-    private static let key = "castbridge.savedServers"
-
-    static func load() -> [UPnPMediaServer] {
-        guard let data = UserDefaults.standard.data(forKey: key),
-              let servers = try? JSONDecoder().decode([UPnPMediaServer].self, from: data) else {
-            return []
-        }
-        return servers
-    }
-
-    static func save(_ servers: [UPnPMediaServer]) {
-        guard let data = try? JSONEncoder().encode(servers) else { return }
-        UserDefaults.standard.set(data, forKey: key)
-    }
-}
-
 @MainActor
 final class UPnPDiscoveryViewModel: ObservableObject {
     @Published private(set) var servers: [UPnPMediaServer] = []
@@ -30,20 +13,15 @@ final class UPnPDiscoveryViewModel: ObservableObject {
 
     init(session: URLSession = .shared) {
         self.session = session
-        servers = ServerStore.load()
     }
 
-    func discover(keepCachedOnFailure: Bool = true) async {
-        guard !isDiscovering else { return }
-
+    func discover() async {
         isDiscovering = true
         errorMessage = nil
         defer { isDiscovering = false }
 
-        let cached = servers
-
         do {
-            let locations = try await ssdpClient.discover(timeout: 6)
+            let locations = try await ssdpClient.discover(timeout: 5)
             var foundServers: [UPnPMediaServer] = []
             var seenIDs = Set<String>()
 
@@ -61,37 +39,13 @@ final class UPnPDiscoveryViewModel: ObservableObject {
                 }
             }
 
-            if foundServers.isEmpty, keepCachedOnFailure, !cached.isEmpty {
-                servers = cached
-                errorMessage = "Discovery non ha trovato nuovi server. Mostro quelli salvati in precedenza. Tocca ↻ per riprovare."
-                return
-            }
+            servers = foundServers.sorted { $0.friendlyName.localizedCaseInsensitiveCompare($1.friendlyName) == .orderedAscending }
 
-            if foundServers.isEmpty, cached.isEmpty {
-                servers = []
-                errorMessage = "Nessun server multimediale trovato. Prova ad aggiungere l'IP del router manualmente."
-                return
-            }
-
-            var merged = cached
-            for server in foundServers where !merged.contains(where: { $0.id == server.id }) {
-                merged.append(server)
-            }
-            servers = merged.sorted {
-                $0.friendlyName.localizedCaseInsensitiveCompare($1.friendlyName) == .orderedAscending
-            }
-            ServerStore.save(servers)
-
-            if foundServers.isEmpty, !cached.isEmpty {
-                errorMessage = "Server salvati disponibili. La ricerca automatica non ha risposto."
+            if servers.isEmpty {
+                errorMessage = "Nessun server multimediale trovato sulla rete locale."
             }
         } catch {
-            if keepCachedOnFailure, !cached.isEmpty {
-                servers = cached
-                errorMessage = nil
-            } else if cached.isEmpty {
-                errorMessage = error.localizedDescription
-            }
+            errorMessage = error.localizedDescription
         }
     }
 
@@ -110,7 +64,6 @@ final class UPnPDiscoveryViewModel: ObservableObject {
             if !servers.contains(where: { $0.id == server.id }) {
                 servers.append(server)
                 servers.sort { $0.friendlyName.localizedCaseInsensitiveCompare($1.friendlyName) == .orderedAscending }
-                ServerStore.save(servers)
             }
             manualServerURL = ""
         } else {

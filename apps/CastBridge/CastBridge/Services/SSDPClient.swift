@@ -1,7 +1,7 @@
 import Foundation
-import Darwin
+import Network
 
-actor SSDPClient {
+final class SSDPClient: @unchecked Sendable {
     static let multicastHost = "239.255.255.250"
     static let multicastPort: UInt16 = 1900
 
@@ -12,130 +12,67 @@ actor SSDPClient {
 
     func discover(timeout: TimeInterval = 5) async throws -> [URL] {
         try await withCheckedThrowingContinuation { continuation in
-            DispatchQueue.global(qos: .userInitiated).async {
-                do {
-                    let locations = try self.discoverUsingSocket(timeout: timeout)
-                    continuation.resume(returning: locations)
-                } catch {
-                    continuation.resume(throwing: error)
+            let session = DiscoverySession()
+
+            let endpoint = NWEndpoint.hostPort(
+                host: NWEndpoint.Host(SSDPClient.multicastHost),
+                port: NWEndpoint.Port(integerLiteral: SSDPClient.multicastPort)
+            )
+
+            guard let multicastGroup = try? NWMulticastGroup(for: [endpoint]) else {
+                continuation.resume(throwing: UPnPError.discoveryFailed("Impossibile creare gruppo multicast"))
+                return
+            }
+
+            let group = NWConnectionGroup(with: multicastGroup, using: .udp)
+
+            group.setReceiveHandler(maximumMessageSize: 65_536, rejectOversizedMessages: true) { _, content, _ in
+                guard let content,
+                      let response = String(data: content, encoding: .utf8),
+                      let location = self.parseLocation(from: response) else {
+                    return
+                }
+                session.addLocation(location)
+            }
+
+            group.stateUpdateHandler = { state in
+                switch state {
+                case .ready:
+                    for target in self.searchTargets {
+                        self.sendMSearch(on: group, searchTarget: target)
+                    }
+                case .failed(let error):
+                    guard session.markResumed() else { return }
+                    group.cancel()
+                    continuation.resume(throwing: UPnPError.discoveryFailed(error.localizedDescription))
+                default:
+                    break
                 }
             }
-        }
-    }
 
-    private func discoverUsingSocket(timeout: TimeInterval) throws -> [URL] {
-        let socketFD = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP)
-        guard socketFD >= 0 else {
-            throw UPnPError.discoveryFailed("Impossibile aprire socket UDP")
-        }
-        defer { close(socketFD) }
+            group.start(queue: .global(qos: .userInitiated))
 
-        var reuse: Int32 = 1
-        setsockopt(
-            socketFD,
-            SOL_SOCKET,
-            SO_REUSEADDR,
-            &reuse,
-            socklen_t(MemoryLayout<Int32>.size)
-        )
-
-        var bindAddress = sockaddr_in()
-        bindAddress.sin_len = UInt8(MemoryLayout<sockaddr_in>.size)
-        bindAddress.sin_family = sa_family_t(AF_INET)
-        bindAddress.sin_port = 0
-        bindAddress.sin_addr.s_addr = INADDR_ANY
-
-        let bindResult = withUnsafePointer(to: &bindAddress) {
-            $0.withMemoryRebound(to: sockaddr.self, capacity: 1) {
-                bind(socketFD, $0, socklen_t(MemoryLayout<sockaddr_in>.size))
+            DispatchQueue.global().asyncAfter(deadline: .now() + timeout) {
+                guard session.markResumed() else { return }
+                group.cancel()
+                continuation.resume(returning: session.locations())
             }
         }
-        guard bindResult == 0 else {
-            throw UPnPError.discoveryFailed("Impossibile collegarsi alla rete locale")
-        }
-
-        for target in searchTargets {
-            try sendMSearch(socketFD: socketFD, searchTarget: target)
-        }
-
-        return try collectResponses(socketFD: socketFD, timeout: timeout)
     }
 
-    private func sendMSearch(socketFD: Int32, searchTarget: String) throws {
+    private func sendMSearch(on group: NWConnectionGroup, searchTarget: String) {
         let message = """
         M-SEARCH * HTTP/1.1\r
-        HOST: \(Self.multicastHost):\(Self.multicastPort)\r
+        HOST: \(SSDPClient.multicastHost):\(SSDPClient.multicastPort)\r
         MAN: "ssdp:discover"\r
-        MX: 2\r
+        MX: 3\r
         ST: \(searchTarget)\r
         USER-AGENT: CastBridge/1.0 UPnP/1.1\r
         \r
 
         """
-
         guard let data = message.data(using: .utf8) else { return }
-
-        var destination = sockaddr_in()
-        destination.sin_len = UInt8(MemoryLayout<sockaddr_in>.size)
-        destination.sin_family = sa_family_t(AF_INET)
-        destination.sin_port = Self.multicastPort.bigEndian
-        inet_pton(AF_INET, Self.multicastHost, &destination.sin_addr)
-
-        let sent = data.withUnsafeBytes { buffer in
-            withUnsafePointer(to: &destination) {
-                $0.withMemoryRebound(to: sockaddr.self, capacity: 1) { address in
-                    sendto(
-                        socketFD,
-                        buffer.baseAddress,
-                        data.count,
-                        0,
-                        address,
-                        socklen_t(MemoryLayout<sockaddr_in>.size)
-                    )
-                }
-            }
-        }
-
-        guard sent > 0 else {
-            throw UPnPError.discoveryFailed("Invio M-SEARCH fallito")
-        }
-    }
-
-    private func collectResponses(socketFD: Int32, timeout: TimeInterval) throws -> [URL] {
-        var flags = fcntl(socketFD, F_GETFL, 0)
-        _ = fcntl(socketFD, F_SETFL, flags | O_NONBLOCK)
-
-        var locations = Set<URL>()
-        let deadline = Date().addingTimeInterval(timeout)
-        var buffer = [UInt8](repeating: 0, count: 65_536)
-
-        while Date() < deadline {
-            var source = sockaddr_in()
-            var sourceLength = socklen_t(MemoryLayout<sockaddr_in>.size)
-
-            let received = withUnsafeMutablePointer(to: &source) {
-                $0.withMemoryRebound(to: sockaddr.self, capacity: 1) { address in
-                    recvfrom(
-                        socketFD,
-                        &buffer,
-                        buffer.count,
-                        0,
-                        address,
-                        &sourceLength
-                    )
-                }
-            }
-
-            if received > 0,
-               let response = String(bytes: buffer.prefix(received), encoding: .utf8),
-               let location = parseLocation(from: response) {
-                locations.insert(location)
-            }
-
-            usleep(100_000)
-        }
-
-        return Array(locations)
+        group.send(content: data) { _ in }
     }
 
     private func parseLocation(from response: String) -> URL? {
@@ -149,5 +86,31 @@ actor SSDPClient {
             }
         }
         return nil
+    }
+}
+
+private final class DiscoverySession: @unchecked Sendable {
+    private let lock = NSLock()
+    private var resumed = false
+    private var discoveredLocations = Set<URL>()
+
+    func addLocation(_ location: URL) {
+        lock.lock()
+        discoveredLocations.insert(location)
+        lock.unlock()
+    }
+
+    func markResumed() -> Bool {
+        lock.lock()
+        defer { lock.unlock() }
+        guard !resumed else { return false }
+        resumed = true
+        return true
+    }
+
+    func locations() -> [URL] {
+        lock.lock()
+        defer { lock.unlock() }
+        return Array(discoveredLocations)
     }
 }
