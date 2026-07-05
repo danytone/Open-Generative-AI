@@ -4,8 +4,10 @@ platform :ios, '17.0'
 target 'CastBridge' do
   use_frameworks!
 
-  # Google Cast SDK per streaming su Chromecast
-  pod 'google-cast-sdk', '~> 4.8'
+  # Google Cast SDK per streaming su Chromecast.
+  # Le versioni 4.8.0/4.8.1 hanno un bug noto: il primo tap sul pulsante
+  # Cast non avvia la discovery dei dispositivi. Escludiamole esplicitamente.
+  pod 'google-cast-sdk', '>= 4.8.2', '< 5.0'
 
   target 'CastBridgeTests' do
     inherit! :search_paths

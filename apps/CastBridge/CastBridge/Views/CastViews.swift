@@ -83,13 +83,26 @@ struct CastStatusView: View {
               .foregroundStyle(castManager.isConnected ? .green : .secondary)
           }
 
+          HStack {
+            Text("Chromecast rilevati")
+            Spacer()
+            Text("\(castManager.discoveredDeviceCount)")
+              .foregroundStyle(.secondary)
+          }
+
           if let deviceName = castManager.deviceName {
             HStack {
-              Text("Chromecast")
+              Text("Connesso a")
               Spacer()
               Text(deviceName)
                 .foregroundStyle(.secondary)
             }
+          }
+
+          Button {
+            castManager.restartDiscovery()
+          } label: {
+            Label("Cerca di nuovo Chromecast", systemImage: "arrow.clockwise")
           }
         }
 
@@ -129,6 +142,20 @@ struct CastStatusView: View {
           }
           .font(.subheadline)
           .foregroundStyle(.secondary)
+        }
+
+        if castManager.discoveredDeviceCount == 0 {
+          Section("Se non trovi il Chromecast") {
+            VStack(alignment: .leading, spacing: 6) {
+              Text("• iPhone e Chromecast devono essere sulla **stessa banda Wi‑Fi**. Molti Chromecast (1ª/2ª gen) supportano solo il 2.4GHz: se il mesh crea reti separate 2.4GHz/5GHz, l'iPhone potrebbe essere agganciato al nodo sbagliato.")
+              Text("• Impostazioni → CastBridge → Rete locale deve essere **attivo**.")
+              Text("• Chiudi del tutto l'app (swipe via) e riaprila dopo aver concesso i permessi.")
+              Text("• Scollega e ricollega l'alimentazione del Chromecast.")
+              Text("• Disattiva eventuali VPN sull'iPhone.")
+            }
+            .font(.caption)
+            .foregroundStyle(.secondary)
+          }
         }
 
         if let error = castManager.lastError {

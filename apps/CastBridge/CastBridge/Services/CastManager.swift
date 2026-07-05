@@ -13,10 +13,12 @@ final class CastManager: NSObject, ObservableObject {
     @Published private(set) var deviceName: String?
     @Published private(set) var isPlaying = false
     @Published private(set) var currentMediaTitle: String?
+    @Published private(set) var discoveredDeviceCount = 0
     @Published var lastError: String?
 
     #if canImport(GoogleCast)
     private var sessionManager: GCKSessionManager?
+    private var discoveryManager: GCKDiscoveryManager?
     #endif
 
     private override init() {
@@ -28,10 +30,29 @@ final class CastManager: NSObject, ObservableObject {
         let criteria = GCKDiscoveryCriteria(applicationID: kGCKDefaultMediaReceiverApplicationID)
         let options = GCKCastOptions(discoveryCriteria: criteria)
         options.physicalVolumeButtonsWillControlDeviceVolume = true
+        options.disableDiscoveryAutostart = false
+        options.startDiscoveryAfterFirstTapOnCastButton = false
         GCKCastContext.setSharedInstanceWith(options)
 
         sessionManager = GCKCastContext.sharedInstance().sessionManager
         sessionManager?.add(self)
+
+        discoveryManager = GCKCastContext.sharedInstance().discoveryManager
+        discoveryManager?.add(self)
+        discoveryManager?.startDiscovery()
+        #endif
+    }
+
+    /// Forces a fresh Chromecast scan. Useful after the app returns from
+    /// background, after granting the Local Network permission, or when
+    /// the standard button doesn't pick up devices right away.
+    func restartDiscovery() {
+        #if canImport(GoogleCast)
+        discoveryManager?.stopDiscovery()
+        discoveryManager?.startDiscovery()
+        lastError = nil
+        #else
+        lastError = "Google Cast SDK non installato. Esegui 'pod install' e ricompila il progetto."
         #endif
     }
 
@@ -151,6 +172,14 @@ extension CastManager: GCKRequestDelegate {
         Task { @MainActor in
             lastError = error.localizedDescription
             isPlaying = false
+        }
+    }
+}
+
+extension CastManager: GCKDiscoveryManagerListener {
+    nonisolated func didUpdateDeviceList() {
+        Task { @MainActor in
+            discoveredDeviceCount = GCKCastContext.sharedInstance().discoveryManager.deviceCount
         }
     }
 }
