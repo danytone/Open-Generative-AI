@@ -34,6 +34,8 @@ final class UPnPDiscoveryViewModel: ObservableObject {
     }
 
     func discover(keepCachedOnFailure: Bool = true) async {
+        guard !isDiscovering else { return }
+
         isDiscovering = true
         errorMessage = nil
         defer { isDiscovering = false }
@@ -86,8 +88,8 @@ final class UPnPDiscoveryViewModel: ObservableObject {
         } catch {
             if keepCachedOnFailure, !cached.isEmpty {
                 servers = cached
-                errorMessage = "Ricerca fallita, ma i server salvati restano disponibili. Tocca ↻ per riprovare."
-            } else {
+                errorMessage = nil
+            } else if cached.isEmpty {
                 errorMessage = error.localizedDescription
             }
         }
