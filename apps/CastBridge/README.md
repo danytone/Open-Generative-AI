@@ -19,7 +19,165 @@
 | CocoaPods | 1.12+ |
 | Rete | iPhone, Chromecast e server UPnP sulla **stessa LAN** |
 
-## Installazione
+## Guida per chi non ha mai usato Xcode
+
+Questa sezione spiega tutto da zero. **Non serve pagare** Apple: con un Apple ID gratuito puoi installare l'app sul tuo iPhone personale.
+
+### Cosa ti serve
+
+| Cosa | Perché |
+|---|---|
+| Un **Mac** (MacBook, iMac, Mac mini…) | Xcode funziona solo su macOS |
+| Il tuo **iPhone** con iOS 17+ | Dove installerai l'app |
+| Un **cavo Lightning/USB‑C** | Per collegare iPhone e Mac la prima volta |
+| Un **Apple ID** (quello dell'iPhone va bene) | Per firmare l'app |
+| **Chromecast** e server UPnP sulla stessa Wi‑Fi | Per usare l'app |
+
+> **Non hai un Mac?** Purtroppo Apple non permette di compilare app iOS senza macOS. Alternative: chiedere a un amico con Mac, usare un Mac in cloud (MacStadium, ecc.), oppure valutare in futuro una versione distribuita via TestFlight.
+
+---
+
+### Passo 1 — Installa Xcode (solo la prima volta)
+
+1. Sul Mac, apri l'**App Store**
+2. Cerca **Xcode**
+3. Clicca **Ottieni** / **Installa** (è gratuito, ma pesa ~12 GB)
+4. Al termine, apri **Xcode** dalla cartella Applicazioni
+5. Accetta la licenza e attendi che installi i componenti aggiuntivi
+
+---
+
+### Passo 2 — Scarica il progetto sul Mac
+
+Apri l'app **Terminale** sul Mac (cerca "Terminale" con Spotlight: `Cmd + Spazio`) e incolla:
+
+```bash
+git clone https://github.com/danytone/Open-Generative-AI.git
+cd Open-Generative-AI/apps/CastBridge
+```
+
+Se hai già il repository, vai solo nella cartella:
+
+```bash
+cd percorso/dove/hai/scaricato/Open-Generative-AI/apps/CastBridge
+```
+
+---
+
+### Passo 3 — Installa le dipendenze (solo la prima volta)
+
+Sempre nel Terminale, dentro la cartella `CastBridge`:
+
+```bash
+./setup.sh
+```
+
+Oppure manualmente:
+
+```bash
+sudo gem install cocoapods
+pod install
+```
+
+Attendi che finisca senza errori. Questo passaggio scarica il SDK di Google Cast.
+
+---
+
+### Passo 4 — Apri il progetto in Xcode
+
+Nel Terminale:
+
+```bash
+open CastBridge.xcworkspace
+```
+
+Si apre Xcode con il progetto. **Importante:** apri sempre il file `.xcworkspace`, **non** il `.xcodeproj`.
+
+**Cosa vedi in Xcode:**
+
+```
+┌─────────────────────────────────────────────────────┐
+│  ▶ CastBridge   [iPhone di Mario ▼]                 │  ← barra in alto
+├──────────┬──────────────────────────────────────────┤
+│ Navigator│  Codice sorgente dell'app               │
+│ (sinistra)│                                         │
+│          │                                         │
+│ CastBridge│                                        │
+│  ├ Models │                                        │
+│  ├ Services│                                       │
+│  └ Views  │                                        │
+└──────────┴──────────────────────────────────────────┘
+```
+
+Non devi leggere il codice: ti serve solo la barra in alto e il pannello di sinistra.
+
+---
+
+### Passo 5 — Collega l'iPhone al Mac
+
+1. Collega l'iPhone con il cavo
+2. Sblocca l'iPhone
+3. Se compare **"Autorizzare questo computer?"** → tocca **Autorizza**
+4. In Xcode, nella barra in alto al centro, clicca sul menu a tendina (di default dice "iPhone 16" o simile)
+5. Seleziona il **tuo iPhone** (appare con il nome che gli hai dato, es. "iPhone di Mario")
+
+Se l'iPhone non compare: scollega e ricollega, sblocca il telefono, e attendi qualche secondo.
+
+---
+
+### Passo 6 — Configura la firma (solo la prima volta)
+
+1. Nel pannello **sinistro** di Xcode, clicca sulla riga blu in cima chiamata **CastBridge** (icona con la "A")
+2. Al centro compare una lista: sotto **TARGETS** seleziona **CastBridge**
+3. Clicca la scheda **Signing & Capabilities** in alto
+4. Spunta ✅ **Automatically manage signing**
+5. Nel menu **Team**, scegli il tuo Apple ID
+   - Se non c'è: clicca **Add Account…**, accedi con il tuo Apple ID, poi selezionalo
+6. Se compare un errore sul **Bundle Identifier**, cambialo in qualcosa di unico, es. `com.tuonome.castbridge`
+
+---
+
+### Passo 7 — Installa l'app sull'iPhone
+
+1. Clicca il pulsante **▶ Play** in alto a sinistra (oppure premi `Cmd + R`)
+2. Xcode compila l'app (la prima volta può richiedere 1–3 minuti)
+3. L'app viene installata e si apre sull'iPhone
+
+**Se l'iPhone dice "Sviluppatore non attendibile":**
+
+1. Su iPhone: **Impostazioni → Generali → VPN e gestione dispositivo**
+2. Tocca il tuo Apple ID sotto "App per sviluppatori"
+3. Tocca **Autorizza** e conferma
+
+Poi riapri l'app **CastBridge** dall'icona sulla home.
+
+---
+
+### Passo 8 — Usa CastBridge
+
+1. All'avvio, consenti l'accesso alla **rete locale** quando richiesto
+2. L'app cerca automaticamente i server UPnP
+3. Tocca un server → scegli un video
+4. Tocca l'icona **Cast** (TV) in alto a destra → seleziona il Chromecast
+5. Il video parte sulla TV
+
+---
+
+### Domande frequenti per principianti
+
+**Devo modificare il codice?** No. Devi solo aprire il progetto e premere Play.
+
+**L'app resta sull'iPhone per sempre?** Con un Apple ID gratuito l'app scade dopo ~7 giorni. Basta ricollegare l'iPhone al Mac e premere di nuovo ▶ Play.
+
+**Posso pubblicarla sull'App Store?** Sì, ma serve un account Apple Developer a pagamento (99 €/anno). Per uso personale non serve.
+
+**Xcode dà errore su "pod install"?** Assicurati di aver eseguito `pod install` e di aver aperto `CastBridge.xcworkspace`, non `.xcodeproj`.
+
+**Non ho server UPnP** — Puoi usare la scheda **URL diretto** per incollare un link HTTP a un video sul tuo NAS o PC.
+
+---
+
+## Installazione (versione rapida)
 
 ### 1. Clona il repository e vai alla cartella dell'app
 
