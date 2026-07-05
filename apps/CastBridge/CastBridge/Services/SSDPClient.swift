@@ -28,22 +28,15 @@ final class SSDPClient: @unchecked Sendable {
 
             let group = NWConnectionGroup(with: multicastGroup, using: .udp)
 
-            group.setReceiveHandler(maximumMessageSize: 65_536, rejectOversizedMessages: true) { message, _, error in
-                if let error {
-                    lock.lock()
-                    defer { lock.unlock() }
-                    guard !resumed else { return }
-                    resumed = true
-                    group.cancel()
-                    continuation.resume(throwing: UPnPError.discoveryFailed(error.localizedDescription))
+            group.setReceiveHandler(maximumMessageSize: 65_536, rejectOversizedMessages: true) { _, content, _ in
+                guard let content,
+                      let response = String(data: content, encoding: .utf8),
+                      let location = self.parseLocation(from: response) else {
                     return
                 }
-
-                if let data = message?.extractData(),
-                   let response = String(data: data, encoding: .utf8),
-                   let location = self.parseLocation(from: response) {
-                    discoveredLocations.insert(location)
-                }
+                lock.lock()
+                discoveredLocations.insert(location)
+                lock.unlock()
             }
 
             group.stateUpdateHandler = { state in
@@ -89,7 +82,7 @@ final class SSDPClient: @unchecked Sendable {
 
         """
         guard let data = message.data(using: .utf8) else { return }
-        group.send(content: data, completion: .contentProcessed { _ in })
+        group.send(content: data) { _ in }
     }
 
     private func parseLocation(from response: String) -> URL? {
@@ -103,12 +96,5 @@ final class SSDPClient: @unchecked Sendable {
             }
         }
         return nil
-    }
-}
-
-private extension NWConnectionGroup.Message {
-    func extractData() -> Data? {
-        guard case let .content(content) = self.content else { return nil }
-        return content
     }
 }
