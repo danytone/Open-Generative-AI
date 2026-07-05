@@ -179,7 +179,7 @@ extension CastManager: GCKRequestDelegate {
 extension CastManager: GCKDiscoveryManagerListener {
     nonisolated func didUpdateDeviceList() {
         Task { @MainActor in
-            discoveredDeviceCount = GCKCastContext.sharedInstance().discoveryManager.deviceCount
+            discoveredDeviceCount = Int(GCKCastContext.sharedInstance().discoveryManager.deviceCount)
         }
     }
 }
