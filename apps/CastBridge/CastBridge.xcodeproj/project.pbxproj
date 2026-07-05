@@ -1,0 +1,458 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A10000010000000000000001 /* CastBridgeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000010000000000000001 /* CastBridgeApp.swift */; };
+		A10000010000000000000002 /* UPnPModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000010000000000000002 /* UPnPModels.swift */; };
+		A10000010000000000000003 /* SSDPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000010000000000000003 /* SSDPClient.swift */; };
+		A10000010000000000000004 /* UPnPDeviceParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000010000000000000004 /* UPnPDeviceParser.swift */; };
+		A10000010000000000000005 /* ContentDirectoryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000010000000000000005 /* ContentDirectoryService.swift */; };
+		A10000010000000000000006 /* UPnPViewModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000010000000000000006 /* UPnPViewModels.swift */; };
+		A10000010000000000000007 /* CastManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000010000000000000007 /* CastManager.swift */; };
+		A10000010000000000000008 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000010000000000000008 /* ContentView.swift */; };
+		A10000010000000000000009 /* ServerListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000010000000000000009 /* ServerListView.swift */; };
+		A10000010000000000000010 /* MediaBrowserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000010000000000000010 /* MediaBrowserView.swift */; };
+		A10000010000000000000011 /* CastViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000010000000000000011 /* CastViews.swift */; };
+		A10000010000000000000012 /* ManualStreamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000010000000000000012 /* ManualStreamView.swift */; };
+		A10000010000000000000013 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A20000010000000000000013 /* Assets.xcassets */; };
+		A10000010000000000000014 /* CastBridgeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000010000000000000014 /* CastBridgeTests.swift */; };
+		A10000010000000000000016 /* PlayerControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000010000000000000016 /* PlayerControlsView.swift */; };
+
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		A20000010000000000000001 /* CastBridgeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CastBridgeApp.swift; sourceTree = "<group>"; };
+		A20000010000000000000002 /* UPnPModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UPnPModels.swift; sourceTree = "<group>"; };
+		A20000010000000000000003 /* SSDPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSDPClient.swift; sourceTree = "<group>"; };
+		A20000010000000000000004 /* UPnPDeviceParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UPnPDeviceParser.swift; sourceTree = "<group>"; };
+		A20000010000000000000005 /* ContentDirectoryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentDirectoryService.swift; sourceTree = "<group>"; };
+		A20000010000000000000006 /* UPnPViewModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UPnPViewModels.swift; sourceTree = "<group>"; };
+		A20000010000000000000007 /* CastManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CastManager.swift; sourceTree = "<group>"; };
+		A20000010000000000000008 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		A20000010000000000000009 /* ServerListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerListView.swift; sourceTree = "<group>"; };
+		A20000010000000000000010 /* MediaBrowserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaBrowserView.swift; sourceTree = "<group>"; };
+		A20000010000000000000011 /* CastViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CastViews.swift; sourceTree = "<group>"; };
+		A20000010000000000000012 /* ManualStreamView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManualStreamView.swift; sourceTree = "<group>"; };
+		A20000010000000000000013 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A20000010000000000000014 /* CastBridgeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CastBridgeTests.swift; sourceTree = "<group>"; };
+		A20000010000000000000015 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A20000010000000000000016 /* PlayerControlsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerControlsView.swift; sourceTree = "<group>"; };
+		A30000010000000000000001 /* CastBridge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CastBridge.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A30000010000000000000002 /* CastBridgeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CastBridgeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A40000010000000000000001 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A40000010000000000000002 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A50000010000000000000001 = {
+			isa = PBXGroup;
+			children = (
+				A50000010000000000000002 /* CastBridge */,
+				A50000010000000000000003 /* CastBridgeTests */,
+				A50000010000000000000004 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A50000010000000000000002 /* CastBridge */ = {
+			isa = PBXGroup;
+			children = (
+				A20000010000000000000001 /* CastBridgeApp.swift */,
+				A50000010000000000000005 /* Models */,
+				A50000010000000000000006 /* Services */,
+				A50000010000000000000007 /* Views */,
+				A50000010000000000000008 /* Resources */,
+			);
+			path = CastBridge;
+			sourceTree = "<group>";
+		};
+		A50000010000000000000003 /* CastBridgeTests */ = {
+			isa = PBXGroup;
+			children = (
+				A20000010000000000000014 /* CastBridgeTests.swift */,
+			);
+			path = CastBridgeTests;
+			sourceTree = "<group>";
+		};
+		A50000010000000000000004 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A30000010000000000000001 /* CastBridge.app */,
+				A30000010000000000000002 /* CastBridgeTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A50000010000000000000005 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				A20000010000000000000002 /* UPnPModels.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		A50000010000000000000006 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				A20000010000000000000003 /* SSDPClient.swift */,
+				A20000010000000000000004 /* UPnPDeviceParser.swift */,
+				A20000010000000000000005 /* ContentDirectoryService.swift */,
+				A20000010000000000000006 /* UPnPViewModels.swift */,
+				A20000010000000000000007 /* CastManager.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		A50000010000000000000007 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				A20000010000000000000008 /* ContentView.swift */,
+				A20000010000000000000009 /* ServerListView.swift */,
+				A20000010000000000000010 /* MediaBrowserView.swift */,
+				A20000010000000000000011 /* CastViews.swift */,
+				A20000010000000000000012 /* ManualStreamView.swift */,
+				A20000010000000000000016 /* PlayerControlsView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		A50000010000000000000008 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				A20000010000000000000015 /* Info.plist */,
+				A20000010000000000000013 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A60000010000000000000001 /* CastBridge */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A80000010000000000000001 /* Build configuration list for PBXNativeTarget "CastBridge" */;
+			buildPhases = (
+				A70000010000000000000001 /* Sources */,
+				A40000010000000000000001 /* Frameworks */,
+				A70000010000000000000002 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CastBridge;
+			productName = CastBridge;
+			productReference = A30000010000000000000001 /* CastBridge.app */;
+			productType = "com.apple.product-type.application";
+		};
+		A60000010000000000000002 /* CastBridgeTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A80000010000000000000002 /* Build configuration list for PBXNativeTarget "CastBridgeTests" */;
+			buildPhases = (
+				A70000010000000000000003 /* Sources */,
+				A40000010000000000000002 /* Frameworks */,
+				A70000010000000000000004 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A90000010000000000000001 /* PBXTargetDependency */,
+			);
+			name = CastBridgeTests;
+			productName = CastBridgeTests;
+			productReference = A30000010000000000000002 /* CastBridgeTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		AA0000010000000000000001 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1500;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+					A60000010000000000000001 = {
+						CreatedOnToolsVersion = 15.0;
+					};
+					A60000010000000000000002 = {
+						CreatedOnToolsVersion = 15.0;
+						TestTargetID = A60000010000000000000001;
+					};
+				};
+			};
+			buildConfigurationList = A80000010000000000000003 /* Build configuration list for PBXProject "CastBridge" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = it;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				it,
+				Base,
+			);
+			mainGroup = A50000010000000000000001;
+			productRefGroup = A50000010000000000000004 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A60000010000000000000001 /* CastBridge */,
+				A60000010000000000000002 /* CastBridgeTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A70000010000000000000002 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A10000010000000000000013 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A70000010000000000000004 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A70000010000000000000001 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A10000010000000000000001 /* CastBridgeApp.swift in Sources */,
+				A10000010000000000000002 /* UPnPModels.swift in Sources */,
+				A10000010000000000000003 /* SSDPClient.swift in Sources */,
+				A10000010000000000000004 /* UPnPDeviceParser.swift in Sources */,
+				A10000010000000000000005 /* ContentDirectoryService.swift in Sources */,
+				A10000010000000000000006 /* UPnPViewModels.swift in Sources */,
+				A10000010000000000000007 /* CastManager.swift in Sources */,
+				A10000010000000000000008 /* ContentView.swift in Sources */,
+				A10000010000000000000009 /* ServerListView.swift in Sources */,
+				A10000010000000000000010 /* MediaBrowserView.swift in Sources */,
+				A10000010000000000000011 /* CastViews.swift in Sources */,
+				A10000010000000000000012 /* ManualStreamView.swift in Sources */,
+				A10000010000000000000016 /* PlayerControlsView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A70000010000000000000003 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A10000010000000000000014 /* CastBridgeTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		A90000010000000000000001 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A60000010000000000000001 /* CastBridge */;
+			targetProxy = A90000010000000000000002 /* PBXContainerItemProxy */;
+		};
+		A90000010000000000000002 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AA0000010000000000000001 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A60000010000000000000001;
+			remoteInfo = CastBridge;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		AB0000010000000000000001 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		AB0000010000000000000002 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		AB0000010000000000000003 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = CastBridge/Resources/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.castbridge.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		AB0000010000000000000004 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = CastBridge/Resources/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.castbridge.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		AB0000010000000000000005 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.castbridge.app.tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CastBridge.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/CastBridge";
+			};
+			name = Debug;
+		};
+		AB0000010000000000000006 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.castbridge.app.tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CastBridge.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/CastBridge";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A80000010000000000000001 /* Build configuration list for PBXNativeTarget "CastBridge" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AB0000010000000000000003 /* Debug */,
+				AB0000010000000000000004 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A80000010000000000000002 /* Build configuration list for PBXNativeTarget "CastBridgeTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AB0000010000000000000005 /* Debug */,
+				AB0000010000000000000006 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A80000010000000000000003 /* Build configuration list for PBXProject "CastBridge" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AB0000010000000000000001 /* Debug */,
+				AB0000010000000000000002 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = AA0000010000000000000001 /* Project object */;
+}
