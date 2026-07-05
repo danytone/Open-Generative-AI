@@ -1,102 +1,123 @@
 import Foundation
-import Network
 
-final class SSDPClient: @unchecked Sendable {
-    static let multicastHost = "239.255.255.250"
-    static let multicastPort: UInt16 = 1900
+struct SSDPClient: Sendable {
+    private static let multicastAddress = "239.255.255.250"
+    private static let multicastPort: UInt16 = 1900
 
-    private let searchTargets = [
+    private static let searchTargets = [
+        "ssdp:all",
         "upnp:rootdevice",
-        "urn:schemas-upnp-org:device:MediaServer:1"
+        "urn:schemas-upnp-org:device:MediaServer:1",
+        "urn:schemas-upnp-org:service:ContentDirectory:1"
     ]
 
-    func discover(
-        timeout: TimeInterval = 5,
-        isCancelled: @escaping @Sendable () -> Bool = { false }
-    ) async throws -> [URL] {
-        try await withCheckedThrowingContinuation { continuation in
-            let session = DiscoverySession()
-
-            let endpoint = NWEndpoint.hostPort(
-                host: NWEndpoint.Host(SSDPClient.multicastHost),
-                port: NWEndpoint.Port(integerLiteral: SSDPClient.multicastPort)
-            )
-
-            guard let multicastGroup = try? NWMulticastGroup(for: [endpoint]) else {
-                continuation.resume(throwing: UPnPError.discoveryFailed("Impossibile creare gruppo multicast"))
-                return
-            }
-
-            let group = NWConnectionGroup(with: multicastGroup, using: .udp)
-
-            func complete(with result: Result<[URL], Error>) {
-                guard session.markResumed() else { return }
-                group.cancel()
-                switch result {
-                case .success(let urls):
-                    continuation.resume(returning: urls)
-                case .failure(let error):
-                    continuation.resume(throwing: error)
-                }
-            }
-
-            group.setReceiveHandler(maximumMessageSize: 65_536, rejectOversizedMessages: true) { _, content, _ in
-                guard !isCancelled() else { return }
-                guard let content,
-                      let response = String(data: content, encoding: .utf8),
-                      let location = self.parseLocation(from: response) else {
-                    return
-                }
-                session.addLocation(location)
-            }
-
-            group.stateUpdateHandler = { state in
-                switch state {
-                case .ready:
-                    guard !isCancelled() else {
-                        complete(with: .success(session.locations()))
-                        return
-                    }
-                    for target in self.searchTargets {
-                        self.sendMSearch(on: group, searchTarget: target)
-                    }
-                case .failed(let error):
-                    if isCancelled() {
-                        complete(with: .success(session.locations()))
-                    } else {
-                        complete(with: .failure(UPnPError.discoveryFailed(error.localizedDescription)))
-                    }
-                default:
-                    break
-                }
-            }
-
-            group.start(queue: .global(qos: .userInitiated))
-
-            DispatchQueue.global().asyncAfter(deadline: .now() + timeout) {
-                if isCancelled() {
-                    complete(with: .success(session.locations()))
-                } else {
-                    complete(with: .success(session.locations()))
-                }
-            }
-
-            DispatchQueue.global(qos: .userInitiated).async {
-                while !session.hasResumed {
-                    if isCancelled() {
-                        complete(with: .success(session.locations()))
-                        return
-                    }
-                    usleep(100_000)
-                }
-            }
-        }
+    /// Discovers UPnP device locations on the local network via SSDP M-SEARCH.
+    /// Never throws: on any failure it simply returns an empty array so the
+    /// caller can fall back to manually-added / cached servers.
+    func discover(timeout: TimeInterval = 6) async -> [URL] {
+        await Task.detached(priority: .userInitiated) {
+            Self.performDiscovery(timeout: timeout)
+        }.value
     }
 
-    private func sendMSearch(on group: NWConnectionGroup, searchTarget: String) {
+    // MARK: - Socket-based discovery
+
+    private static func performDiscovery(timeout: TimeInterval) -> [URL] {
+        guard let socketFD = openSocket() else { return [] }
+        defer { close(socketFD) }
+
+        let deadline = Date().addingTimeInterval(timeout)
+        var locations = Set<URL>()
+
+        // Send the search burst a couple of times: Wi-Fi mesh networks and
+        // busy 2.4GHz bands routinely drop the first UDP multicast packet.
+        for _ in 0..<3 {
+            for target in searchTargets {
+                sendSearch(socketFD: socketFD, searchTarget: target)
+            }
+            usleep(200_000)
+        }
+
+        var buffer = [UInt8](repeating: 0, count: 65_536)
+
+        while true {
+            let remaining = deadline.timeIntervalSinceNow
+            guard remaining > 0 else { break }
+
+            guard waitForReadableData(socketFD: socketFD, timeout: min(remaining, 0.5)) else {
+                continue
+            }
+
+            var source = sockaddr_in()
+            var sourceLength = socklen_t(MemoryLayout<sockaddr_in>.size)
+
+            let received = withUnsafeMutablePointer(to: &source) { sourcePointer in
+                sourcePointer.withMemoryRebound(to: sockaddr.self, capacity: 1) { addr in
+                    recvfrom(socketFD, &buffer, buffer.count, 0, addr, &sourceLength)
+                }
+            }
+
+            guard received > 0 else { continue }
+
+            if let response = String(bytes: buffer.prefix(received), encoding: .utf8),
+               let location = parseLocation(from: response) {
+                locations.insert(location)
+            }
+        }
+
+        return Array(locations)
+    }
+
+    private static func openSocket() -> Int32? {
+        let socketFD = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP)
+        guard socketFD >= 0 else { return nil }
+
+        var reuseAddr: Int32 = 1
+        setsockopt(socketFD, SOL_SOCKET, SO_REUSEADDR, &reuseAddr, socklen_t(MemoryLayout<Int32>.size))
+
+        var reusePort: Int32 = 1
+        setsockopt(socketFD, SOL_SOCKET, SO_REUSEPORT, &reusePort, socklen_t(MemoryLayout<Int32>.size))
+
+        // Higher TTL helps the M-SEARCH packet survive an extra hop on
+        // Wi-Fi mesh systems (router <-> satellite) where default TTL 1
+        // may be dropped before reaching the satellite's own segment.
+        var ttl: Int32 = 4
+        setsockopt(socketFD, IPPROTO_IP, IP_MULTICAST_TTL, &ttl, socklen_t(MemoryLayout<Int32>.size))
+
+        if let wifiAddress = wifiIPv4Address() {
+            var interfaceAddr = in_addr()
+            inet_pton(AF_INET, wifiAddress, &interfaceAddr)
+            setsockopt(socketFD, IPPROTO_IP, IP_MULTICAST_IF, &interfaceAddr, socklen_t(MemoryLayout<in_addr>.size))
+        }
+
+        var bindAddress = sockaddr_in()
+        bindAddress.sin_len = UInt8(MemoryLayout<sockaddr_in>.size)
+        bindAddress.sin_family = sa_family_t(AF_INET)
+        bindAddress.sin_port = 0
+        bindAddress.sin_addr.s_addr = INADDR_ANY
+
+        let bindResult = withUnsafePointer(to: &bindAddress) { pointer in
+            pointer.withMemoryRebound(to: sockaddr.self, capacity: 1) { addr in
+                bind(socketFD, addr, socklen_t(MemoryLayout<sockaddr_in>.size))
+            }
+        }
+
+        guard bindResult == 0 else {
+            close(socketFD)
+            return nil
+        }
+
+        var flags = fcntl(socketFD, F_GETFL, 0)
+        flags |= O_NONBLOCK
+        _ = fcntl(socketFD, F_SETFL, flags)
+
+        return socketFD
+    }
+
+    private static func sendSearch(socketFD: Int32, searchTarget: String) {
         let message = """
         M-SEARCH * HTTP/1.1\r
-        HOST: \(SSDPClient.multicastHost):\(SSDPClient.multicastPort)\r
+        HOST: \(multicastAddress):\(multicastPort)\r
         MAN: "ssdp:discover"\r
         MX: 3\r
         ST: \(searchTarget)\r
@@ -105,10 +126,31 @@ final class SSDPClient: @unchecked Sendable {
 
         """
         guard let data = message.data(using: .utf8) else { return }
-        group.send(content: data) { _ in }
+
+        var destination = sockaddr_in()
+        destination.sin_len = UInt8(MemoryLayout<sockaddr_in>.size)
+        destination.sin_family = sa_family_t(AF_INET)
+        destination.sin_port = multicastPort.bigEndian
+        inet_pton(AF_INET, multicastAddress, &destination.sin_addr)
+
+        _ = data.withUnsafeBytes { buffer in
+            withUnsafePointer(to: &destination) { pointer in
+                pointer.withMemoryRebound(to: sockaddr.self, capacity: 1) { addr in
+                    sendto(socketFD, buffer.baseAddress, data.count, 0, addr, socklen_t(MemoryLayout<sockaddr_in>.size))
+                }
+            }
+        }
     }
 
-    private func parseLocation(from response: String) -> URL? {
+    private static func waitForReadableData(socketFD: Int32, timeout: TimeInterval) -> Bool {
+        var pollDescriptor = pollfd(fd: socketFD, events: Int16(POLLIN), revents: 0)
+        let timeoutMs = Int32(max(0, timeout * 1000))
+        let result = poll(&pollDescriptor, 1, timeoutMs)
+        guard result > 0 else { return false }
+        return (Int32(pollDescriptor.revents) & POLLIN) != 0
+    }
+
+    private static func parseLocation(from response: String) -> URL? {
         for line in response.components(separatedBy: "\r\n") {
             let parts = line.split(separator: ":", maxSplits: 1)
             guard parts.count == 2 else { continue }
@@ -120,36 +162,33 @@ final class SSDPClient: @unchecked Sendable {
         }
         return nil
     }
-}
 
-private final class DiscoverySession: @unchecked Sendable {
-    private let lock = NSLock()
-    private var resumed = false
-    private var discoveredLocations = Set<URL>()
+    static func wifiIPv4Address() -> String? {
+        var address: String?
+        var ifaddrPointer: UnsafeMutablePointer<ifaddrs>?
+        guard getifaddrs(&ifaddrPointer) == 0, let firstAddr = ifaddrPointer else { return nil }
+        defer { freeifaddrs(ifaddrPointer) }
 
-    var hasResumed: Bool {
-        lock.lock()
-        defer { lock.unlock() }
-        return resumed
-    }
+        for ptr in sequence(first: firstAddr, next: { $0.pointee.ifa_next }) {
+            let interface = ptr.pointee
+            guard interface.ifa_addr.pointee.sa_family == UInt8(AF_INET) else { continue }
 
-    func addLocation(_ location: URL) {
-        lock.lock()
-        discoveredLocations.insert(location)
-        lock.unlock()
-    }
+            let name = String(cString: interface.ifa_name)
+            guard name == "en0" else { continue }
 
-    func markResumed() -> Bool {
-        lock.lock()
-        defer { lock.unlock() }
-        guard !resumed else { return false }
-        resumed = true
-        return true
-    }
-
-    func locations() -> [URL] {
-        lock.lock()
-        defer { lock.unlock() }
-        return Array(discoveredLocations)
+            var hostname = [CChar](repeating: 0, count: Int(NI_MAXHOST))
+            getnameinfo(
+                interface.ifa_addr,
+                socklen_t(interface.ifa_addr.pointee.sa_len),
+                &hostname,
+                socklen_t(hostname.count),
+                nil,
+                0,
+                NI_NUMERICHOST
+            )
+            address = String(cString: hostname)
+            break
+        }
+        return address
     }
 }
