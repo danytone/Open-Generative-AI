@@ -5,60 +5,95 @@ import Combine
 final class UPnPDiscoveryViewModel: ObservableObject {
     @Published private(set) var servers: [UPnPMediaServer] = []
     @Published private(set) var isDiscovering = false
-    @Published var errorMessage: String?
+    @Published private(set) var isAddingManual = false
+    @Published var statusMessage: String?
     @Published var manualServerURL = ""
 
     private let ssdpClient = SSDPClient()
     private let session: URLSession
+    private var discoverTask: Task<Void, Never>?
 
     init(session: URLSession = .shared) {
         self.session = session
     }
 
-    func discover() async {
-        isDiscovering = true
-        errorMessage = nil
-        defer { isDiscovering = false }
+    func discover() {
+        cancelDiscovery()
 
-        do {
-            let locations = try await ssdpClient.discover(timeout: 5)
-            var foundServers: [UPnPMediaServer] = []
-            var seenIDs = Set<String>()
+        discoverTask = Task {
+            isDiscovering = true
+            statusMessage = "Ricerca server in corso…"
+            defer {
+                isDiscovering = false
+                discoverTask = nil
+            }
 
-            await withTaskGroup(of: UPnPMediaServer?.self) { group in
-                for location in locations {
-                    group.addTask {
-                        await self.fetchServer(at: location)
+            let existing = servers
+
+            do {
+                try Task.checkCancellation()
+                let locations = try await ssdpClient.discover(timeout: 4) {
+                    Task.isCancelled
+                }
+                try Task.checkCancellation()
+
+                var foundServers: [UPnPMediaServer] = []
+                var seenIDs = Set(existing.map(\.id))
+
+                await withTaskGroup(of: UPnPMediaServer?.self) { group in
+                    for location in locations {
+                        group.addTask {
+                            await self.fetchServer(at: location)
+                        }
+                    }
+
+                    for await server in group {
+                        try? Task.checkCancellation()
+                        guard let server, !seenIDs.contains(server.id) else { continue }
+                        seenIDs.insert(server.id)
+                        foundServers.append(server)
                     }
                 }
 
-                for await server in group {
-                    guard let server, !seenIDs.contains(server.id) else { continue }
-                    seenIDs.insert(server.id)
-                    foundServers.append(server)
+                if foundServers.isEmpty {
+                    servers = existing
+                    statusMessage = existing.isEmpty
+                        ? "Nessun server trovato. Aggiungi l'URL del router qui sotto."
+                        : "Nessun nuovo server trovato. Usa quelli già in lista."
+                } else {
+                    servers = (existing + foundServers).sorted {
+                        $0.friendlyName.localizedCaseInsensitiveCompare($1.friendlyName) == .orderedAscending
+                    }
+                    statusMessage = "Trovati \(foundServers.count) server."
                 }
+            } catch is CancellationError {
+                statusMessage = "Ricerca interrotta."
+            } catch {
+                servers = existing
+                statusMessage = existing.isEmpty
+                    ? "Ricerca fallita. Aggiungi il server manualmente qui sotto."
+                    : "Ricerca fallita. I server in lista restano disponibili."
             }
-
-            servers = foundServers.sorted { $0.friendlyName.localizedCaseInsensitiveCompare($1.friendlyName) == .orderedAscending }
-
-            if servers.isEmpty {
-                errorMessage = "Nessun server multimediale trovato sulla rete locale."
-            }
-        } catch {
-            errorMessage = error.localizedDescription
         }
+    }
+
+    func cancelDiscovery() {
+        discoverTask?.cancel()
+        discoverTask = nil
+        isDiscovering = false
     }
 
     func addManualServer() async {
         let trimmed = manualServerURL.trimmingCharacters(in: .whitespacesAndNewlines)
         guard let url = URL(string: trimmed), url.scheme != nil else {
-            errorMessage = "Inserisci un URL valido (es. http://192.168.1.10:8200)"
+            statusMessage = "URL non valido. Esempio: http://192.168.1.1"
             return
         }
 
-        isDiscovering = true
-        errorMessage = nil
-        defer { isDiscovering = false }
+        cancelDiscovery()
+        isAddingManual = true
+        statusMessage = "Connessione al server…"
+        defer { isAddingManual = false }
 
         if let server = await fetchServer(at: url) {
             if !servers.contains(where: { $0.id == server.id }) {
@@ -66,8 +101,9 @@ final class UPnPDiscoveryViewModel: ObservableObject {
                 servers.sort { $0.friendlyName.localizedCaseInsensitiveCompare($1.friendlyName) == .orderedAscending }
             }
             manualServerURL = ""
+            statusMessage = "Server \"\(server.friendlyName)\" aggiunto."
         } else {
-            errorMessage = "Impossibile connettersi al server. Verifica URL e rete."
+            statusMessage = "Impossibile connettersi. Verifica URL e rete Wi‑Fi."
         }
     }
 

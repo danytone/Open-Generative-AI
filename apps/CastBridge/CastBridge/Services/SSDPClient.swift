@@ -10,7 +10,10 @@ final class SSDPClient: @unchecked Sendable {
         "urn:schemas-upnp-org:device:MediaServer:1"
     ]
 
-    func discover(timeout: TimeInterval = 5) async throws -> [URL] {
+    func discover(
+        timeout: TimeInterval = 5,
+        isCancelled: @escaping @Sendable () -> Bool = { false }
+    ) async throws -> [URL] {
         try await withCheckedThrowingContinuation { continuation in
             let session = DiscoverySession()
 
@@ -26,7 +29,19 @@ final class SSDPClient: @unchecked Sendable {
 
             let group = NWConnectionGroup(with: multicastGroup, using: .udp)
 
+            func complete(with result: Result<[URL], Error>) {
+                guard session.markResumed() else { return }
+                group.cancel()
+                switch result {
+                case .success(let urls):
+                    continuation.resume(returning: urls)
+                case .failure(let error):
+                    continuation.resume(throwing: error)
+                }
+            }
+
             group.setReceiveHandler(maximumMessageSize: 65_536, rejectOversizedMessages: true) { _, content, _ in
+                guard !isCancelled() else { return }
                 guard let content,
                       let response = String(data: content, encoding: .utf8),
                       let location = self.parseLocation(from: response) else {
@@ -38,13 +53,19 @@ final class SSDPClient: @unchecked Sendable {
             group.stateUpdateHandler = { state in
                 switch state {
                 case .ready:
+                    guard !isCancelled() else {
+                        complete(with: .success(session.locations()))
+                        return
+                    }
                     for target in self.searchTargets {
                         self.sendMSearch(on: group, searchTarget: target)
                     }
                 case .failed(let error):
-                    guard session.markResumed() else { return }
-                    group.cancel()
-                    continuation.resume(throwing: UPnPError.discoveryFailed(error.localizedDescription))
+                    if isCancelled() {
+                        complete(with: .success(session.locations()))
+                    } else {
+                        complete(with: .failure(UPnPError.discoveryFailed(error.localizedDescription)))
+                    }
                 default:
                     break
                 }
@@ -53,9 +74,21 @@ final class SSDPClient: @unchecked Sendable {
             group.start(queue: .global(qos: .userInitiated))
 
             DispatchQueue.global().asyncAfter(deadline: .now() + timeout) {
-                guard session.markResumed() else { return }
-                group.cancel()
-                continuation.resume(returning: session.locations())
+                if isCancelled() {
+                    complete(with: .success(session.locations()))
+                } else {
+                    complete(with: .success(session.locations()))
+                }
+            }
+
+            DispatchQueue.global(qos: .userInitiated).async {
+                while !session.hasResumed {
+                    if isCancelled() {
+                        complete(with: .success(session.locations()))
+                        return
+                    }
+                    usleep(100_000)
+                }
             }
         }
     }
@@ -93,6 +126,12 @@ private final class DiscoverySession: @unchecked Sendable {
     private let lock = NSLock()
     private var resumed = false
     private var discoveredLocations = Set<URL>()
+
+    var hasResumed: Bool {
+        lock.lock()
+        defer { lock.unlock() }
+        return resumed
+    }
 
     func addLocation(_ location: URL) {
         lock.lock()

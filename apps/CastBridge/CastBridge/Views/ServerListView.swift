@@ -6,11 +6,68 @@ struct ServerListView: View {
 
   var body: some View {
     NavigationStack {
-      Group {
-        if viewModel.servers.isEmpty && !viewModel.isDiscovering {
-          emptyState
-        } else {
-          serverList
+      List {
+        Section {
+          HStack {
+            TextField("http://192.168.1.1", text: $viewModel.manualServerURL)
+              .textInputAutocapitalization(.never)
+              .autocorrectionDisabled()
+              .keyboardType(.URL)
+            Button("Aggiungi") {
+              Task { await viewModel.addManualServer() }
+            }
+            .disabled(
+              viewModel.manualServerURL.trimmingCharacters(in: .whitespaces).isEmpty
+                || viewModel.isAddingManual
+            )
+          }
+
+          if viewModel.isDiscovering {
+            HStack {
+              ProgressView()
+              Text("Ricerca automatica in corso…")
+                .foregroundStyle(.secondary)
+              Spacer()
+              Button("Stop") {
+                viewModel.cancelDiscovery()
+              }
+              .buttonStyle(.bordered)
+            }
+          }
+
+          if let status = viewModel.statusMessage {
+            Text(status)
+              .font(.caption)
+              .foregroundStyle(.secondary)
+          }
+        } header: {
+          Text("Aggiungi server")
+        } footer: {
+          Text("Puoi aggiungere il router anche durante la ricerca. Trova l'IP in Impostazioni → Wi‑Fi → (i) → Router.")
+        }
+
+        Section {
+          if viewModel.servers.isEmpty {
+            Text("Nessun server in lista.")
+              .foregroundStyle(.secondary)
+          } else {
+            ForEach(viewModel.servers) { server in
+              NavigationLink(value: server) {
+                ServerRowView(server: server)
+              }
+            }
+          }
+        } header: {
+          HStack {
+            Text("Server disponibili")
+            Spacer()
+            if !viewModel.isDiscovering {
+              Button("Cerca") {
+                viewModel.discover()
+              }
+              .font(.caption)
+            }
+          }
         }
       }
       .navigationTitle("CastBridge")
@@ -19,80 +76,26 @@ struct ServerListView: View {
           CastToolbarButton()
         }
         ToolbarItem(placement: .topBarLeading) {
-          Button {
-            Task { await viewModel.discover() }
-          } label: {
-            if viewModel.isDiscovering {
-              ProgressView()
-            } else {
+          if viewModel.isDiscovering {
+            Button("Stop") {
+              viewModel.cancelDiscovery()
+            }
+          } else {
+            Button {
+              viewModel.discover()
+            } label: {
               Image(systemName: "arrow.clockwise")
             }
           }
-          .disabled(viewModel.isDiscovering)
         }
+      }
+      .navigationDestination(for: UPnPMediaServer.self) { server in
+        MediaBrowserView(server: server)
       }
       .safeAreaInset(edge: .bottom) {
         if castManager.isConnected {
           CastMiniController()
         }
-      }
-      .task {
-        await viewModel.discover()
-      }
-      .alert("Errore", isPresented: .constant(viewModel.errorMessage != nil)) {
-        Button("OK") { viewModel.errorMessage = nil }
-      } message: {
-        Text(viewModel.errorMessage ?? "")
-      }
-    }
-  }
-
-  private var emptyState: some View {
-    ContentUnavailableView {
-      Label("Nessun server", systemImage: "wifi.slash")
-    } description: {
-      Text("Assicurati che iPhone e server UPnP/DLNA siano sulla stessa rete Wi‑Fi, poi tocca Aggiorna.")
-    } actions: {
-      Button("Cerca server") {
-        Task { await viewModel.discover() }
-      }
-      .buttonStyle(.borderedProminent)
-    }
-  }
-
-  private var serverList: some View {
-    List {
-      Section {
-        HStack {
-          TextField("URL server manuale", text: $viewModel.manualServerURL)
-            .textInputAutocapitalization(.never)
-            .autocorrectionDisabled()
-            .keyboardType(.URL)
-          Button("Aggiungi") {
-            Task { await viewModel.addManualServer() }
-          }
-          .disabled(viewModel.manualServerURL.trimmingCharacters(in: .whitespaces).isEmpty)
-        }
-      } header: {
-        Text("Server manuale")
-      } footer: {
-        Text("Utile per Jellyfin, Plex DLNA, MiniDLNA o server personalizzati.")
-      }
-
-      Section("Server trovati") {
-        ForEach(viewModel.servers) { server in
-          NavigationLink(value: server) {
-            ServerRowView(server: server)
-          }
-        }
-      }
-    }
-    .navigationDestination(for: UPnPMediaServer.self) { server in
-      MediaBrowserView(server: server)
-    }
-    .overlay {
-      if viewModel.isDiscovering && viewModel.servers.isEmpty {
-        ProgressView("Ricerca server UPnP...")
       }
     }
   }
