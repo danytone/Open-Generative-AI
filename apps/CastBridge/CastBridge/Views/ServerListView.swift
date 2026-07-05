@@ -2,7 +2,9 @@ import SwiftUI
 
 struct ServerListView: View {
   @StateObject private var viewModel = UPnPDiscoveryViewModel()
+  @ObservedObject private var networkMonitor = NetworkMonitor.shared
   @EnvironmentObject private var castManager: CastManager
+  @Environment(\.scenePhase) private var scenePhase
 
   var body: some View {
     NavigationStack {
@@ -37,7 +39,15 @@ struct ServerListView: View {
         }
       }
       .task {
+        NetworkMonitor.shared.onNetworkChanged = {
+          Task { await viewModel.discover() }
+        }
         await viewModel.discover()
+      }
+      .onChange(of: scenePhase) { _, phase in
+        if phase == .active {
+          Task { await viewModel.discover() }
+        }
       }
       .alert("Errore", isPresented: .constant(viewModel.errorMessage != nil)) {
         Button("OK") { viewModel.errorMessage = nil }
@@ -51,17 +61,37 @@ struct ServerListView: View {
     ContentUnavailableView {
       Label("Nessun server", systemImage: "wifi.slash")
     } description: {
-      Text("Assicurati che iPhone e server UPnP/DLNA siano sulla stessa rete Wi‑Fi, poi tocca Aggiorna.")
+      Text(emptyStateMessage)
     } actions: {
       Button("Cerca server") {
-        Task { await viewModel.discover() }
+        Task { await viewModel.discover(keepCachedOnFailure: false) }
       }
       .buttonStyle(.borderedProminent)
     }
   }
 
+  private var emptyStateMessage: String {
+    var parts = [
+      "iPhone, router Vodafone e Chromecast devono essere sulla stessa rete Wi‑Fi.",
+      "La ricerca automatica usa multicast: su alcuni router Vodafone non funziona da tutte le stanze.",
+      "Aggiungi manualmente l'IP del router (es. http://192.168.1.1)."
+    ]
+    if let ip = networkMonitor.localIPAddress {
+      parts.append("Il tuo iPhone è su \(ip).")
+    }
+    return parts.joined(separator: " ")
+  }
+
   private var serverList: some View {
     List {
+      if let ip = networkMonitor.localIPAddress {
+        Section {
+          Text("Rete iPhone: \(ip)")
+            .font(.caption)
+            .foregroundStyle(.secondary)
+        }
+      }
+
       Section {
         HStack {
           TextField("URL server manuale", text: $viewModel.manualServerURL)
@@ -76,7 +106,7 @@ struct ServerListView: View {
       } header: {
         Text("Server manuale")
       } footer: {
-        Text("Utile per Jellyfin, Plex DLNA, MiniDLNA o server personalizzati.")
+        Text("Se la chiavetta Vodafone sparisce dopo il Cast, aggiungi qui l'URL del router. Lo trovi nell'app Vodafone Station o in Impostazioni Wi‑Fi → (i) sulla rete.")
       }
 
       Section("Server trovati") {
