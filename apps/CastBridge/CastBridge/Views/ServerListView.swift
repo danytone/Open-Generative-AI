@@ -2,7 +2,6 @@ import SwiftUI
 
 struct ServerListView: View {
   @StateObject private var viewModel = UPnPDiscoveryViewModel()
-  @ObservedObject private var networkMonitor = NetworkMonitor.shared
   @EnvironmentObject private var castManager: CastManager
   @Environment(\.scenePhase) private var scenePhase
 
@@ -39,9 +38,6 @@ struct ServerListView: View {
         }
       }
       .task {
-        NetworkMonitor.shared.onNetworkChanged = {
-          Task { await viewModel.discover() }
-        }
         await viewModel.discover()
       }
       .onChange(of: scenePhase) { _, phase in
@@ -73,10 +69,10 @@ struct ServerListView: View {
   private var emptyStateMessage: String {
     var parts = [
       "iPhone, router Vodafone e Chromecast devono essere sulla stessa rete Wi‑Fi.",
-      "La ricerca automatica usa multicast: su alcuni router Vodafone non funziona da tutte le stanze.",
+      "Con Wi‑Fi mesh la ricerca automatica spesso non funziona da tutte le stanze.",
       "Aggiungi manualmente l'IP del router (es. http://192.168.1.1)."
     ]
-    if let ip = networkMonitor.localIPAddress {
+    if let ip = LocalNetworkInfo.wifiIPv4Address() {
       parts.append("Il tuo iPhone è su \(ip).")
     }
     return parts.joined(separator: " ")
@@ -84,7 +80,7 @@ struct ServerListView: View {
 
   private var serverList: some View {
     List {
-      if let ip = networkMonitor.localIPAddress {
+      if let ip = LocalNetworkInfo.wifiIPv4Address() {
         Section {
           Text("Rete iPhone: \(ip)")
             .font(.caption)
@@ -106,7 +102,7 @@ struct ServerListView: View {
       } header: {
         Text("Server manuale")
       } footer: {
-        Text("Se la chiavetta Vodafone sparisce dopo il Cast, aggiungi qui l'URL del router. Lo trovi nell'app Vodafone Station o in Impostazioni Wi‑Fi → (i) sulla rete.")
+        Text("Se la chiavetta Vodafone sparisce dopo il Cast, aggiungi qui l'URL del router. Lo trovi in Impostazioni Wi‑Fi → (i) sulla rete.")
       }
 
       Section("Server trovati") {
@@ -125,6 +121,36 @@ struct ServerListView: View {
         ProgressView("Ricerca server UPnP...")
       }
     }
+  }
+}
+
+private enum LocalNetworkInfo {
+  static func wifiIPv4Address() -> String? {
+    var address: String?
+    var ifaddrPointer: UnsafeMutablePointer<ifaddrs>?
+    guard getifaddrs(&ifaddrPointer) == 0, let firstAddr = ifaddrPointer else { return nil }
+    defer { freeifaddrs(ifaddrPointer) }
+
+    for ptr in sequence(first: firstAddr, next: { $0.pointee.ifa_next }) {
+      let interface = ptr.pointee
+      guard interface.ifa_addr.pointee.sa_family == UInt8(AF_INET) else { continue }
+      let name = String(cString: interface.ifa_name)
+      guard name == "en0" else { continue }
+
+      var hostname = [CChar](repeating: 0, count: Int(NI_MAXHOST))
+      getnameinfo(
+        interface.ifa_addr,
+        socklen_t(interface.ifa_addr.pointee.sa_len),
+        &hostname,
+        socklen_t(hostname.count),
+        nil,
+        0,
+        NI_NUMERICHOST
+      )
+      address = String(cString: hostname)
+      break
+    }
+    return address
   }
 }
 
