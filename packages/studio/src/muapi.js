@@ -219,12 +219,19 @@ export function uploadFile(apiKey, file, onProgress) {
 }
 
 export async function getUserBalance(apiKey) {
+    if (!apiKey) return null;
     const response = await fetch(`${BASE_URL}/api/v1/account/balance`, {
         headers: {
             'Content-Type': 'application/json',
             'x-api-key': apiKey
         }
     });
+    // A missing or invalid key returns 401/403. That's an expected state (the
+    // header just shows "---"), not a failure worth throwing — throwing here
+    // turned every balance poll into a dev-overlay "Console Error".
+    if (response.status === 401 || response.status === 403) {
+        return null;
+    }
     if (!response.ok) {
         const errText = await response.text();
         throw new Error(`Failed to fetch balance: ${response.status} - ${errText.slice(0, 100)}`);

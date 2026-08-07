@@ -107,9 +107,13 @@ export default function StandaloneShell() {
   const fetchBalance = useCallback(async (key) => {
     try {
       const data = await getUserBalance(key);
-      setBalance(data.balance);
+      setBalance(data?.balance ?? null);
     } catch (err) {
-      console.error('Balance fetch failed:', err);
+      // Unexpected (network / 5xx) — auth failures are handled in getUserBalance
+      // and simply leave the balance as "---". Use warn, not error, so a flaky
+      // background poll doesn't raise the dev-overlay issue badge.
+      console.warn('Balance fetch failed:', err?.message || err);
+      setBalance(null);
     }
   }, []);
 
