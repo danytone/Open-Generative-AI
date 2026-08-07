@@ -1,0 +1,59 @@
+name: Sync Muapi models
+
+# Daily check for newly available Muapi models. When new models are found they
+# are appended to packages/studio/src/models.js and a pull request is opened for
+# review (never merged automatically). Also runnable on demand from the Actions
+# tab. Note: GitHub only runs the scheduled trigger from the workflow file on the
+# default branch, so this starts running daily once merged to main.
+
+on:
+  schedule:
+    - cron: '17 6 * * *' # every day at 06:17 UTC
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: sync-muapi-models
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Sync catalog with live Muapi API
+        id: sync
+        run: node scripts/sync-muapi-models.mjs
+
+      - name: Validate the updated catalog (dependency-free parse + sanity check)
+        if: steps.sync.outputs.added != '0'
+        run: node scripts/validate-models.mjs
+
+      - name: Open / update pull request
+        if: steps.sync.outputs.added != '0'
+        uses: peter-evans/create-pull-request@v6
+        with:
+          branch: automation/sync-muapi-models
+          base: main
+          commit-message: 'chore(studio): add new Muapi models (${{ steps.sync.outputs.added }})'
+          title: 'chore(studio): add ${{ steps.sync.outputs.added }} new Muapi model(s)'
+          body: |
+            Automated daily sync with the live Muapi model catalog
+            (`GET /api/v1/models`). New models were appended to
+            `packages/studio/src/models.js` by `scripts/sync-muapi-models.mjs`.
+
+            ${{ steps.sync.outputs.summary }}
+
+            Review the added entries (endpoints, control inputs) before merging.
+          labels: automated, models
+          delete-branch: true
