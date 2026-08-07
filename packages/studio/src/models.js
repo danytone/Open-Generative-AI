@@ -2177,6 +2177,666 @@ export const t2iModels = [
         "step": 1
       }
     }
+  },
+  // ── Newly added: synced from the live Muapi model catalog ──
+  {
+    "id": "bytedance-seedream-5.0-pro",
+    "name": "Bytedance Seedream 5.0 Pro",
+    "endpoint": "bytedance-seedream-5.0-pro",
+    "family": "seedream",
+    "inputs": {
+      "prompt": {
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt",
+        "description": "Text prompt describing the image to generate"
+      },
+      "aspect_ratio": {
+        "enum": [
+          "1:1",
+          "16:9",
+          "9:16",
+          "4:3",
+          "3:4",
+          "2:3",
+          "3:2"
+        ],
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "type": "string",
+        "description": "Aspect ratio of the output image. 16:9 and 9:16 do not support 2K resolution.",
+        "default": "1:1"
+      },
+      "resolution": {
+        "enum": [
+          "1K",
+          "2K"
+        ],
+        "title": "Resolution",
+        "name": "resolution",
+        "type": "string",
+        "description": "Output image resolution.",
+        "default": "1K"
+      }
+    }
+  },
+  {
+    "id": "bytedance-seedream-v5.0",
+    "name": "Bytedance Seedream v5.0",
+    "endpoint": "bytedance-seedream-v5.0",
+    "family": "seedream",
+    "inputs": {
+      "prompt": {
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt",
+        "description": "Text prompt describing the image to generate"
+      },
+      "aspect_ratio": {
+        "enum": [
+          "1:1",
+          "16:9",
+          "9:16",
+          "4:3",
+          "3:4",
+          "2:3",
+          "3:2",
+          "21:9"
+        ],
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "type": "string",
+        "description": "Aspect ratio of the output image.",
+        "default": "1:1"
+      },
+      "quality": {
+        "enum": [
+          "basic",
+          "high"
+        ],
+        "title": "Quality",
+        "name": "quality",
+        "type": "string",
+        "description": "Quality of the output image.",
+        "default": "basic"
+      }
+    }
+  },
+  {
+    "id": "flux-2-klein-4b-turbo",
+    "name": "Flux 2 Klein 4b Turbo",
+    "endpoint": "flux-2-klein-4b-turbo",
+    "family": "flux-2",
+    "inputs": {
+      "prompt": {
+        "description": "Text prompt describing the image.",
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt"
+      },
+      "aspect_ratio": {
+        "enum": [
+          "16:9",
+          "9:16",
+          "1:1",
+          "3:4",
+          "4:3",
+          "21:9",
+          "9:21"
+        ],
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "type": "string",
+        "description": "The aspect ratio of the generated image",
+        "default": "1:1"
+      }
+    }
+  },
+  {
+    "id": "flux-2-klein-9b-turbo",
+    "name": "Flux 2 Klein 9b Turbo",
+    "endpoint": "flux-2-klein-9b-turbo",
+    "family": "flux-2",
+    "inputs": {
+      "prompt": {
+        "description": "Text prompt describing the image.",
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt"
+      },
+      "aspect_ratio": {
+        "enum": [
+          "16:9",
+          "9:16",
+          "1:1",
+          "3:4",
+          "4:3",
+          "21:9",
+          "9:21"
+        ],
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "type": "string",
+        "description": "The aspect ratio of the generated image",
+        "default": "1:1"
+      }
+    }
+  },
+  {
+    "id": "midjourney-niji",
+    "name": "Midjourney Niji",
+    "endpoint": "midjourney-niji",
+    "family": "midjourney",
+    "inputs": {
+      "prompt": {
+        "description": "Text description of the image to generate.",
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt"
+      },
+      "aspect_ratio": {
+        "enum": [
+          "1:1",
+          "16:9",
+          "9:16",
+          "3:4",
+          "4:3",
+          "21:9"
+        ],
+        "type": "string",
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "description": "Output image aspect ratio.",
+        "default": "1:1"
+      }
+    }
+  },
+  {
+    "id": "flux-3-dev",
+    "name": "Flux 3 Dev",
+    "endpoint": "flux-3-dev",
+    "family": "flux-3",
+    "inputs": {
+      "prompt": {
+        "name": "prompt",
+        "type": "string",
+        "title": "Prompt",
+        "description": "Text prompt describing the image. Supports long, richly detailed descriptions."
+      },
+      "aspect_ratio": {
+        "enum": [
+          "16:9",
+          "9:16",
+          "1:1",
+          "4:3",
+          "3:4",
+          "2:3",
+          "3:2",
+          "21:9"
+        ],
+        "name": "aspect_ratio",
+        "type": "string",
+        "title": "Aspect Ratio",
+        "default": "1:1",
+        "description": "Aspect ratio of the output image."
+      },
+      "resolution": {
+        "enum": [
+          "1k",
+          "2k",
+          "4k"
+        ],
+        "name": "resolution",
+        "type": "string",
+        "title": "Resolution",
+        "default": "2k",
+        "description": "Target resolution of the generated image."
+      }
+    }
+  },
+  {
+    "id": "flux-3-text-to-image",
+    "name": "Flux 3",
+    "endpoint": "flux-3-text-to-image",
+    "family": "flux-3",
+    "inputs": {
+      "prompt": {
+        "name": "prompt",
+        "type": "string",
+        "title": "Prompt",
+        "description": "Text prompt describing the image. Supports long, richly detailed descriptions."
+      },
+      "aspect_ratio": {
+        "enum": [
+          "16:9",
+          "9:16",
+          "1:1",
+          "4:3",
+          "3:4",
+          "2:3",
+          "3:2",
+          "21:9"
+        ],
+        "name": "aspect_ratio",
+        "type": "string",
+        "title": "Aspect Ratio",
+        "default": "1:1",
+        "description": "Aspect ratio of the output image."
+      },
+      "resolution": {
+        "enum": [
+          "1k",
+          "2k",
+          "4k"
+        ],
+        "name": "resolution",
+        "type": "string",
+        "title": "Resolution",
+        "default": "2k",
+        "description": "Target resolution of the generated image."
+      }
+    }
+  },
+  {
+    "id": "midjourney-v7",
+    "name": "Midjourney v7",
+    "endpoint": "midjourney-v7",
+    "family": "midjourney",
+    "inputs": {
+      "prompt": {
+        "description": "Text description of the image to generate.",
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt"
+      },
+      "aspect_ratio": {
+        "enum": [
+          "1:1",
+          "16:9",
+          "9:16",
+          "3:4",
+          "4:3",
+          "21:9"
+        ],
+        "type": "string",
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "description": "Output image aspect ratio.",
+        "default": "1:1"
+      }
+    }
+  },
+  {
+    "id": "midjourney-v8",
+    "name": "Midjourney v8",
+    "endpoint": "midjourney-v8",
+    "family": "midjourney",
+    "inputs": {
+      "prompt": {
+        "description": "Text description of the image to generate.",
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt"
+      },
+      "aspect_ratio": {
+        "enum": [
+          "1:1",
+          "16:9",
+          "9:16",
+          "3:4",
+          "4:3",
+          "21:9"
+        ],
+        "type": "string",
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "description": "Output image aspect ratio.",
+        "default": "1:1"
+      }
+    }
+  },
+  {
+    "id": "kling-o3-image",
+    "name": "Kling O3 Image",
+    "endpoint": "kling-o3-image",
+    "family": "kling",
+    "inputs": {
+      "prompt": {
+        "description": "Text prompt describing the image to generate. Maximum 2,000 characters.",
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt"
+      },
+      "aspect_ratio": {
+        "enum": [
+          "1:1",
+          "16:9",
+          "9:16",
+          "4:3",
+          "3:4",
+          "3:2",
+          "2:3",
+          "21:9"
+        ],
+        "type": "string",
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "description": "Output image aspect ratio.",
+        "default": "16:9"
+      },
+      "resolution": {
+        "enum": [
+          "1K",
+          "2K",
+          "4K"
+        ],
+        "type": "string",
+        "title": "Resolution",
+        "name": "resolution",
+        "description": "Output image resolution.",
+        "default": "1K"
+      }
+    }
+  },
+  {
+    "id": "grok-imagine-text-to-image-quality",
+    "name": "Grok Imagine Quality",
+    "endpoint": "grok-imagine-text-to-image-quality",
+    "family": "grok",
+    "inputs": {
+      "prompt": {
+        "description": "Text prompt describing the image.",
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt"
+      },
+      "aspect_ratio": {
+        "enum": [
+          "9:16",
+          "16:9",
+          "2:3",
+          "3:2",
+          "1:1"
+        ],
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "type": "string",
+        "description": "Aspect ratio of the output image. Get 6 images each time.",
+        "default": "1:1"
+      }
+    }
+  },
+  {
+    "id": "nano-banana-2-lite",
+    "name": "Nano Banana 2 Lite",
+    "endpoint": "nano-banana-2-lite",
+    "family": "nano",
+    "inputs": {
+      "prompt": {
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt",
+        "description": "Text prompt describing the desired image content."
+      },
+      "aspect_ratio": {
+        "enum": [
+          "1:1",
+          "2:3",
+          "3:2",
+          "3:4",
+          "4:3",
+          "4:5",
+          "5:4",
+          "9:16",
+          "16:9",
+          "21:9"
+        ],
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "type": "string",
+        "description": "The aspect ratio of the generated image.",
+        "default": "1:1"
+      }
+    }
+  },
+  {
+    "id": "qwen3-pro-text-to-image",
+    "name": "Qwen3 Pro",
+    "endpoint": "qwen3-pro-text-to-image",
+    "family": "qwen3",
+    "inputs": {
+      "prompt": {
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt",
+        "description": "The positive prompt describing image content, style, and composition. (Max 800 characters)"
+      },
+      "aspect_ratio": {
+        "type": "string",
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "enum": [
+          "1:1",
+          "3:2",
+          "2:3",
+          "4:3",
+          "3:4",
+          "16:9",
+          "9:16",
+          "21:9"
+        ],
+        "default": "16:9"
+      },
+      "resolution": {
+        "type": "string",
+        "title": "Resolution",
+        "name": "resolution",
+        "enum": [
+          "1k",
+          "2k"
+        ],
+        "default": "1k"
+      }
+    }
+  },
+  {
+    "id": "qwen-image-2.0-pro",
+    "name": "Qwen Image 2.0 Pro",
+    "endpoint": "qwen-image-2.0-pro",
+    "family": "qwen2",
+    "inputs": {
+      "prompt": {
+        "description": "A description of the image you want to generate.",
+        "title": "Prompt",
+        "type": "string",
+        "name": "prompt"
+      },
+      "aspect_ratio": {
+        "enum": [
+          "16:9",
+          "9:16",
+          "1:1",
+          "4:3",
+          "3:4",
+          "21:9",
+          "9:21"
+        ],
+        "title": "Aspect Ratio",
+        "type": "string",
+        "name": "aspect_ratio",
+        "default": "16:9",
+        "description": "Aspect ratio of the output image."
+      }
+    }
+  },
+  {
+    "id": "qwen-image-2.0",
+    "name": "Qwen Image 2.0",
+    "endpoint": "qwen-image-2.0",
+    "family": "qwen2",
+    "inputs": {
+      "prompt": {
+        "description": "A description of the image you want to generate.",
+        "title": "Prompt",
+        "type": "string",
+        "name": "prompt"
+      },
+      "aspect_ratio": {
+        "enum": [
+          "16:9",
+          "9:16",
+          "1:1",
+          "4:3",
+          "3:4",
+          "21:9",
+          "9:21"
+        ],
+        "title": "Aspect Ratio",
+        "type": "string",
+        "name": "aspect_ratio",
+        "default": "16:9",
+        "description": "Aspect ratio of the output image."
+      }
+    }
+  },
+  {
+    "id": "wan2.7-text-to-image-pro",
+    "name": "Wan2.7 Pro",
+    "endpoint": "wan2.7-text-to-image-pro",
+    "family": "wan2.7",
+    "inputs": {
+      "prompt": {
+        "description": "Text prompt describing the image.",
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt"
+      },
+      "aspect_ratio": {
+        "type": "string",
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "description": "The aspect ratio of the generated image",
+        "default": "1:1",
+        "enum": [
+          "1:1",
+          "4:3",
+          "3:4",
+          "16:9",
+          "9:16",
+          "21:9",
+          "9:21",
+          "3:2",
+          "2:3"
+        ]
+      }
+    }
+  },
+  {
+    "id": "tiktok-carousel",
+    "name": "Tiktok Carousel",
+    "endpoint": "tiktok-carousel",
+    "family": "carousel",
+    "inputs": {}
+  },
+  {
+    "id": "qwen3-text-to-image",
+    "name": "Qwen3",
+    "endpoint": "qwen3-text-to-image",
+    "family": "qwen3",
+    "inputs": {
+      "prompt": {
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt",
+        "description": "The positive prompt describing image content, style, and composition. (Max 800 characters)"
+      },
+      "aspect_ratio": {
+        "type": "string",
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "enum": [
+          "1:1",
+          "3:2",
+          "2:3",
+          "4:3",
+          "3:4",
+          "16:9",
+          "9:16",
+          "21:9"
+        ],
+        "default": "16:9"
+      },
+      "resolution": {
+        "type": "string",
+        "title": "Resolution",
+        "name": "resolution",
+        "enum": [
+          "1k",
+          "2k"
+        ],
+        "default": "1k"
+      }
+    }
+  },
+  {
+    "id": "wan3.0-text-to-image",
+    "name": "Wan3.0",
+    "endpoint": "wan3.0-text-to-image",
+    "family": "wan3.0",
+    "inputs": {
+      "prompt": {
+        "name": "prompt",
+        "type": "string",
+        "title": "Prompt",
+        "description": "Describe the image you want to create."
+      }
+    }
+  },
+  {
+    "id": "wan2.7-text-to-image",
+    "name": "Wan2.7",
+    "endpoint": "wan2.7-text-to-image",
+    "family": "wan2.7",
+    "inputs": {
+      "prompt": {
+        "description": "Text prompt describing the image.",
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt"
+      },
+      "aspect_ratio": {
+        "enum": [
+          "1:1",
+          "4:3",
+          "3:4",
+          "16:9",
+          "9:16",
+          "21:9",
+          "9:21",
+          "3:2",
+          "2:3"
+        ],
+        "type": "string",
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "description": "The aspect ratio of the generated image",
+        "default": "1:1"
+      }
+    }
+  },
+  {
+    "id": "z-image-p",
+    "name": "Z Image P",
+    "endpoint": "z-image-p",
+    "family": "z-image",
+    "inputs": {
+      "prompt": {
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt",
+        "description": "Text prompt describing the desired image content."
+      }
+    }
   }
 ];
 
@@ -2600,6 +3260,2103 @@ export const t2vModels = [
       "aspect_ratio": { "enum": ["16:9", "9:16"], "title": "Aspect Ratio", "name": "aspect_ratio", "type": "string", "description": "The aspect ratio of the generated video", "default": "16:9" },
       "duration": { "title": "Duration", "name": "duration", "type": "int", "description": "The duration of the generated video in seconds", "default": 5 },
       "resolution": { "enum": ["480p", "720p", "1080p"], "title": "Resolution", "name": "resolution", "type": "string", "description": "The resolution of the generated video.", "default": "720p" }
+    }
+  },
+  // ── Newly added: synced from the live Muapi model catalog ──
+  {
+    "id": "flux-3-text-to-video",
+    "name": "Flux 3",
+    "endpoint": "flux-3-text-to-video",
+    "family": "flux-3",
+    "inputs": {
+      "prompt": {
+        "name": "prompt",
+        "type": "string",
+        "title": "Prompt",
+        "description": "Text prompt describing the video scene and motion."
+      },
+      "aspect_ratio": {
+        "enum": [
+          "16:9",
+          "9:16",
+          "1:1",
+          "4:3",
+          "3:4",
+          "21:9"
+        ],
+        "name": "aspect_ratio",
+        "type": "string",
+        "title": "Aspect Ratio",
+        "default": "16:9",
+        "description": "Aspect ratio of the output video."
+      },
+      "resolution": {
+        "enum": [
+          "480p",
+          "720p",
+          "1080p"
+        ],
+        "name": "resolution",
+        "type": "string",
+        "title": "Resolution",
+        "default": "720p",
+        "description": "Output video resolution."
+      },
+      "duration": {
+        "name": "duration",
+        "step": 1,
+        "type": "int",
+        "title": "Duration",
+        "default": 5,
+        "maxValue": 10,
+        "minValue": 4,
+        "description": "Video duration in seconds."
+      }
+    }
+  },
+  {
+    "id": "grok-imagine-extend",
+    "name": "Grok Imagine Extend",
+    "endpoint": "grok-imagine-extend",
+    "family": "grok",
+    "inputs": {
+      "prompt": {
+        "description": "Text prompt describing how to continue the video.",
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt"
+      },
+      "resolution": {
+        "enum": [
+          "480p",
+          "720p"
+        ],
+        "title": "Resolution",
+        "name": "resolution",
+        "type": "string",
+        "description": "Output video resolution.",
+        "default": "480p"
+      }
+    }
+  },
+  {
+    "id": "gemini-omni-text-to-video",
+    "name": "Gemini Omni",
+    "endpoint": "gemini-omni-text-to-video",
+    "family": "gemini-omni",
+    "inputs": {
+      "prompt": {
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt",
+        "description": "Text description of the desired video content. Gemini Omni supports rich multimodal prompts including scene composition, camera direction, dialogue, and ambient audio cues."
+      },
+      "aspect_ratio": {
+        "enum": [
+          "16:9",
+          "9:16"
+        ],
+        "type": "string",
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "description": "Output video aspect ratio.",
+        "default": "16:9"
+      },
+      "resolution": {
+        "enum": [
+          "720p",
+          "1080p",
+          "4k"
+        ],
+        "type": "string",
+        "title": "Resolution",
+        "name": "resolution",
+        "description": "Output video resolution. 720p and 1080p are the same price; 4K costs more.",
+        "default": "1080p"
+      },
+      "duration": {
+        "enum": [
+          4,
+          6,
+          8,
+          10
+        ],
+        "type": "int",
+        "title": "Duration (seconds)",
+        "name": "duration",
+        "description": "Duration of the generated video in seconds.",
+        "default": 8
+      }
+    }
+  },
+  {
+    "id": "happy-horse-1-text-to-video-1080p",
+    "name": "Happy Horse 1 1080p",
+    "endpoint": "happy-horse-1-text-to-video-1080p",
+    "family": "happy-horse-1",
+    "inputs": {
+      "prompt": {
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt",
+        "description": "Text description of the desired video content."
+      },
+      "aspect_ratio": {
+        "enum": [
+          "16:9",
+          "9:16",
+          "1:1",
+          "4:3",
+          "3:4"
+        ],
+        "type": "string",
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "description": "Output video aspect ratio.",
+        "default": "16:9"
+      },
+      "duration": {
+        "type": "int",
+        "title": "Duration (seconds)",
+        "name": "duration",
+        "description": "Video duration in seconds.",
+        "default": 5,
+        "minValue": 3,
+        "maxValue": 15,
+        "step": 1
+      }
+    }
+  },
+  {
+    "id": "happy-horse-1.1-text-to-video-1080p",
+    "name": "Happy Horse 1.1 1080p",
+    "endpoint": "happy-horse-1.1-text-to-video-1080p",
+    "family": "happy-horse-1.1",
+    "inputs": {
+      "prompt": {
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt",
+        "description": "Text description of the desired video content."
+      },
+      "aspect_ratio": {
+        "enum": [
+          "16:9",
+          "9:16",
+          "1:1",
+          "4:3",
+          "3:4"
+        ],
+        "type": "string",
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "description": "Output video aspect ratio.",
+        "default": "16:9"
+      },
+      "duration": {
+        "type": "int",
+        "title": "Duration (seconds)",
+        "name": "duration",
+        "description": "Video duration in seconds.",
+        "default": 5,
+        "minValue": 3,
+        "maxValue": 15,
+        "step": 1
+      }
+    }
+  },
+  {
+    "id": "happy-horse-1-text-to-video-720p",
+    "name": "Happy Horse 1 720p",
+    "endpoint": "happy-horse-1-text-to-video-720p",
+    "family": "happy-horse-1",
+    "inputs": {
+      "prompt": {
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt",
+        "description": "Text description of the desired video content."
+      },
+      "aspect_ratio": {
+        "enum": [
+          "16:9",
+          "9:16",
+          "1:1",
+          "4:3",
+          "3:4"
+        ],
+        "type": "string",
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "description": "Output video aspect ratio.",
+        "default": "16:9"
+      },
+      "duration": {
+        "type": "int",
+        "title": "Duration (seconds)",
+        "name": "duration",
+        "description": "Video duration in seconds.",
+        "default": 5,
+        "minValue": 3,
+        "maxValue": 15,
+        "step": 1
+      }
+    }
+  },
+  {
+    "id": "kling-v3-turbo-pro-text-to-video",
+    "name": "Kling v3 Turbo Pro",
+    "endpoint": "kling-v3-turbo-pro-text-to-video",
+    "family": "kling-v3.0",
+    "inputs": {
+      "prompt": {
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt",
+        "description": "Text description of the video to generate."
+      },
+      "aspect_ratio": {
+        "enum": [
+          "16:9",
+          "9:16",
+          "1:1"
+        ],
+        "default": "16:9",
+        "type": "string",
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "description": "The aspect ratio of the generated video."
+      },
+      "duration": {
+        "type": "int",
+        "title": "Duration",
+        "name": "duration",
+        "description": "Duration of the generated video in seconds (3–15).",
+        "default": 5,
+        "minValue": 3,
+        "maxValue": 15,
+        "step": 1
+      }
+    }
+  },
+  {
+    "id": "happy-horse-1.1-text-to-video-720p",
+    "name": "Happy Horse 1.1 720p",
+    "endpoint": "happy-horse-1.1-text-to-video-720p",
+    "family": "happy-horse-1.1",
+    "inputs": {
+      "prompt": {
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt",
+        "description": "Text description of the desired video content."
+      },
+      "aspect_ratio": {
+        "enum": [
+          "16:9",
+          "9:16",
+          "1:1",
+          "4:3",
+          "3:4"
+        ],
+        "type": "string",
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "description": "Output video aspect ratio.",
+        "default": "16:9"
+      },
+      "duration": {
+        "type": "int",
+        "title": "Duration (seconds)",
+        "name": "duration",
+        "description": "Video duration in seconds.",
+        "default": 5,
+        "minValue": 3,
+        "maxValue": 15,
+        "step": 1
+      }
+    }
+  },
+  {
+    "id": "kling-v3.0-omni-4k-text-to-video",
+    "name": "Kling v3.0 Omni 4K",
+    "endpoint": "kling-v3.0-omni-4k-text-to-video",
+    "family": "kling-v3-omni",
+    "inputs": {
+      "prompt": {
+        "description": "Text prompt. Reference images via <<<image_N>>> (1-indexed). If omitted, <<<image_1>>> is auto-prepended.",
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt"
+      },
+      "aspect_ratio": {
+        "enum": [
+          "9:16",
+          "16:9",
+          "1:1"
+        ],
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "type": "string",
+        "default": "16:9",
+        "description": "Aspect ratio of the output video."
+      },
+      "duration": {
+        "enum": [
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ],
+        "title": "Duration",
+        "name": "duration",
+        "type": "int",
+        "description": "Duration of the generated video in seconds.",
+        "default": 5
+      }
+    }
+  },
+  {
+    "id": "kling-v3-turbo-standard-text-to-video",
+    "name": "Kling v3 Turbo Standard",
+    "endpoint": "kling-v3-turbo-standard-text-to-video",
+    "family": "kling-v3.0",
+    "inputs": {
+      "prompt": {
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt",
+        "description": "Text description of the video to generate."
+      },
+      "aspect_ratio": {
+        "enum": [
+          "16:9",
+          "9:16",
+          "1:1"
+        ],
+        "default": "16:9",
+        "type": "string",
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "description": "The aspect ratio of the generated video."
+      },
+      "duration": {
+        "type": "int",
+        "title": "Duration",
+        "name": "duration",
+        "description": "Duration of the generated video in seconds (3–15).",
+        "default": 5,
+        "minValue": 3,
+        "maxValue": 15,
+        "step": 1
+      }
+    }
+  },
+  {
+    "id": "minimax-h3-open-text-to-video",
+    "name": "Minimax H3 Open",
+    "endpoint": "minimax-h3-open-text-to-video",
+    "family": "minimax-h3",
+    "inputs": {
+      "prompt": {
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt",
+        "description": "Text description of the video scene, action, camera movement, and desired soundtrack."
+      },
+      "aspect_ratio": {
+        "type": "string",
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "enum": [
+          "16:9",
+          "9:16",
+          "1:1",
+          "4:3",
+          "3:4",
+          "21:9",
+          "9:21"
+        ],
+        "default": "16:9"
+      },
+      "resolution": {
+        "type": "string",
+        "title": "Resolution",
+        "name": "resolution",
+        "enum": [
+          "480p",
+          "768p"
+        ],
+        "default": "480p"
+      },
+      "duration": {
+        "type": "integer",
+        "title": "Duration",
+        "name": "duration",
+        "enum": [
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ],
+        "default": 5,
+        "description": "Output duration in seconds."
+      }
+    }
+  },
+  {
+    "id": "kling-v3.0-4k-text-to-video",
+    "name": "Kling v3.0 4K",
+    "endpoint": "kling-v3.0-4k-text-to-video",
+    "family": "kling-v3.0",
+    "inputs": {
+      "prompt": {
+        "description": "Text prompt describing the video.",
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt"
+      },
+      "aspect_ratio": {
+        "enum": [
+          "16:9",
+          "9:16",
+          "1:1"
+        ],
+        "default": "16:9",
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "type": "string",
+        "description": "The aspect ratio of the generated video"
+      },
+      "duration": {
+        "title": "Duration",
+        "name": "duration",
+        "type": "int",
+        "description": "The duration of the generated video in seconds",
+        "default": 5,
+        "minValue": 3,
+        "maxValue": 15,
+        "step": 1
+      }
+    }
+  },
+  {
+    "id": "kling-v3.0-omni-standard-text-to-video",
+    "name": "Kling v3.0 Omni Standard",
+    "endpoint": "kling-v3.0-omni-standard-text-to-video",
+    "family": "kling-v3-omni",
+    "inputs": {
+      "prompt": {
+        "description": "Text prompt. Reference images via <<<image_N>>> (1-indexed). If omitted, <<<image_1>>> is auto-prepended.",
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt"
+      },
+      "aspect_ratio": {
+        "enum": [
+          "9:16",
+          "16:9",
+          "1:1"
+        ],
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "type": "string",
+        "default": "16:9",
+        "description": "Aspect ratio of the output video."
+      },
+      "duration": {
+        "enum": [
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ],
+        "title": "Duration",
+        "name": "duration",
+        "type": "int",
+        "description": "Duration of the generated video in seconds.",
+        "default": 5
+      }
+    }
+  },
+  {
+    "id": "kling-v3.0-omni-pro-text-to-video",
+    "name": "Kling v3.0 Omni Pro",
+    "endpoint": "kling-v3.0-omni-pro-text-to-video",
+    "family": "kling-v3-omni",
+    "inputs": {
+      "prompt": {
+        "description": "Text prompt. Reference images via <<<image_N>>> (1-indexed). If omitted, <<<image_1>>> is auto-prepended.",
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt"
+      },
+      "aspect_ratio": {
+        "enum": [
+          "9:16",
+          "16:9",
+          "1:1"
+        ],
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "type": "string",
+        "default": "16:9",
+        "description": "Aspect ratio of the output video."
+      },
+      "duration": {
+        "enum": [
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ],
+        "title": "Duration",
+        "name": "duration",
+        "type": "int",
+        "description": "Duration of the generated video in seconds.",
+        "default": 5
+      }
+    }
+  },
+  {
+    "id": "minimax-h3-text-to-video",
+    "name": "Minimax H3",
+    "endpoint": "minimax-h3-text-to-video",
+    "family": "minimax-h3",
+    "inputs": {
+      "prompt": {
+        "name": "prompt",
+        "type": "string",
+        "title": "Prompt",
+        "description": "Describe the video scene, action, camera movement, and style."
+      },
+      "aspect_ratio": {
+        "enum": [
+          "21:9",
+          "16:9",
+          "4:3",
+          "1:1",
+          "3:4",
+          "9:16"
+        ],
+        "name": "aspect_ratio",
+        "type": "string",
+        "title": "Aspect Ratio",
+        "default": "16:9"
+      },
+      "resolution": {
+        "enum": [
+          "2k"
+        ],
+        "name": "resolution",
+        "type": "string",
+        "title": "Resolution",
+        "default": "2k"
+      },
+      "duration": {
+        "enum": [
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ],
+        "name": "duration",
+        "type": "integer",
+        "title": "Duration",
+        "default": 5,
+        "description": "Output duration in seconds."
+      }
+    }
+  },
+  {
+    "id": "ltx-2.3-text-to-video",
+    "name": "LTX 2.3",
+    "endpoint": "ltx-2.3-text-to-video",
+    "family": "ltx2.3",
+    "inputs": {
+      "prompt": {
+        "description": "Text prompt describing the video.",
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt"
+      },
+      "aspect_ratio": {
+        "enum": [
+          "16:9",
+          "9:16"
+        ],
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "type": "string",
+        "description": "Aspect ratio of the generated video.",
+        "default": "16:9"
+      },
+      "resolution": {
+        "enum": [
+          "480p",
+          "720p",
+          "1080p"
+        ],
+        "title": "Resolution",
+        "name": "resolution",
+        "type": "string",
+        "description": "The resolution of the generated video.",
+        "default": "720p"
+      },
+      "duration": {
+        "title": "Duration",
+        "name": "duration",
+        "type": "int",
+        "description": "Duration of the generated video in seconds.",
+        "default": 5,
+        "minValue": 5,
+        "maxValue": 20,
+        "step": 1
+      }
+    }
+  },
+  {
+    "id": "motion-graphics",
+    "name": "Motion Graphics",
+    "endpoint": "motion-graphics",
+    "family": "motion-graphics",
+    "inputs": {
+      "prompt": {
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt",
+        "description": "Describe the motion graphics animation to generate."
+      },
+      "aspect_ratio": {
+        "enum": [
+          "16:9",
+          "9:16",
+          "1:1"
+        ],
+        "type": "string",
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "description": "Output canvas aspect ratio.",
+        "default": "16:9"
+      }
+    }
+  },
+  {
+    "id": "seedance-2-mini-omni-reference",
+    "name": "Seedance 2 Mini Omni Reference",
+    "endpoint": "seedance-2-mini-omni-reference",
+    "family": "seedance-2.0-mini",
+    "inputs": {
+      "prompt": {
+        "description": "Text prompt. Reference images with @image1..@image9, videos with @video1..@video3, audio with @audio1..@audio3.",
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt"
+      },
+      "aspect_ratio": {
+        "enum": [
+          "16:9",
+          "9:16",
+          "1:1",
+          "3:4",
+          "4:3",
+          "21:9"
+        ],
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "type": "string",
+        "description": "Aspect ratio of the output video.",
+        "default": "16:9"
+      },
+      "resolution": {
+        "enum": [
+          "480p",
+          "720p"
+        ],
+        "title": "Resolution",
+        "name": "resolution",
+        "type": "string",
+        "description": "Output video resolution.",
+        "default": "720p"
+      },
+      "duration": {
+        "title": "Duration",
+        "name": "duration",
+        "type": "int",
+        "description": "Video duration in seconds.",
+        "default": 5,
+        "minValue": 4,
+        "maxValue": 15,
+        "step": 1
+      }
+    }
+  },
+  {
+    "id": "pixverse-v6-t2v",
+    "name": "Pixverse v6",
+    "endpoint": "pixverse-v6-t2v",
+    "family": "pixverse-v6",
+    "inputs": {
+      "prompt": {
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt",
+        "description": "Text description of the video to generate."
+      },
+      "aspect_ratio": {
+        "enum": [
+          "16:9",
+          "4:3",
+          "1:1",
+          "3:4",
+          "9:16",
+          "2:3",
+          "3:2",
+          "21:9"
+        ],
+        "type": "string",
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "description": "Output video aspect ratio.",
+        "default": "16:9"
+      },
+      "resolution": {
+        "enum": [
+          "360p",
+          "540p",
+          "720p",
+          "1080p"
+        ],
+        "type": "string",
+        "title": "Resolution",
+        "name": "resolution",
+        "description": "Output video resolution.",
+        "default": "720p"
+      },
+      "duration": {
+        "type": "int",
+        "title": "Duration (seconds)",
+        "name": "duration",
+        "description": "Video duration in seconds.",
+        "default": 5,
+        "minValue": 1,
+        "maxValue": 15,
+        "step": 1
+      }
+    }
+  },
+  {
+    "id": "seedance-2-spicy-text-to-video",
+    "name": "Seedance 2 Spicy",
+    "endpoint": "seedance-2-spicy-text-to-video",
+    "family": "sd-2",
+    "inputs": {
+      "prompt": {
+        "name": "prompt",
+        "type": "string",
+        "title": "Prompt",
+        "description": "Text description of the video to generate. Use @character:<id> to anchor the video to a Seedance 2 character — automatically switches to image-to-video mode. Use @omni-character:<char_id> for a trained Kinovi character."
+      },
+      "aspect_ratio": {
+        "enum": [
+          "21:9",
+          "16:9",
+          "4:3",
+          "1:1",
+          "3:4",
+          "9:16"
+        ],
+        "name": "aspect_ratio",
+        "type": "string",
+        "title": "Aspect Ratio",
+        "default": "16:9",
+        "description": "Output video aspect ratio."
+      },
+      "duration": {
+        "name": "duration",
+        "step": 1,
+        "type": "int",
+        "title": "Duration (seconds)",
+        "default": 5,
+        "maxValue": 15,
+        "minValue": 4,
+        "description": "Video duration in seconds."
+      }
+    }
+  },
+  {
+    "id": "seedance-2-extend",
+    "name": "Seedance 2 Extend",
+    "endpoint": "seedance-2-extend",
+    "family": "sd-v2.0",
+    "inputs": {
+      "prompt": {
+        "description": "Optional prompt to guide the extension. Reference additional images with @image2…@image9, videos with @video1…@video3, and audio with @audio1…@audio3 — the source video's last frame is always @image1.",
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt"
+      },
+      "aspect_ratio": {
+        "enum": [
+          "21:9",
+          "16:9",
+          "4:3",
+          "1:1",
+          "3:4",
+          "9:16"
+        ],
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "type": "string",
+        "default": "16:9",
+        "description": "Output video aspect ratio (only used when reference images/videos/audio are provided)."
+      },
+      "quality": {
+        "enum": [
+          "high",
+          "basic"
+        ],
+        "title": "Quality",
+        "type": "string",
+        "name": "quality",
+        "default": "basic"
+      },
+      "duration": {
+        "type": "int",
+        "title": "Duration (seconds)",
+        "name": "duration",
+        "description": "Length of the extension clip in seconds.",
+        "default": 5,
+        "minValue": 4,
+        "maxValue": 15,
+        "step": 1
+      }
+    }
+  },
+  {
+    "id": "openai-sora-2-pro-storyboard",
+    "name": "Openai Sora 2 Pro Storyboard",
+    "endpoint": "openai-sora-2-pro-storyboard",
+    "family": "sora",
+    "inputs": {
+      "aspect_ratio": {
+        "enum": [
+          "16:9",
+          "9:16"
+        ],
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "type": "string",
+        "description": "Aspect ratio of the output video.",
+        "default": "9:16"
+      },
+      "duration": {
+        "enum": [
+          10,
+          15,
+          25
+        ],
+        "title": "Duration",
+        "name": "duration",
+        "type": "int",
+        "description": "The duration of the generated video in seconds",
+        "default": 10
+      }
+    }
+  },
+  {
+    "id": "seedance-2-mini-spicy-text-to-video",
+    "name": "Seedance 2 Mini Spicy",
+    "endpoint": "seedance-2-mini-spicy-text-to-video",
+    "family": "seedance-2.0-mini",
+    "inputs": {
+      "prompt": {
+        "name": "prompt",
+        "type": "string",
+        "title": "Prompt",
+        "description": "Text prompt describing the video scene and motion."
+      },
+      "aspect_ratio": {
+        "enum": [
+          "16:9",
+          "9:16",
+          "1:1",
+          "3:4",
+          "4:3",
+          "21:9"
+        ],
+        "name": "aspect_ratio",
+        "type": "string",
+        "title": "Aspect Ratio",
+        "default": "16:9",
+        "description": "Aspect ratio of the output video."
+      },
+      "resolution": {
+        "enum": [
+          "480p",
+          "720p"
+        ],
+        "name": "resolution",
+        "type": "string",
+        "title": "Resolution",
+        "default": "720p",
+        "description": "Output video resolution."
+      },
+      "duration": {
+        "name": "duration",
+        "step": 1,
+        "type": "int",
+        "title": "Duration",
+        "default": 5,
+        "maxValue": 15,
+        "minValue": 4,
+        "description": "Video duration in seconds."
+      }
+    }
+  },
+  {
+    "id": "seedance-2-mini-text-to-video",
+    "name": "Seedance 2 Mini",
+    "endpoint": "seedance-2-mini-text-to-video",
+    "family": "seedance-2.0-mini",
+    "inputs": {
+      "prompt": {
+        "description": "Text prompt describing the video scene and motion.",
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt"
+      },
+      "aspect_ratio": {
+        "enum": [
+          "16:9",
+          "9:16",
+          "1:1",
+          "3:4",
+          "4:3",
+          "21:9"
+        ],
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "type": "string",
+        "description": "Aspect ratio of the output video.",
+        "default": "16:9"
+      },
+      "resolution": {
+        "enum": [
+          "480p",
+          "720p"
+        ],
+        "title": "Resolution",
+        "name": "resolution",
+        "type": "string",
+        "description": "Output video resolution.",
+        "default": "720p"
+      },
+      "duration": {
+        "title": "Duration",
+        "name": "duration",
+        "type": "int",
+        "description": "Video duration in seconds.",
+        "default": 5,
+        "minValue": 4,
+        "maxValue": 15,
+        "step": 1
+      }
+    }
+  },
+  {
+    "id": "seedance-2-spicy-text-to-video-fast",
+    "name": "Seedance 2 Spicy Fast",
+    "endpoint": "seedance-2-spicy-text-to-video-fast",
+    "family": "sd-2",
+    "inputs": {
+      "prompt": {
+        "name": "prompt",
+        "type": "string",
+        "title": "Prompt",
+        "description": "Text description of the video to generate. Use @character:<id> to anchor the video to a Seedance 2 character — automatically switches to image-to-video mode. Use @omni-character:<char_id> for a trained Kinovi character."
+      },
+      "aspect_ratio": {
+        "enum": [
+          "21:9",
+          "16:9",
+          "4:3",
+          "1:1",
+          "3:4",
+          "9:16"
+        ],
+        "name": "aspect_ratio",
+        "type": "string",
+        "title": "Aspect Ratio",
+        "default": "16:9",
+        "description": "Output video aspect ratio."
+      },
+      "duration": {
+        "name": "duration",
+        "step": 1,
+        "type": "int",
+        "title": "Duration (seconds)",
+        "default": 5,
+        "maxValue": 15,
+        "minValue": 4,
+        "description": "Video duration in seconds."
+      }
+    }
+  },
+  {
+    "id": "seedance-2-t2v",
+    "name": "Seedance 2",
+    "endpoint": "seedance-2-t2v",
+    "family": "sd-v2.0",
+    "inputs": {
+      "prompt": {
+        "type": "string",
+        "title": "Prompt",
+        "description": "Text prompt describing the video. To use a fictional character, reference it inline with @character:<id> (the request_id from a completed Seedance 2 Character generation). Multiple characters are supported. Example: '@character:ab539e5f walks on the beach at sunset'."
+      },
+      "aspect_ratio": {
+        "enum": [
+          "16:9",
+          "9:16",
+          "4:3",
+          "3:4"
+        ],
+        "title": "Aspect Ratio",
+        "type": "string",
+        "default": "16:9"
+      },
+      "quality": {
+        "enum": [
+          "high",
+          "basic"
+        ],
+        "title": "Quality",
+        "type": "string",
+        "default": "basic"
+      },
+      "duration": {
+        "enum": [
+          5,
+          10,
+          15
+        ],
+        "title": "Duration",
+        "type": "integer",
+        "default": 5
+      }
+    }
+  },
+  {
+    "id": "seedance-2-t2v-480p",
+    "name": "Seedance 2 480p",
+    "endpoint": "seedance-2-t2v-480p",
+    "family": "sd-v2.0",
+    "inputs": {
+      "prompt": {
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt",
+        "description": "Text prompt describing the video. To use a fictional character, reference it inline with @character:<id> (the request_id from a completed Seedance 2 Character generation). Multiple characters are supported. Example: '@character:ab539e5f walks on the beach at sunset'."
+      },
+      "aspect_ratio": {
+        "enum": [
+          "16:9",
+          "9:16",
+          "4:3",
+          "3:4"
+        ],
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "type": "string",
+        "default": "16:9"
+      },
+      "quality": {
+        "enum": [
+          "high",
+          "basic"
+        ],
+        "title": "Quality",
+        "name": "quality",
+        "type": "string",
+        "description": "high=$0.15/sec, basic=$0.12/sec",
+        "default": "basic"
+      },
+      "duration": {
+        "type": "int",
+        "title": "Duration (seconds)",
+        "name": "duration",
+        "description": "Video duration in seconds.",
+        "default": 5,
+        "minValue": 4,
+        "maxValue": 15,
+        "step": 1
+      }
+    }
+  },
+  {
+    "id": "seedance-2-text-to-video",
+    "name": "Seedance 2 (2)",
+    "endpoint": "seedance-2-text-to-video",
+    "family": "sd-2",
+    "inputs": {
+      "prompt": {
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt",
+        "description": "Text description of the video to generate. Use @character:<id> to anchor the video to a Seedance 2 character — automatically switches to image-to-video mode."
+      },
+      "aspect_ratio": {
+        "enum": [
+          "21:9",
+          "16:9",
+          "4:3",
+          "1:1",
+          "3:4",
+          "9:16"
+        ],
+        "type": "string",
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "description": "Output video aspect ratio.",
+        "default": "16:9"
+      },
+      "duration": {
+        "type": "int",
+        "title": "Duration (seconds)",
+        "name": "duration",
+        "description": "Video duration in seconds.",
+        "default": 5,
+        "minValue": 4,
+        "maxValue": 15,
+        "step": 1
+      }
+    }
+  },
+  {
+    "id": "seedance-2-vip-extend-1080p",
+    "name": "Seedance 2 VIP Extend 1080p",
+    "endpoint": "seedance-2-vip-extend-1080p",
+    "family": "sd-v2.0",
+    "inputs": {
+      "prompt": {
+        "description": "Optional prompt to guide the extension. Reference additional images with @image2…@image9, videos with @video1…@video3, and audio with @audio1…@audio3 — the source video's last frame is always @image1.",
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt"
+      },
+      "aspect_ratio": {
+        "enum": [
+          "21:9",
+          "16:9",
+          "4:3",
+          "1:1",
+          "3:4",
+          "9:16"
+        ],
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "type": "string",
+        "default": "16:9",
+        "description": "Output video aspect ratio (only used when reference images/videos/audio are provided)."
+      },
+      "quality": {
+        "enum": [
+          "high",
+          "basic"
+        ],
+        "title": "Quality",
+        "type": "string",
+        "name": "quality",
+        "default": "high"
+      },
+      "duration": {
+        "type": "int",
+        "title": "Duration (seconds)",
+        "name": "duration",
+        "description": "Length of the extension clip in seconds.",
+        "default": 5,
+        "minValue": 4,
+        "maxValue": 15,
+        "step": 1
+      }
+    }
+  },
+  {
+    "id": "seedance-2-text-to-video-fast",
+    "name": "Seedance 2 Fast",
+    "endpoint": "seedance-2-text-to-video-fast",
+    "family": "sd-2",
+    "inputs": {
+      "prompt": {
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt",
+        "description": "Text description of the video to generate. Use @character:<id> to anchor the video to a Seedance 2 character — automatically switches to image-to-video mode."
+      },
+      "aspect_ratio": {
+        "enum": [
+          "21:9",
+          "16:9",
+          "4:3",
+          "1:1",
+          "3:4",
+          "9:16"
+        ],
+        "type": "string",
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "description": "Output video aspect ratio.",
+        "default": "16:9"
+      },
+      "duration": {
+        "type": "int",
+        "title": "Duration (seconds)",
+        "name": "duration",
+        "description": "Video duration in seconds.",
+        "default": 5,
+        "minValue": 4,
+        "maxValue": 15,
+        "step": 1
+      }
+    }
+  },
+  {
+    "id": "seedance-2-vip-extend",
+    "name": "Seedance 2 VIP Extend",
+    "endpoint": "seedance-2-vip-extend",
+    "family": "sd-v2.0",
+    "inputs": {
+      "prompt": {
+        "description": "Optional prompt to guide the extension. Reference additional images with @image2…@image9, videos with @video1…@video3, and audio with @audio1…@audio3 — the source video's last frame is always @image1.",
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt"
+      },
+      "aspect_ratio": {
+        "enum": [
+          "21:9",
+          "16:9",
+          "4:3",
+          "1:1",
+          "3:4",
+          "9:16"
+        ],
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "type": "string",
+        "default": "16:9",
+        "description": "Output video aspect ratio (only used when reference images/videos/audio are provided)."
+      },
+      "quality": {
+        "enum": [
+          "high",
+          "basic"
+        ],
+        "title": "Quality",
+        "type": "string",
+        "name": "quality",
+        "default": "basic"
+      },
+      "duration": {
+        "type": "int",
+        "title": "Duration (seconds)",
+        "name": "duration",
+        "description": "Length of the extension clip in seconds.",
+        "default": 5,
+        "minValue": 4,
+        "maxValue": 15,
+        "step": 1
+      }
+    }
+  },
+  {
+    "id": "seedance-2-vip-text-to-video",
+    "name": "Seedance 2 VIP",
+    "endpoint": "seedance-2-vip-text-to-video",
+    "family": "sd-2",
+    "inputs": {
+      "prompt": {
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt",
+        "description": "Text description of the video to generate. Use @character:<id> to anchor the video to a Seedance 2 character — automatically switches to image-to-video mode. Use @omni-character:<char_id> for a trained Kinovi character."
+      },
+      "aspect_ratio": {
+        "enum": [
+          "21:9",
+          "16:9",
+          "4:3",
+          "1:1",
+          "3:4",
+          "9:16"
+        ],
+        "type": "string",
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "description": "Output video aspect ratio.",
+        "default": "16:9"
+      },
+      "duration": {
+        "type": "int",
+        "title": "Duration (seconds)",
+        "name": "duration",
+        "description": "Video duration in seconds.",
+        "default": 5,
+        "minValue": 4,
+        "maxValue": 15,
+        "step": 1
+      }
+    }
+  },
+  {
+    "id": "seedance-2-vip-text-to-video-1080p",
+    "name": "Seedance 2 VIP 1080p",
+    "endpoint": "seedance-2-vip-text-to-video-1080p",
+    "family": "sd-2",
+    "inputs": {
+      "prompt": {
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt",
+        "description": "Text description of the video to generate."
+      },
+      "aspect_ratio": {
+        "enum": [
+          "21:9",
+          "16:9",
+          "4:3",
+          "1:1",
+          "3:4",
+          "9:16"
+        ],
+        "type": "string",
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "description": "Output video aspect ratio.",
+        "default": "16:9"
+      },
+      "duration": {
+        "type": "int",
+        "title": "Duration (seconds)",
+        "name": "duration",
+        "description": "Video duration in seconds.",
+        "default": 5,
+        "minValue": 4,
+        "maxValue": 15,
+        "step": 1
+      }
+    }
+  },
+  {
+    "id": "seedance-2-vip-text-to-video-4k",
+    "name": "Seedance 2 VIP 4K",
+    "endpoint": "seedance-2-vip-text-to-video-4k",
+    "family": "sd-2",
+    "inputs": {
+      "prompt": {
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt",
+        "description": "Text description of the video to generate."
+      },
+      "aspect_ratio": {
+        "enum": [
+          "21:9",
+          "16:9",
+          "4:3",
+          "1:1",
+          "3:4",
+          "9:16"
+        ],
+        "type": "string",
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "description": "Output video aspect ratio.",
+        "default": "16:9"
+      },
+      "duration": {
+        "type": "int",
+        "title": "Duration (seconds)",
+        "name": "duration",
+        "description": "Video duration in seconds.",
+        "default": 5,
+        "minValue": 4,
+        "maxValue": 15,
+        "step": 1
+      }
+    }
+  },
+  {
+    "id": "seedance-2.1-text-to-video",
+    "name": "Seedance 2.1",
+    "endpoint": "seedance-2.1-text-to-video",
+    "family": "seedance-2.1",
+    "inputs": {
+      "prompt": {
+        "description": "Text prompt describing the video scene and motion.",
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt"
+      },
+      "aspect_ratio": {
+        "enum": [
+          "16:9",
+          "9:16",
+          "1:1",
+          "3:4",
+          "4:3",
+          "21:9"
+        ],
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "type": "string",
+        "description": "Aspect ratio of the output video.",
+        "default": "16:9"
+      },
+      "resolution": {
+        "enum": [
+          "480p",
+          "720p",
+          "1080p"
+        ],
+        "title": "Resolution",
+        "name": "resolution",
+        "type": "string",
+        "description": "Output video resolution.",
+        "default": "720p"
+      },
+      "duration": {
+        "title": "Duration",
+        "name": "duration",
+        "type": "int",
+        "description": "The duration of the generated video in seconds.",
+        "default": 5,
+        "minValue": 4,
+        "maxValue": 12,
+        "step": 1
+      }
+    }
+  },
+  {
+    "id": "seedance-2-vip-text-to-video-fast",
+    "name": "Seedance 2 VIP Fast",
+    "endpoint": "seedance-2-vip-text-to-video-fast",
+    "family": "sd-2",
+    "inputs": {
+      "prompt": {
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt",
+        "description": "Text description of the video to generate. Use @character:<id> to anchor the video to a Seedance 2 character — automatically switches to image-to-video mode. Use @omni-character:<char_id> for a trained Kinovi character."
+      },
+      "aspect_ratio": {
+        "enum": [
+          "21:9",
+          "16:9",
+          "4:3",
+          "1:1",
+          "3:4",
+          "9:16"
+        ],
+        "type": "string",
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "description": "Output video aspect ratio.",
+        "default": "16:9"
+      },
+      "duration": {
+        "type": "int",
+        "title": "Duration (seconds)",
+        "name": "duration",
+        "description": "Video duration in seconds.",
+        "default": 5,
+        "minValue": 4,
+        "maxValue": 15,
+        "step": 1
+      }
+    }
+  },
+  {
+    "id": "seedance-2.5-spicy-text-to-video",
+    "name": "Seedance 2.5 Spicy",
+    "endpoint": "seedance-2.5-spicy-text-to-video",
+    "family": "seedance-2.5",
+    "inputs": {
+      "prompt": {
+        "name": "prompt",
+        "type": "string",
+        "title": "Prompt",
+        "description": "Text prompt describing the video scene and motion. Spicy mode favors bolder, higher-contrast, more expressive results."
+      },
+      "aspect_ratio": {
+        "enum": [
+          "16:9",
+          "9:16",
+          "1:1",
+          "3:4",
+          "4:3",
+          "21:9"
+        ],
+        "name": "aspect_ratio",
+        "type": "string",
+        "title": "Aspect Ratio",
+        "default": "16:9",
+        "description": "Aspect ratio of the output video."
+      },
+      "resolution": {
+        "enum": [
+          "480p",
+          "720p",
+          "1080p",
+          "4K"
+        ],
+        "name": "resolution",
+        "type": "string",
+        "title": "Resolution",
+        "default": "1080p",
+        "description": "Output video resolution."
+      },
+      "duration": {
+        "name": "duration",
+        "step": 1,
+        "type": "int",
+        "title": "Duration",
+        "default": 5,
+        "maxValue": 16,
+        "minValue": 4,
+        "description": "The duration of the generated video in seconds."
+      }
+    }
+  },
+  {
+    "id": "seedance-2.5-text-to-video-1080p",
+    "name": "Seedance 2.5 1080p",
+    "endpoint": "seedance-2.5-text-to-video-1080p",
+    "family": "seedance-2.5",
+    "inputs": {
+      "prompt": {
+        "description": "Text prompt describing the video scene and motion.",
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt"
+      },
+      "aspect_ratio": {
+        "enum": [
+          "16:9",
+          "9:16",
+          "1:1",
+          "4:3",
+          "3:4",
+          "21:9",
+          "9:21"
+        ],
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "type": "string",
+        "description": "Aspect ratio of the output video.",
+        "default": "16:9"
+      },
+      "duration": {
+        "title": "Duration",
+        "name": "duration",
+        "type": "int",
+        "description": "The duration of the generated video in seconds.",
+        "default": 5,
+        "minValue": 4,
+        "maxValue": 30,
+        "step": 1
+      }
+    }
+  },
+  {
+    "id": "seedance-2.5-text-to-video",
+    "name": "Seedance 2.5",
+    "endpoint": "seedance-2.5-text-to-video",
+    "family": "seedance-2.5",
+    "inputs": {
+      "prompt": {
+        "description": "Text prompt describing the video scene and motion.",
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt"
+      },
+      "aspect_ratio": {
+        "enum": [
+          "16:9",
+          "9:16",
+          "1:1",
+          "4:3",
+          "3:4",
+          "21:9",
+          "9:21"
+        ],
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "type": "string",
+        "description": "Aspect ratio of the output video.",
+        "default": "16:9"
+      },
+      "duration": {
+        "title": "Duration",
+        "name": "duration",
+        "type": "int",
+        "description": "The duration of the generated video in seconds.",
+        "default": 5,
+        "minValue": 4,
+        "maxValue": 30,
+        "step": 1
+      }
+    }
+  },
+  {
+    "id": "seedance-2.5-text-to-video-480p",
+    "name": "Seedance 2.5 480p",
+    "endpoint": "seedance-2.5-text-to-video-480p",
+    "family": "seedance-2.5",
+    "inputs": {
+      "prompt": {
+        "description": "Text prompt describing the video scene and motion.",
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt"
+      },
+      "aspect_ratio": {
+        "enum": [
+          "16:9",
+          "9:16",
+          "1:1",
+          "4:3",
+          "3:4",
+          "21:9",
+          "9:21"
+        ],
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "type": "string",
+        "description": "Aspect ratio of the output video.",
+        "default": "16:9"
+      },
+      "duration": {
+        "title": "Duration",
+        "name": "duration",
+        "type": "int",
+        "description": "The duration of the generated video in seconds.",
+        "default": 5,
+        "minValue": 4,
+        "maxValue": 30,
+        "step": 1
+      }
+    }
+  },
+  {
+    "id": "seedance-2.5-text-to-video-4k",
+    "name": "Seedance 2.5 4K",
+    "endpoint": "seedance-2.5-text-to-video-4k",
+    "family": "seedance-2.5",
+    "inputs": {
+      "prompt": {
+        "description": "Text prompt describing the video scene and motion.",
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt"
+      },
+      "aspect_ratio": {
+        "enum": [
+          "16:9",
+          "9:16",
+          "1:1",
+          "4:3",
+          "3:4",
+          "21:9",
+          "9:21"
+        ],
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "type": "string",
+        "description": "Aspect ratio of the output video.",
+        "default": "16:9"
+      },
+      "duration": {
+        "title": "Duration",
+        "name": "duration",
+        "type": "int",
+        "description": "The duration of the generated video in seconds.",
+        "default": 5,
+        "minValue": 4,
+        "maxValue": 30,
+        "step": 1
+      }
+    }
+  },
+  {
+    "id": "veo-4-text-to-video",
+    "name": "Veo 4",
+    "endpoint": "veo-4-text-to-video",
+    "family": "veo-4",
+    "inputs": {
+      "prompt": {
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt",
+        "description": "Text description of the desired video content."
+      },
+      "aspect_ratio": {
+        "enum": [
+          "16:9",
+          "9:16",
+          "1:1"
+        ],
+        "type": "string",
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "description": "Output video aspect ratio.",
+        "default": "16:9"
+      },
+      "duration": {
+        "type": "int",
+        "title": "Duration (seconds)",
+        "name": "duration",
+        "description": "Video duration in seconds.",
+        "default": 8,
+        "minValue": 5,
+        "maxValue": 30,
+        "step": 1
+      }
+    }
+  },
+  {
+    "id": "veo3.1-4k-video",
+    "name": "Veo3.1 4K Video",
+    "endpoint": "veo3.1-4k-video",
+    "family": "veo3.1",
+    "inputs": {}
+  },
+  {
+    "id": "veo3.1-extend-video",
+    "name": "Veo3.1 Extend Video",
+    "endpoint": "veo3.1-extend-video",
+    "family": "veo3.1",
+    "inputs": {
+      "prompt": {
+        "description": "Text prompt describing the video.",
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt"
+      }
+    }
+  },
+  {
+    "id": "vidu-q3-pro-text-to-video",
+    "name": "Vidu Q3 Pro",
+    "endpoint": "vidu-q3-pro-text-to-video",
+    "family": "vidu-q3-pro",
+    "inputs": {
+      "prompt": {
+        "description": "Text prompt describing the video.",
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt"
+      },
+      "aspect_ratio": {
+        "enum": [
+          "16:9",
+          "9:16",
+          "4:3",
+          "3:4",
+          "1:1"
+        ],
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "type": "string",
+        "description": "Aspect ratio of the output video.",
+        "default": "16:9"
+      },
+      "resolution": {
+        "enum": [
+          "360p",
+          "540p",
+          "720p",
+          "1080p"
+        ],
+        "title": "Resolution",
+        "name": "resolution",
+        "type": "string",
+        "description": "The resolution of the generated video.",
+        "default": "720p"
+      },
+      "duration": {
+        "title": "Duration",
+        "name": "duration",
+        "type": "int",
+        "description": "The duration of the generated video in seconds.",
+        "default": 5,
+        "minValue": 1,
+        "maxValue": 16,
+        "step": 1
+      }
+    }
+  },
+  {
+    "id": "vidu-q2-turbo-text-to-video",
+    "name": "Vidu Q2 Turbo",
+    "endpoint": "vidu-q2-turbo-text-to-video",
+    "family": "vidu-q2",
+    "inputs": {
+      "prompt": {
+        "description": "Text prompt describing the video.",
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt"
+      },
+      "aspect_ratio": {
+        "enum": [
+          "16:9",
+          "9:16",
+          "1:1"
+        ],
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "type": "string",
+        "description": "Aspect ratio of the output video.",
+        "default": "16:9"
+      },
+      "resolution": {
+        "enum": [
+          "720p",
+          "1080p"
+        ],
+        "title": "Resolution",
+        "name": "resolution",
+        "type": "string",
+        "description": "The resolution of the generated video.",
+        "default": "720p"
+      },
+      "duration": {
+        "title": "Duration",
+        "name": "duration",
+        "type": "int",
+        "description": "The duration of the generated video in seconds.",
+        "default": 5,
+        "minValue": 2,
+        "maxValue": 8,
+        "step": 1
+      }
+    }
+  },
+  {
+    "id": "vidu-q2-pro-text-to-video",
+    "name": "Vidu Q2 Pro",
+    "endpoint": "vidu-q2-pro-text-to-video",
+    "family": "vidu-q2",
+    "inputs": {
+      "prompt": {
+        "description": "Text prompt describing the video.",
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt"
+      },
+      "aspect_ratio": {
+        "enum": [
+          "16:9",
+          "9:16",
+          "1:1"
+        ],
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "type": "string",
+        "description": "Aspect ratio of the output video.",
+        "default": "16:9"
+      },
+      "resolution": {
+        "enum": [
+          "720p",
+          "1080p"
+        ],
+        "title": "Resolution",
+        "name": "resolution",
+        "type": "string",
+        "description": "The resolution of the generated video.",
+        "default": "720p"
+      },
+      "duration": {
+        "title": "Duration",
+        "name": "duration",
+        "type": "int",
+        "description": "The duration of the generated video in seconds.",
+        "default": 5,
+        "minValue": 2,
+        "maxValue": 8,
+        "step": 1
+      }
+    }
+  },
+  {
+    "id": "vidu-q3-turbo-text-to-video",
+    "name": "Vidu Q3 Turbo",
+    "endpoint": "vidu-q3-turbo-text-to-video",
+    "family": "vidu-q3-turbo",
+    "inputs": {
+      "prompt": {
+        "description": "Text prompt describing the video.",
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt"
+      },
+      "aspect_ratio": {
+        "enum": [
+          "16:9",
+          "9:16",
+          "4:3",
+          "3:4",
+          "1:1"
+        ],
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "type": "string",
+        "description": "Aspect ratio of the output video.",
+        "default": "16:9"
+      },
+      "resolution": {
+        "enum": [
+          "360p",
+          "540p",
+          "720p",
+          "1080p"
+        ],
+        "title": "Resolution",
+        "name": "resolution",
+        "type": "string",
+        "description": "The resolution of the generated video.",
+        "default": "720p"
+      },
+      "duration": {
+        "title": "Duration",
+        "name": "duration",
+        "type": "int",
+        "description": "The duration of the generated video in seconds.",
+        "default": 5,
+        "minValue": 1,
+        "maxValue": 16,
+        "step": 1
+      }
+    }
+  },
+  {
+    "id": "wan2.7-text-to-video",
+    "name": "Wan2.7",
+    "endpoint": "wan2.7-text-to-video",
+    "family": "wan2.7",
+    "inputs": {
+      "prompt": {
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt",
+        "description": "Text description"
+      },
+      "aspect_ratio": {
+        "enum": [
+          "16:9",
+          "9:16",
+          "1:1",
+          "4:3",
+          "3:4"
+        ],
+        "type": "string",
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "description": "The aspect ratio of the generated video.",
+        "default": "16:9"
+      },
+      "resolution": {
+        "enum": [
+          "720p",
+          "1080p"
+        ],
+        "type": "string",
+        "title": "Resolution",
+        "name": "resolution",
+        "description": "Output resolution",
+        "default": "720p"
+      },
+      "duration": {
+        "type": "int",
+        "title": "Duration",
+        "name": "duration",
+        "description": "Video duration in seconds (2-15).",
+        "default": 5,
+        "minValue": 2,
+        "maxValue": 15,
+        "step": 1
+      }
+    }
+  },
+  {
+    "id": "wan3.0-spicy-text-to-video",
+    "name": "Wan3.0 Spicy",
+    "endpoint": "wan3.0-spicy-text-to-video",
+    "family": "wan3.0",
+    "inputs": {
+      "prompt": {
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt",
+        "description": "Describe the video you want to create with the Spicy variant."
+      }
+    }
+  },
+  {
+    "id": "wan3.0-text-to-video",
+    "name": "Wan3.0",
+    "endpoint": "wan3.0-text-to-video",
+    "family": "wan3.0",
+    "inputs": {
+      "prompt": {
+        "name": "prompt",
+        "type": "string",
+        "title": "Prompt",
+        "description": "Describe the video you want to create."
+      }
     }
   }
 ];
@@ -4758,6 +7515,708 @@ export const i2iModels = [
         "type": "string",
         "description": "Quality of the output image.",
         "default": "basic"
+      }
+    }
+  },
+  // ── Newly added: synced from the live Muapi model catalog ──
+  {
+    "id": "bytedance-seedream-v5.0-edit",
+    "name": "Bytedance Seedream v5.0 Edit",
+    "endpoint": "bytedance-seedream-v5.0-edit",
+    "family": "seedream",
+    "imageField": "images_list",
+    "hasPrompt": true,
+    "maxImages": 14,
+    "inputs": {
+      "prompt": {
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt",
+        "description": "Text prompt describing the desired modification"
+      },
+      "aspect_ratio": {
+        "enum": [
+          "1:1",
+          "16:9",
+          "9:16",
+          "4:3",
+          "3:4",
+          "2:3",
+          "3:2",
+          "21:9"
+        ],
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "type": "string",
+        "description": "Aspect ratio of the output image.",
+        "default": "1:1"
+      },
+      "quality": {
+        "enum": [
+          "basic",
+          "high"
+        ],
+        "title": "Quality",
+        "name": "quality",
+        "type": "string",
+        "description": "Quality of the output image.",
+        "default": "basic"
+      }
+    }
+  },
+  {
+    "id": "bytedance-seedream-v4-edit",
+    "name": "Bytedance Seedream v4 Edit",
+    "endpoint": "bytedance-seedream-v4-edit",
+    "family": "seedream",
+    "imageField": "images_list",
+    "hasPrompt": true,
+    "maxImages": 10,
+    "inputs": {
+      "prompt": {
+        "description": "Text prompt describing the image.",
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt"
+      },
+      "aspect_ratio": {
+        "enum": [
+          "1:1",
+          "16:9",
+          "9:16",
+          "3:4",
+          "4:3",
+          "2:3",
+          "3:2",
+          "21:9"
+        ],
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "type": "string",
+        "description": "Aspect ratio of the output image.",
+        "default": "1:1"
+      },
+      "resolution": {
+        "enum": [
+          "1K",
+          "2K",
+          "4K"
+        ],
+        "title": "Resolution",
+        "name": "resolution",
+        "type": "string",
+        "description": "Resolution of the output image.",
+        "default": "4K"
+      }
+    }
+  },
+  {
+    "id": "bytedance-seedream-5.0-pro-edit",
+    "name": "Bytedance Seedream 5.0 Pro Edit",
+    "endpoint": "bytedance-seedream-5.0-pro-edit",
+    "family": "seedream",
+    "imageField": "images_list",
+    "hasPrompt": true,
+    "maxImages": 10,
+    "inputs": {
+      "prompt": {
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt",
+        "description": "Text prompt describing the desired modification"
+      },
+      "aspect_ratio": {
+        "enum": [
+          "1:1",
+          "16:9",
+          "9:16",
+          "4:3",
+          "3:4",
+          "2:3",
+          "3:2"
+        ],
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "type": "string",
+        "description": "Aspect ratio of the output image. 16:9 and 9:16 do not support 2K resolution.",
+        "default": "1:1"
+      },
+      "resolution": {
+        "enum": [
+          "1K",
+          "2K"
+        ],
+        "title": "Resolution",
+        "name": "resolution",
+        "type": "string",
+        "description": "Output image resolution.",
+        "default": "1K"
+      }
+    }
+  },
+  {
+    "id": "flux-2-klein-4b-turbo-edit",
+    "name": "Flux 2 Klein 4b Turbo Edit",
+    "endpoint": "flux-2-klein-4b-turbo-edit",
+    "family": "flux-2",
+    "imageField": "images_list",
+    "hasPrompt": true,
+    "maxImages": 4,
+    "inputs": {
+      "prompt": {
+        "description": "Text prompt describing the image, what you want the final edited image to look like.",
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt"
+      },
+      "aspect_ratio": {
+        "enum": [
+          "16:9",
+          "9:16",
+          "1:1",
+          "3:4",
+          "4:3",
+          "21:9",
+          "9:21"
+        ],
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "type": "string",
+        "description": "The aspect ratio of the generated image",
+        "default": "1:1"
+      }
+    }
+  },
+  {
+    "id": "face-expression-change",
+    "name": "Face Expression Change",
+    "endpoint": "face-expression-change",
+    "family": "qwen",
+    "imageField": "images_list",
+    "hasPrompt": false,
+    "maxImages": 3,
+    "inputs": {
+      "aspect_ratio": {
+        "default": "1:1",
+        "enum": [
+          "1:1",
+          "16:9",
+          "9:16",
+          "3:2",
+          "2:3",
+          "4:3",
+          "3:4",
+          "21:9",
+          "9:21"
+        ],
+        "type": "string",
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "description": "Aspect ratio of generated image."
+      }
+    }
+  },
+  {
+    "id": "flux-3-image-to-image",
+    "name": "Flux 3",
+    "endpoint": "flux-3-image-to-image",
+    "family": "flux-3",
+    "imageField": "images_list",
+    "hasPrompt": true,
+    "maxImages": 4,
+    "inputs": {
+      "prompt": {
+        "name": "prompt",
+        "type": "string",
+        "title": "Prompt",
+        "description": "Text prompt describing the image. Supports long, richly detailed descriptions."
+      },
+      "aspect_ratio": {
+        "enum": [
+          "16:9",
+          "9:16",
+          "1:1",
+          "4:3",
+          "3:4",
+          "2:3",
+          "3:2",
+          "21:9"
+        ],
+        "name": "aspect_ratio",
+        "type": "string",
+        "title": "Aspect Ratio",
+        "default": "1:1",
+        "description": "Aspect ratio of the output image."
+      },
+      "resolution": {
+        "enum": [
+          "1k",
+          "2k",
+          "4k"
+        ],
+        "name": "resolution",
+        "type": "string",
+        "title": "Resolution",
+        "default": "2k",
+        "description": "Target resolution of the generated image."
+      }
+    }
+  },
+  {
+    "id": "kling-o3-image-edit",
+    "name": "Kling O3 Image Edit",
+    "endpoint": "kling-o3-image-edit",
+    "family": "kling",
+    "imageField": "images_list",
+    "hasPrompt": true,
+    "maxImages": 10,
+    "inputs": {
+      "prompt": {
+        "description": "Text instructions describing the desired transformation. Maximum 2,000 characters.",
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt"
+      },
+      "aspect_ratio": {
+        "enum": [
+          "auto",
+          "1:1",
+          "16:9",
+          "9:16",
+          "4:3",
+          "3:4",
+          "3:2",
+          "2:3",
+          "21:9"
+        ],
+        "type": "string",
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "description": "Output image aspect ratio. Use 'auto' to follow the reference image.",
+        "default": "auto"
+      },
+      "resolution": {
+        "enum": [
+          "1K",
+          "2K",
+          "4K"
+        ],
+        "type": "string",
+        "title": "Resolution",
+        "name": "resolution",
+        "description": "Output image resolution.",
+        "default": "1K"
+      }
+    }
+  },
+  {
+    "id": "gemini-omni-character",
+    "name": "Gemini Omni Character",
+    "endpoint": "gemini-omni-character",
+    "family": "gemini-omni",
+    "imageField": "images_list",
+    "hasPrompt": false,
+    "inputs": {}
+  },
+  {
+    "id": "nano-banana-2-lite-edit",
+    "name": "Nano Banana 2 Lite Edit",
+    "endpoint": "nano-banana-2-lite-edit",
+    "family": "nano",
+    "imageField": "images_list",
+    "hasPrompt": true,
+    "maxImages": 14,
+    "inputs": {
+      "prompt": {
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt",
+        "description": "Text prompt describing the desired image content."
+      },
+      "aspect_ratio": {
+        "enum": [
+          "1:1",
+          "2:3",
+          "3:2",
+          "3:4",
+          "4:3",
+          "4:5",
+          "5:4",
+          "9:16",
+          "16:9",
+          "21:9"
+        ],
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "type": "string",
+        "description": "The aspect ratio of the generated image.",
+        "default": "1:1"
+      }
+    }
+  },
+  {
+    "id": "photo-pack",
+    "name": "Photo Pack",
+    "endpoint": "photo-pack",
+    "family": "nano",
+    "imageField": "image_url",
+    "hasPrompt": false,
+    "inputs": {
+      "aspect_ratio": {
+        "enum": [
+          "1:1",
+          "3:4",
+          "4:3",
+          "9:16",
+          "16:9"
+        ],
+        "description": "Output image aspect ratio.",
+        "type": "string",
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "default": "1:1"
+      }
+    }
+  },
+  {
+    "id": "flux-2-klein-9b-turbo-edit",
+    "name": "Flux 2 Klein 9b Turbo Edit",
+    "endpoint": "flux-2-klein-9b-turbo-edit",
+    "family": "flux-2",
+    "imageField": "images_list",
+    "hasPrompt": true,
+    "maxImages": 4,
+    "inputs": {
+      "prompt": {
+        "description": "Text prompt describing the image, what you want the final edited image to look like.",
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt"
+      },
+      "aspect_ratio": {
+        "enum": [
+          "16:9",
+          "9:16",
+          "1:1",
+          "3:4",
+          "4:3",
+          "21:9",
+          "9:21"
+        ],
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "type": "string",
+        "description": "The aspect ratio of the generated image",
+        "default": "1:1"
+      }
+    }
+  },
+  {
+    "id": "portrait-stylist",
+    "name": "Portrait Stylist",
+    "endpoint": "portrait-stylist",
+    "family": "flux-klein",
+    "imageField": "image_url",
+    "hasPrompt": false,
+    "inputs": {
+      "aspect_ratio": {
+        "type": "string",
+        "name": "aspect_ratio",
+        "title": "Aspect Ratio",
+        "description": "Output aspect ratio.",
+        "enum": [
+          "auto",
+          "1:1",
+          "4:3",
+          "3:4",
+          "16:9",
+          "9:16"
+        ],
+        "default": "auto"
+      },
+      "name": {
+        "type": "string",
+        "title": "Name",
+        "name": "name",
+        "description": "Select the portrait effect to apply.",
+        "enum": [
+          "Voluminous Frizzy Hair",
+          "Platinum Blonde Hair",
+          "Deep Burgundy Hair",
+          "Jet Black Hair",
+          "Bold Hair Highlights",
+          "Bold Red Lipstick",
+          "Smokey Eye Makeup",
+          "Glossy Nude Makeup",
+          "Winged Eyeliner",
+          "Party Glam Makeup",
+          "Aviator Sunglasses",
+          "Oversized Sunglasses",
+          "Modern Transparent Glasses",
+          "Bold Fashion Hat",
+          "Bright Pink Outfit",
+          "Black Leather Jacket",
+          "White Formal Shirt",
+          "Neon Green Hoodie",
+          "Cinematic Lighting",
+          "Cyberpunk Lighting"
+        ],
+        "default": "Voluminous Frizzy Hair"
+      }
+    }
+  },
+  {
+    "id": "qwen-image-2.0-edit",
+    "name": "Qwen Image 2.0 Edit",
+    "endpoint": "qwen-image-2.0-edit",
+    "family": "qwen2",
+    "imageField": "images_list",
+    "hasPrompt": true,
+    "maxImages": 9,
+    "inputs": {
+      "prompt": {
+        "description": "A description of the edits you want to make.",
+        "title": "Prompt",
+        "type": "string",
+        "name": "prompt"
+      },
+      "aspect_ratio": {
+        "enum": [
+          "16:9",
+          "9:16",
+          "1:1",
+          "4:3",
+          "3:4",
+          "21:9",
+          "9:21"
+        ],
+        "title": "Aspect Ratio",
+        "type": "string",
+        "name": "aspect_ratio",
+        "default": "16:9",
+        "description": "Aspect ratio of the output image."
+      }
+    }
+  },
+  {
+    "id": "qwen-image-2.0-pro-edit",
+    "name": "Qwen Image 2.0 Pro Edit",
+    "endpoint": "qwen-image-2.0-pro-edit",
+    "family": "qwen2",
+    "imageField": "images_list",
+    "hasPrompt": true,
+    "maxImages": 6,
+    "inputs": {
+      "prompt": {
+        "description": "A description of the edits you want to make.",
+        "title": "Prompt",
+        "type": "string",
+        "name": "prompt"
+      },
+      "aspect_ratio": {
+        "enum": [
+          "16:9",
+          "9:16",
+          "1:1",
+          "4:3",
+          "3:4",
+          "21:9",
+          "9:21"
+        ],
+        "title": "Aspect Ratio",
+        "type": "string",
+        "name": "aspect_ratio",
+        "default": "16:9",
+        "description": "The aspect ratio of the generated image."
+      }
+    }
+  },
+  {
+    "id": "qwen3-image-to-image",
+    "name": "Qwen3",
+    "endpoint": "qwen3-image-to-image",
+    "family": "qwen3",
+    "imageField": "images_list",
+    "hasPrompt": true,
+    "maxImages": 3,
+    "inputs": {
+      "prompt": {
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt",
+        "description": "The positive prompt describing image transformation, style, and editing instructions. (Max 800 characters)"
+      },
+      "aspect_ratio": {
+        "type": "string",
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "enum": [
+          "1:1",
+          "3:2",
+          "2:3",
+          "4:3",
+          "3:4",
+          "16:9",
+          "9:16",
+          "21:9"
+        ],
+        "default": "16:9"
+      },
+      "resolution": {
+        "type": "string",
+        "title": "Resolution",
+        "name": "resolution",
+        "enum": [
+          "1k",
+          "2k"
+        ],
+        "default": "1k"
+      }
+    }
+  },
+  {
+    "id": "qwen3-pro-image-to-image",
+    "name": "Qwen3 Pro",
+    "endpoint": "qwen3-pro-image-to-image",
+    "family": "qwen3",
+    "imageField": "images_list",
+    "hasPrompt": true,
+    "maxImages": 3,
+    "inputs": {
+      "prompt": {
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt",
+        "description": "The positive prompt describing image transformation, style, and editing instructions. (Max 800 characters)"
+      },
+      "aspect_ratio": {
+        "type": "string",
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "enum": [
+          "1:1",
+          "3:2",
+          "2:3",
+          "4:3",
+          "3:4",
+          "16:9",
+          "9:16",
+          "21:9"
+        ],
+        "default": "16:9"
+      },
+      "resolution": {
+        "type": "string",
+        "title": "Resolution",
+        "name": "resolution",
+        "enum": [
+          "1k",
+          "2k"
+        ],
+        "default": "1k"
+      }
+    }
+  },
+  {
+    "id": "seedance-2-character",
+    "name": "Seedance 2 Character",
+    "endpoint": "seedance-2-character",
+    "family": "sd-v2.0",
+    "imageField": "images_list",
+    "hasPrompt": true,
+    "maxImages": 3,
+    "inputs": {
+      "prompt": {
+        "type": "string",
+        "title": "Outfit Description",
+        "name": "prompt",
+        "description": "Describe the outfit or costume the character should wear."
+      }
+    }
+  },
+  {
+    "id": "wan2.7-image-edit",
+    "name": "Wan2.7 Image Edit",
+    "endpoint": "wan2.7-image-edit",
+    "family": "wan2.7",
+    "imageField": "images_list",
+    "hasPrompt": true,
+    "maxImages": 9,
+    "inputs": {
+      "prompt": {
+        "description": "Text prompt describing the image.",
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt"
+      },
+      "aspect_ratio": {
+        "type": "string",
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "description": "The aspect ratio of the generated image",
+        "default": "1:1",
+        "enum": [
+          "1:1",
+          "4:3",
+          "3:4",
+          "16:9",
+          "9:16",
+          "21:9",
+          "9:21",
+          "3:2",
+          "2:3"
+        ]
+      }
+    }
+  },
+  {
+    "id": "wan3.0-image-edit",
+    "name": "Wan3.0 Image Edit",
+    "endpoint": "wan3.0-image-edit",
+    "family": "wan3.0",
+    "imageField": "image_url",
+    "hasPrompt": true,
+    "inputs": {
+      "prompt": {
+        "name": "prompt",
+        "type": "string",
+        "title": "Prompt",
+        "description": "Describe the edit you want to make."
+      }
+    }
+  },
+  {
+    "id": "wan2.7-image-edit-pro",
+    "name": "Wan2.7 Image Edit Pro",
+    "endpoint": "wan2.7-image-edit-pro",
+    "family": "wan2.7",
+    "imageField": "images_list",
+    "hasPrompt": true,
+    "maxImages": 9,
+    "inputs": {
+      "prompt": {
+        "description": "Text prompt describing the image.",
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt"
+      },
+      "aspect_ratio": {
+        "type": "string",
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "description": "The aspect ratio of the generated image",
+        "default": "1:1",
+        "enum": [
+          "1:1",
+          "4:3",
+          "3:4",
+          "16:9",
+          "9:16",
+          "21:9",
+          "9:21",
+          "3:2",
+          "2:3"
+        ]
       }
     }
   }
@@ -7782,6 +11241,3190 @@ export const i2vModels = [
         "default": "basic"
       }
     }
+  },
+  // ── Newly added: synced from the live Muapi model catalog ──
+  {
+    "id": "flux-3-image-to-video",
+    "name": "Flux 3",
+    "endpoint": "flux-3-image-to-video",
+    "family": "flux-3",
+    "imageField": "images_list",
+    "inputs": {
+      "prompt": {
+        "name": "prompt",
+        "type": "string",
+        "title": "Prompt",
+        "description": "Text prompt describing the video scene and motion."
+      },
+      "aspect_ratio": {
+        "enum": [
+          "16:9",
+          "9:16",
+          "1:1",
+          "4:3",
+          "3:4",
+          "21:9"
+        ],
+        "name": "aspect_ratio",
+        "type": "string",
+        "title": "Aspect Ratio",
+        "default": "16:9",
+        "description": "Aspect ratio of the output video."
+      },
+      "resolution": {
+        "enum": [
+          "480p",
+          "720p",
+          "1080p"
+        ],
+        "name": "resolution",
+        "type": "string",
+        "title": "Resolution",
+        "default": "720p",
+        "description": "Output video resolution."
+      },
+      "duration": {
+        "name": "duration",
+        "step": 1,
+        "type": "int",
+        "title": "Duration",
+        "default": 5,
+        "maxValue": 10,
+        "minValue": 4,
+        "description": "Video duration in seconds."
+      }
+    }
+  },
+  {
+    "id": "gemini-omni-image-to-video",
+    "name": "Gemini Omni",
+    "endpoint": "gemini-omni-image-to-video",
+    "family": "gemini-omni",
+    "imageField": "image_urls",
+    "inputs": {
+      "prompt": {
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt",
+        "description": "Text description of the desired motion and scene. Gemini Omni supports rich multimodal prompts including camera direction, dialogue, and ambient audio cues."
+      },
+      "aspect_ratio": {
+        "enum": [
+          "16:9",
+          "9:16"
+        ],
+        "type": "string",
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "description": "Output video aspect ratio.",
+        "default": "16:9"
+      },
+      "resolution": {
+        "enum": [
+          "720p",
+          "1080p",
+          "4k"
+        ],
+        "type": "string",
+        "title": "Resolution",
+        "name": "resolution",
+        "description": "Output video resolution. 720p and 1080p are the same price; 4K costs more.",
+        "default": "1080p"
+      },
+      "duration": {
+        "enum": [
+          4,
+          6,
+          8,
+          10
+        ],
+        "type": "int",
+        "title": "Duration (seconds)",
+        "name": "duration",
+        "description": "Duration of the generated video in seconds.",
+        "default": 8
+      }
+    }
+  },
+  {
+    "id": "grok-imagine-video-1-5-preview",
+    "name": "Grok Imagine Video 1 5 Preview",
+    "endpoint": "grok-imagine-video-1-5-preview",
+    "family": "video-generation",
+    "imageField": "images_list",
+    "inputs": {
+      "prompt": {
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt",
+        "description": "Text description for video generation."
+      },
+      "aspect_ratio": {
+        "enum": [
+          "auto",
+          "1:1",
+          "16:9",
+          "9:16",
+          "4:3",
+          "3:4",
+          "3:2",
+          "2:3"
+        ],
+        "type": "string",
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "description": "Aspect ratio for the generated video. Use 'auto' to match the input image.",
+        "default": "auto"
+      },
+      "resolution": {
+        "enum": [
+          "480p",
+          "720p"
+        ],
+        "type": "string",
+        "title": "Resolution",
+        "name": "resolution",
+        "description": "Output video resolution.",
+        "default": "480p"
+      },
+      "duration": {
+        "type": "int",
+        "title": "Duration (seconds)",
+        "name": "duration",
+        "description": "Video duration in seconds.",
+        "default": 8,
+        "minValue": 1,
+        "maxValue": 15,
+        "step": 1
+      }
+    }
+  },
+  {
+    "id": "happy-horse-1-image-to-video-1080p",
+    "name": "Happy Horse 1 1080p",
+    "endpoint": "happy-horse-1-image-to-video-1080p",
+    "family": "happy-horse-1",
+    "imageField": "images_list",
+    "inputs": {
+      "prompt": {
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt",
+        "description": "Optional text description guiding the motion."
+      },
+      "aspect_ratio": {
+        "enum": [
+          "16:9",
+          "9:16",
+          "1:1",
+          "4:3",
+          "3:4"
+        ],
+        "type": "string",
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "description": "Output video aspect ratio.",
+        "default": "16:9"
+      },
+      "duration": {
+        "type": "int",
+        "title": "Duration (seconds)",
+        "name": "duration",
+        "description": "Video duration in seconds.",
+        "default": 5,
+        "minValue": 3,
+        "maxValue": 15,
+        "step": 1
+      }
+    }
+  },
+  {
+    "id": "happy-horse-1-image-to-video-720p",
+    "name": "Happy Horse 1 720p",
+    "endpoint": "happy-horse-1-image-to-video-720p",
+    "family": "happy-horse-1",
+    "imageField": "images_list",
+    "inputs": {
+      "prompt": {
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt",
+        "description": "Optional text description guiding the motion."
+      },
+      "aspect_ratio": {
+        "enum": [
+          "16:9",
+          "9:16",
+          "1:1",
+          "4:3",
+          "3:4"
+        ],
+        "type": "string",
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "description": "Output video aspect ratio.",
+        "default": "16:9"
+      },
+      "duration": {
+        "type": "int",
+        "title": "Duration (seconds)",
+        "name": "duration",
+        "description": "Video duration in seconds.",
+        "default": 5,
+        "minValue": 3,
+        "maxValue": 15,
+        "step": 1
+      }
+    }
+  },
+  {
+    "id": "happy-horse-1-reference-to-video-1080p",
+    "name": "Happy Horse 1 1080p (2)",
+    "endpoint": "happy-horse-1-reference-to-video-1080p",
+    "family": "happy-horse-1",
+    "imageField": "images_list",
+    "inputs": {
+      "prompt": {
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt",
+        "description": "Text description of the desired video. Up to 5,000 non-Chinese (or 2,500 Chinese) characters."
+      },
+      "aspect_ratio": {
+        "enum": [
+          "16:9",
+          "9:16",
+          "1:1",
+          "4:3",
+          "3:4"
+        ],
+        "type": "string",
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "description": "Output video aspect ratio.",
+        "default": "16:9"
+      },
+      "duration": {
+        "type": "int",
+        "title": "Duration (seconds)",
+        "name": "duration",
+        "description": "Video duration in seconds.",
+        "default": 5,
+        "minValue": 3,
+        "maxValue": 15,
+        "step": 1
+      }
+    }
+  },
+  {
+    "id": "happy-horse-1.1-reference-to-video-1080p",
+    "name": "Happy Horse 1.1 1080p",
+    "endpoint": "happy-horse-1.1-reference-to-video-1080p",
+    "family": "happy-horse-1.1",
+    "imageField": "images_list",
+    "inputs": {
+      "prompt": {
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt",
+        "description": "Text description of the desired video. Up to 5,000 characters."
+      },
+      "aspect_ratio": {
+        "enum": [
+          "16:9",
+          "9:16",
+          "1:1",
+          "4:3",
+          "3:4"
+        ],
+        "type": "string",
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "description": "Output video aspect ratio.",
+        "default": "16:9"
+      },
+      "duration": {
+        "type": "int",
+        "title": "Duration (seconds)",
+        "name": "duration",
+        "description": "Video duration in seconds.",
+        "default": 5,
+        "minValue": 3,
+        "maxValue": 15,
+        "step": 1
+      }
+    }
+  },
+  {
+    "id": "happy-horse-1.1-image-to-video-720p",
+    "name": "Happy Horse 1.1 720p",
+    "endpoint": "happy-horse-1.1-image-to-video-720p",
+    "family": "happy-horse-1.1",
+    "imageField": "images_list",
+    "inputs": {
+      "prompt": {
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt",
+        "description": "Optional text description guiding the motion."
+      },
+      "aspect_ratio": {
+        "enum": [
+          "16:9",
+          "9:16",
+          "1:1",
+          "4:3",
+          "3:4"
+        ],
+        "type": "string",
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "description": "Output video aspect ratio.",
+        "default": "16:9"
+      },
+      "duration": {
+        "type": "int",
+        "title": "Duration (seconds)",
+        "name": "duration",
+        "description": "Video duration in seconds.",
+        "default": 5,
+        "minValue": 3,
+        "maxValue": 15,
+        "step": 1
+      }
+    }
+  },
+  {
+    "id": "happy-horse-1.1-image-to-video-1080p",
+    "name": "Happy Horse 1.1 1080p (2)",
+    "endpoint": "happy-horse-1.1-image-to-video-1080p",
+    "family": "happy-horse-1.1",
+    "imageField": "images_list",
+    "inputs": {
+      "prompt": {
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt",
+        "description": "Optional text description guiding the motion."
+      },
+      "aspect_ratio": {
+        "enum": [
+          "16:9",
+          "9:16",
+          "1:1",
+          "4:3",
+          "3:4"
+        ],
+        "type": "string",
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "description": "Output video aspect ratio.",
+        "default": "16:9"
+      },
+      "duration": {
+        "type": "int",
+        "title": "Duration (seconds)",
+        "name": "duration",
+        "description": "Video duration in seconds.",
+        "default": 5,
+        "minValue": 3,
+        "maxValue": 15,
+        "step": 1
+      }
+    }
+  },
+  {
+    "id": "happy-horse-1-reference-to-video-720p",
+    "name": "Happy Horse 1 720p (2)",
+    "endpoint": "happy-horse-1-reference-to-video-720p",
+    "family": "happy-horse-1",
+    "imageField": "images_list",
+    "inputs": {
+      "prompt": {
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt",
+        "description": "Text description of the desired video. Up to 5,000 non-Chinese (or 2,500 Chinese) characters."
+      },
+      "aspect_ratio": {
+        "enum": [
+          "16:9",
+          "9:16",
+          "1:1",
+          "4:3",
+          "3:4"
+        ],
+        "type": "string",
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "description": "Output video aspect ratio.",
+        "default": "16:9"
+      },
+      "duration": {
+        "type": "int",
+        "title": "Duration (seconds)",
+        "name": "duration",
+        "description": "Video duration in seconds.",
+        "default": 5,
+        "minValue": 3,
+        "maxValue": 15,
+        "step": 1
+      }
+    }
+  },
+  {
+    "id": "kling-v3-turbo-standard-image-to-video",
+    "name": "Kling v3 Turbo Standard",
+    "endpoint": "kling-v3-turbo-standard-image-to-video",
+    "family": "kling-v3.0",
+    "imageField": "image_url",
+    "inputs": {
+      "prompt": {
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt",
+        "description": "Text prompt describing the video."
+      },
+      "duration": {
+        "type": "int",
+        "title": "Duration",
+        "name": "duration",
+        "description": "Duration of the generated video in seconds (3–15).",
+        "default": 5,
+        "minValue": 3,
+        "maxValue": 15,
+        "step": 1
+      }
+    }
+  },
+  {
+    "id": "happy-horse-1.1-reference-to-video-720p",
+    "name": "Happy Horse 1.1 720p (2)",
+    "endpoint": "happy-horse-1.1-reference-to-video-720p",
+    "family": "happy-horse-1.1",
+    "imageField": "images_list",
+    "inputs": {
+      "prompt": {
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt",
+        "description": "Text description of the desired video. Up to 5,000 characters."
+      },
+      "aspect_ratio": {
+        "enum": [
+          "16:9",
+          "9:16",
+          "1:1",
+          "4:3",
+          "3:4"
+        ],
+        "type": "string",
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "description": "Output video aspect ratio.",
+        "default": "16:9"
+      },
+      "duration": {
+        "type": "int",
+        "title": "Duration (seconds)",
+        "name": "duration",
+        "description": "Video duration in seconds.",
+        "default": 5,
+        "minValue": 3,
+        "maxValue": 15,
+        "step": 1
+      }
+    }
+  },
+  {
+    "id": "kling-v3-turbo-pro-image-to-video",
+    "name": "Kling v3 Turbo Pro",
+    "endpoint": "kling-v3-turbo-pro-image-to-video",
+    "family": "kling-v3.0",
+    "imageField": "image_url",
+    "inputs": {
+      "prompt": {
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt",
+        "description": "Text prompt describing the video."
+      },
+      "duration": {
+        "type": "int",
+        "title": "Duration",
+        "name": "duration",
+        "description": "Duration of the generated video in seconds (3–15).",
+        "default": 5,
+        "minValue": 3,
+        "maxValue": 15,
+        "step": 1
+      }
+    }
+  },
+  {
+    "id": "kling-v3.0-4k-image-to-video",
+    "name": "Kling v3.0 4K",
+    "endpoint": "kling-v3.0-4k-image-to-video",
+    "family": "kling-v3.0",
+    "imageField": "image_url",
+    "lastImageField": "last_image",
+    "inputs": {
+      "prompt": {
+        "description": "Text prompt describing the video.",
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt"
+      },
+      "duration": {
+        "title": "Duration",
+        "name": "duration",
+        "type": "int",
+        "description": "The duration of the generated video in seconds",
+        "default": 5,
+        "minValue": 3,
+        "maxValue": 15,
+        "step": 1
+      }
+    }
+  },
+  {
+    "id": "ltx-2.3-image-to-video",
+    "name": "LTX 2.3",
+    "endpoint": "ltx-2.3-image-to-video",
+    "family": "ltx2.3",
+    "imageField": "image_url",
+    "inputs": {
+      "prompt": {
+        "description": "Text prompt describing the video.",
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt"
+      },
+      "resolution": {
+        "enum": [
+          "480p",
+          "720p",
+          "1080p"
+        ],
+        "title": "Resolution",
+        "name": "resolution",
+        "type": "string",
+        "description": "The resolution of the generated video.",
+        "default": "720p"
+      },
+      "duration": {
+        "title": "Duration",
+        "name": "duration",
+        "type": "int",
+        "description": "Duration of the generated video in seconds.",
+        "default": 5,
+        "minValue": 5,
+        "maxValue": 20,
+        "step": 1
+      }
+    }
+  },
+  {
+    "id": "kling-v3.0-omni-standard-image-to-video",
+    "name": "Kling v3.0 Omni Standard",
+    "endpoint": "kling-v3.0-omni-standard-image-to-video",
+    "family": "kling-v3-omni",
+    "imageField": "images_list",
+    "inputs": {
+      "prompt": {
+        "description": "Text prompt. Reference images via <<<image_N>>> (1-indexed). If omitted, <<<image_1>>> is auto-prepended.",
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt"
+      },
+      "aspect_ratio": {
+        "enum": [
+          "9:16",
+          "16:9",
+          "1:1"
+        ],
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "type": "string",
+        "default": "16:9",
+        "description": "Aspect ratio of the output video."
+      },
+      "duration": {
+        "enum": [
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ],
+        "title": "Duration",
+        "name": "duration",
+        "type": "int",
+        "description": "Duration of the generated video in seconds.",
+        "default": 5
+      }
+    }
+  },
+  {
+    "id": "kling-v3.0-omni-4k-image-to-video",
+    "name": "Kling v3.0 Omni 4K",
+    "endpoint": "kling-v3.0-omni-4k-image-to-video",
+    "family": "kling-v3-omni",
+    "imageField": "images_list",
+    "inputs": {
+      "prompt": {
+        "description": "Text prompt. Reference images via <<<image_N>>> (1-indexed). If omitted, <<<image_1>>> is auto-prepended.",
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt"
+      },
+      "aspect_ratio": {
+        "enum": [
+          "9:16",
+          "16:9",
+          "1:1"
+        ],
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "type": "string",
+        "default": "16:9",
+        "description": "Aspect ratio of the output video."
+      },
+      "duration": {
+        "enum": [
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ],
+        "title": "Duration",
+        "name": "duration",
+        "type": "int",
+        "description": "Duration of the generated video in seconds.",
+        "default": 5
+      }
+    }
+  },
+  {
+    "id": "kling-v3.0-omni-pro-image-to-video",
+    "name": "Kling v3.0 Omni Pro",
+    "endpoint": "kling-v3.0-omni-pro-image-to-video",
+    "family": "kling-v3-omni",
+    "imageField": "images_list",
+    "inputs": {
+      "prompt": {
+        "description": "Text prompt. Reference images via <<<image_N>>> (1-indexed). If omitted, <<<image_1>>> is auto-prepended.",
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt"
+      },
+      "aspect_ratio": {
+        "enum": [
+          "9:16",
+          "16:9",
+          "1:1"
+        ],
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "type": "string",
+        "default": "16:9",
+        "description": "Aspect ratio of the output video."
+      },
+      "duration": {
+        "enum": [
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ],
+        "title": "Duration",
+        "name": "duration",
+        "type": "int",
+        "description": "Duration of the generated video in seconds.",
+        "default": 5
+      }
+    }
+  },
+  {
+    "id": "minimax-h3-open-reference-to-video",
+    "name": "Minimax H3 Open",
+    "endpoint": "minimax-h3-open-reference-to-video",
+    "family": "minimax-h3",
+    "imageField": "images_list",
+    "inputs": {
+      "prompt": {
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt",
+        "description": "Text description referencing <Picture 1..9>, <Video 1..3>, <Audio 1..3>. Native stereo audio is generated with the video."
+      },
+      "aspect_ratio": {
+        "type": "string",
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "enum": [
+          "16:9",
+          "9:16",
+          "1:1",
+          "4:3",
+          "3:4",
+          "21:9",
+          "9:21"
+        ],
+        "default": "16:9"
+      },
+      "resolution": {
+        "type": "string",
+        "title": "Resolution",
+        "name": "resolution",
+        "enum": [
+          "480p",
+          "768p"
+        ],
+        "default": "480p"
+      },
+      "duration": {
+        "type": "integer",
+        "title": "Duration",
+        "name": "duration",
+        "enum": [
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ],
+        "default": 5
+      }
+    }
+  },
+  {
+    "id": "minimax-h3-open-image-to-video",
+    "name": "Minimax H3 Open (2)",
+    "endpoint": "minimax-h3-open-image-to-video",
+    "family": "minimax-h3",
+    "imageField": "image_url",
+    "lastImageField": "last_image",
+    "inputs": {
+      "prompt": {
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt",
+        "description": "Text description of the desired motion, scene, and soundtrack."
+      },
+      "resolution": {
+        "type": "string",
+        "title": "Resolution",
+        "name": "resolution",
+        "enum": [
+          "480p",
+          "768p"
+        ],
+        "default": "480p"
+      },
+      "duration": {
+        "type": "integer",
+        "title": "Duration",
+        "name": "duration",
+        "enum": [
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ],
+        "default": 5,
+        "description": "Output duration in seconds."
+      }
+    }
+  },
+  {
+    "id": "minimax-h3-image-to-video",
+    "name": "Minimax H3",
+    "endpoint": "minimax-h3-image-to-video",
+    "family": "minimax-h3",
+    "imageField": "image_url",
+    "lastImageField": "last_image_url",
+    "inputs": {
+      "prompt": {
+        "name": "prompt",
+        "type": "string",
+        "title": "Prompt",
+        "description": "Describe the motion, action, and camera movement."
+      },
+      "resolution": {
+        "enum": [
+          "2k"
+        ],
+        "name": "resolution",
+        "type": "string",
+        "title": "Resolution",
+        "default": "2k"
+      },
+      "duration": {
+        "enum": [
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ],
+        "name": "duration",
+        "type": "integer",
+        "title": "Duration",
+        "default": 5,
+        "description": "Output duration in seconds."
+      }
+    }
+  },
+  {
+    "id": "minimax-h3-reference-to-video",
+    "name": "Minimax H3 (2)",
+    "endpoint": "minimax-h3-reference-to-video",
+    "family": "minimax-h3",
+    "imageField": "reference_images",
+    "inputs": {
+      "prompt": {
+        "name": "prompt",
+        "type": "string",
+        "title": "Prompt",
+        "description": "Describe the video scene and how the references should be used."
+      },
+      "aspect_ratio": {
+        "enum": [
+          "21:9",
+          "16:9",
+          "4:3",
+          "1:1",
+          "3:4",
+          "9:16"
+        ],
+        "name": "aspect_ratio",
+        "type": "string",
+        "title": "Aspect Ratio",
+        "default": "16:9"
+      },
+      "resolution": {
+        "enum": [
+          "2k"
+        ],
+        "name": "resolution",
+        "type": "string",
+        "title": "Resolution",
+        "default": "2k"
+      },
+      "duration": {
+        "enum": [
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ],
+        "name": "duration",
+        "type": "integer",
+        "title": "Duration",
+        "default": 5,
+        "description": "Output duration in seconds."
+      }
+    }
+  },
+  {
+    "id": "pixverse-v6-transition",
+    "name": "Pixverse v6 Transition",
+    "endpoint": "pixverse-v6-transition",
+    "family": "pixverse-v6",
+    "imageField": "image_url",
+    "lastImageField": "last_image",
+    "inputs": {
+      "prompt": {
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt",
+        "description": "Text description of the transition or video content."
+      },
+      "aspect_ratio": {
+        "enum": [
+          "16:9",
+          "4:3",
+          "1:1",
+          "3:4",
+          "9:16",
+          "2:3",
+          "3:2",
+          "21:9"
+        ],
+        "type": "string",
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "description": "Output video orientation.",
+        "default": "16:9"
+      },
+      "resolution": {
+        "enum": [
+          "360p",
+          "540p",
+          "720p",
+          "1080p"
+        ],
+        "type": "string",
+        "title": "Resolution",
+        "name": "resolution",
+        "description": "Video output quality.",
+        "default": "720p"
+      },
+      "duration": {
+        "type": "int",
+        "title": "Duration (seconds)",
+        "name": "duration",
+        "description": "Total length of the video.",
+        "default": 5,
+        "minValue": 1,
+        "maxValue": 15,
+        "step": 1
+      }
+    }
+  },
+  {
+    "id": "pixverse-v6-i2v",
+    "name": "Pixverse v6",
+    "endpoint": "pixverse-v6-i2v",
+    "family": "pixverse-v6",
+    "imageField": "images_list",
+    "inputs": {
+      "prompt": {
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt",
+        "description": "Text description of the desired video motion and content."
+      },
+      "resolution": {
+        "enum": [
+          "360p",
+          "540p",
+          "720p",
+          "1080p"
+        ],
+        "type": "string",
+        "title": "Resolution",
+        "name": "resolution",
+        "description": "Output video resolution.",
+        "default": "720p"
+      },
+      "duration": {
+        "type": "int",
+        "title": "Duration (seconds)",
+        "name": "duration",
+        "description": "Video duration in seconds.",
+        "default": 5,
+        "minValue": 1,
+        "maxValue": 15,
+        "step": 1
+      }
+    }
+  },
+  {
+    "id": "seedance-2-first-last-frame",
+    "name": "Seedance 2",
+    "endpoint": "seedance-2-first-last-frame",
+    "family": "sd-2",
+    "imageField": "images_list",
+    "inputs": {
+      "prompt": {
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt",
+        "description": "Text description guiding the transition between frames."
+      },
+      "aspect_ratio": {
+        "enum": [
+          "adaptive",
+          "21:9",
+          "16:9",
+          "4:3",
+          "1:1",
+          "3:4",
+          "9:16"
+        ],
+        "type": "string",
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "description": "Output video aspect ratio. 'adaptive' matches the reference image (recommended); concrete ratios may crop or pad.",
+        "default": "adaptive"
+      },
+      "duration": {
+        "type": "int",
+        "title": "Duration (seconds)",
+        "name": "duration",
+        "description": "Video duration in seconds.",
+        "default": 5,
+        "minValue": 4,
+        "maxValue": 15,
+        "step": 1
+      }
+    }
+  },
+  {
+    "id": "seedance-2-i2v",
+    "name": "Seedance 2 (2)",
+    "endpoint": "seedance-2-i2v",
+    "family": "sd-v2.0",
+    "imageField": "images_list",
+    "inputs": {
+      "prompt": {
+        "type": "string",
+        "title": "Prompt",
+        "description": "Text prompt describing the video animation. Reference uploaded images using @image1, @image2, … @imageN (1-based, matching images_list order). To use a fictional character, reference it with @character:<id> (request_id from a completed Seedance 2 Character generation) — characters are automatically appended to images_list. Multiple characters are supported. Example: '@character:ab539e5f walks through a garden' or 'The cat in @image1 meets @character:ab539e5f'."
+      },
+      "aspect_ratio": {
+        "enum": [
+          "16:9",
+          "9:16",
+          "4:3",
+          "3:4"
+        ],
+        "title": "Aspect Ratio",
+        "type": "string",
+        "default": "16:9"
+      },
+      "quality": {
+        "enum": [
+          "high",
+          "basic"
+        ],
+        "title": "Quality",
+        "type": "string",
+        "default": "basic"
+      },
+      "duration": {
+        "enum": [
+          5,
+          10,
+          15
+        ],
+        "title": "Duration",
+        "type": "integer",
+        "default": 5
+      }
+    }
+  },
+  {
+    "id": "seedance-2-i2v-480p",
+    "name": "Seedance 2 480p",
+    "endpoint": "seedance-2-i2v-480p",
+    "family": "sd-v2.0",
+    "imageField": "images_list",
+    "inputs": {
+      "prompt": {
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt",
+        "description": "Text prompt describing the video animation. Reference uploaded images using @image1, @image2, … @imageN (1-based, matching images_list order). To use a fictional character, reference it with @character:<id> (request_id from a completed Seedance 2 Character generation) — characters are automatically appended to images_list. Multiple characters are supported."
+      },
+      "aspect_ratio": {
+        "enum": [
+          "16:9",
+          "9:16",
+          "4:3",
+          "3:4"
+        ],
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "type": "string",
+        "default": "16:9"
+      },
+      "quality": {
+        "enum": [
+          "high",
+          "basic"
+        ],
+        "title": "Quality",
+        "name": "quality",
+        "type": "string",
+        "description": "high=$0.15/sec, basic=$0.12/sec",
+        "default": "basic"
+      },
+      "duration": {
+        "type": "int",
+        "title": "Duration (seconds)",
+        "name": "duration",
+        "description": "Video duration in seconds.",
+        "default": 5,
+        "minValue": 4,
+        "maxValue": 15,
+        "step": 1
+      }
+    }
+  },
+  {
+    "id": "seedance-2-image-to-video",
+    "name": "Seedance 2 (3)",
+    "endpoint": "seedance-2-image-to-video",
+    "family": "sd-2",
+    "imageField": "images_list",
+    "inputs": {
+      "prompt": {
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt",
+        "description": "Text description guiding the video animation. Use @character:<id> to reference a completed Seedance 2 Character generation."
+      },
+      "aspect_ratio": {
+        "enum": [
+          "21:9",
+          "16:9",
+          "4:3",
+          "1:1",
+          "3:4",
+          "9:16"
+        ],
+        "type": "string",
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "description": "Output video aspect ratio.",
+        "default": "16:9"
+      },
+      "duration": {
+        "type": "int",
+        "title": "Duration (seconds)",
+        "name": "duration",
+        "description": "Video duration in seconds.",
+        "default": 5,
+        "minValue": 4,
+        "maxValue": 15,
+        "step": 1
+      }
+    }
+  },
+  {
+    "id": "seedance-2-image-to-video-fast",
+    "name": "Seedance 2 Fast",
+    "endpoint": "seedance-2-image-to-video-fast",
+    "family": "sd-2",
+    "imageField": "images_list",
+    "inputs": {
+      "prompt": {
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt",
+        "description": "Text description guiding the video animation. Use @character:<id> to reference a completed Seedance 2 Character generation."
+      },
+      "aspect_ratio": {
+        "enum": [
+          "21:9",
+          "16:9",
+          "4:3",
+          "1:1",
+          "3:4",
+          "9:16"
+        ],
+        "type": "string",
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "description": "Output video aspect ratio.",
+        "default": "16:9"
+      },
+      "duration": {
+        "type": "int",
+        "title": "Duration (seconds)",
+        "name": "duration",
+        "description": "Video duration in seconds.",
+        "default": 5,
+        "minValue": 4,
+        "maxValue": 15,
+        "step": 1
+      }
+    }
+  },
+  {
+    "id": "seedance-2-mini-spicy-image-to-video",
+    "name": "Seedance 2 Mini Spicy",
+    "endpoint": "seedance-2-mini-spicy-image-to-video",
+    "family": "seedance-2.0-mini",
+    "imageField": "images_list",
+    "inputs": {
+      "prompt": {
+        "name": "prompt",
+        "type": "string",
+        "title": "Prompt",
+        "description": "Text prompt guiding the video animation."
+      },
+      "aspect_ratio": {
+        "enum": [
+          "16:9",
+          "9:16",
+          "1:1",
+          "3:4",
+          "4:3",
+          "21:9"
+        ],
+        "name": "aspect_ratio",
+        "type": "string",
+        "title": "Aspect Ratio",
+        "default": "16:9",
+        "description": "Aspect ratio of the output video."
+      },
+      "resolution": {
+        "enum": [
+          "480p",
+          "720p"
+        ],
+        "name": "resolution",
+        "type": "string",
+        "title": "Resolution",
+        "default": "720p",
+        "description": "Output video resolution."
+      },
+      "duration": {
+        "name": "duration",
+        "step": 1,
+        "type": "int",
+        "title": "Duration",
+        "default": 5,
+        "maxValue": 15,
+        "minValue": 4,
+        "description": "Video duration in seconds."
+      }
+    }
+  },
+  {
+    "id": "seedance-2-mini-image-to-video",
+    "name": "Seedance 2 Mini",
+    "endpoint": "seedance-2-mini-image-to-video",
+    "family": "seedance-2.0-mini",
+    "imageField": "images_list",
+    "inputs": {
+      "prompt": {
+        "description": "Text prompt guiding the video animation.",
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt"
+      },
+      "aspect_ratio": {
+        "enum": [
+          "16:9",
+          "9:16",
+          "1:1",
+          "3:4",
+          "4:3",
+          "21:9"
+        ],
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "type": "string",
+        "description": "Aspect ratio of the output video.",
+        "default": "16:9"
+      },
+      "resolution": {
+        "enum": [
+          "480p",
+          "720p"
+        ],
+        "title": "Resolution",
+        "name": "resolution",
+        "type": "string",
+        "description": "Output video resolution.",
+        "default": "720p"
+      },
+      "duration": {
+        "title": "Duration",
+        "name": "duration",
+        "type": "int",
+        "description": "Video duration in seconds.",
+        "default": 5,
+        "minValue": 4,
+        "maxValue": 15,
+        "step": 1
+      }
+    }
+  },
+  {
+    "id": "seedance-2-first-last-frame-fast",
+    "name": "Seedance 2 Fast (2)",
+    "endpoint": "seedance-2-first-last-frame-fast",
+    "family": "sd-2",
+    "imageField": "images_list",
+    "inputs": {
+      "prompt": {
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt",
+        "description": "Text description guiding the transition between frames."
+      },
+      "aspect_ratio": {
+        "enum": [
+          "adaptive",
+          "21:9",
+          "16:9",
+          "4:3",
+          "1:1",
+          "3:4",
+          "9:16"
+        ],
+        "type": "string",
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "description": "Output video aspect ratio. 'adaptive' matches the reference image (recommended); concrete ratios may crop or pad.",
+        "default": "adaptive"
+      },
+      "duration": {
+        "type": "int",
+        "title": "Duration (seconds)",
+        "name": "duration",
+        "description": "Video duration in seconds.",
+        "default": 5,
+        "minValue": 4,
+        "maxValue": 15,
+        "step": 1
+      }
+    }
+  },
+  {
+    "id": "seedance-2-omni-reference-no-video",
+    "name": "Seedance 2 Omni Reference No Video",
+    "endpoint": "seedance-2-omni-reference-no-video",
+    "family": "sd-2",
+    "imageField": "images_list",
+    "inputs": {
+      "prompt": {
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt",
+        "description": "Video description. Use @image1…@image9 to reference images and @audio1…@audio3 for audio. To use a character sheet, reference it with @character:<request_id> (from a completed Seedance 2 Character generation). To use a trained Omni Reference character, reference it with @omni-character:<character_id> where character_id is the value returned by Omni Reference Train Character (e.g. char_1775422630065_4vbana). Both methods can be combined in the same prompt. Multiple characters are supported. Example: '@omni-character:char_1775422630065_4vbana walking through a neon-lit city at night'."
+      },
+      "aspect_ratio": {
+        "enum": [
+          "16:9",
+          "9:16",
+          "4:3",
+          "3:4"
+        ],
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "type": "string",
+        "default": "16:9",
+        "description": "Output video aspect ratio."
+      },
+      "duration": {
+        "type": "int",
+        "title": "Duration (seconds)",
+        "name": "duration",
+        "description": "Video duration in seconds (4–15).",
+        "default": 5,
+        "minValue": 4,
+        "maxValue": 15,
+        "step": 1
+      }
+    }
+  },
+  {
+    "id": "seedance-2-omni-reference-480p",
+    "name": "Seedance 2 Omni Reference 480p",
+    "endpoint": "seedance-2-omni-reference-480p",
+    "family": "sd-v2.0",
+    "imageField": "images_list",
+    "inputs": {
+      "prompt": {
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt",
+        "description": "Video description. Use @image1…@image9 to reference images, @video1…@video3 for videos, @audio1…@audio3 for audio. To use a fictional character, reference it with @character:<id> (request_id from a completed Seedance 2 Character generation) — characters are automatically appended to images_list. Multiple characters are supported."
+      },
+      "aspect_ratio": {
+        "enum": [
+          "16:9",
+          "9:16",
+          "4:3",
+          "3:4"
+        ],
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "type": "string",
+        "default": "16:9",
+        "description": "Output video aspect ratio."
+      },
+      "quality": {
+        "enum": [
+          "high",
+          "basic"
+        ],
+        "title": "Quality",
+        "name": "quality",
+        "type": "string",
+        "default": "basic",
+        "description": "Generation quality. 'high' uses the standard model ($0.24/sec output + $0.072/sec per input video second). 'basic' uses the fast model ($0.18/sec output + $0.054/sec per input video second). Video reference inputs incur an additional 30% surcharge based on their combined duration."
+      },
+      "duration": {
+        "type": "int",
+        "title": "Duration (seconds)",
+        "name": "duration",
+        "description": "Video duration in seconds (8–15).",
+        "default": 8,
+        "minValue": 8,
+        "maxValue": 15,
+        "step": 1
+      }
+    }
+  },
+  {
+    "id": "seedance-2-omni-reference",
+    "name": "Seedance 2 Omni Reference",
+    "endpoint": "seedance-2-omni-reference",
+    "family": "sd-v2.0",
+    "imageField": "images_list",
+    "inputs": {
+      "prompt": {
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt",
+        "description": "Video description. Use @image1…@image9 to reference images, @video1…@video3 for videos, @audio1…@audio3 for audio. To use a character sheet, reference it with @character:<request_id> (from a completed Seedance 2 Character generation). To use a trained Omni Reference character, reference it with @omni-character:<character_id> where character_id is the value returned by Omni Reference Train Character (e.g. char_1775422630065_4vbana). Both methods can be combined in the same prompt. Multiple characters are supported. Example: '@omni-character:char_1775422630065_4vbana walking through a neon-lit city at night'."
+      },
+      "aspect_ratio": {
+        "enum": [
+          "21:9",
+          "16:9",
+          "4:3",
+          "1:1",
+          "3:4",
+          "9:16"
+        ],
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "type": "string",
+        "default": "16:9",
+        "description": "Output video aspect ratio."
+      },
+      "quality": {
+        "enum": [
+          "high",
+          "basic"
+        ],
+        "title": "Quality",
+        "name": "quality",
+        "type": "string",
+        "default": "high",
+        "description": "Generation quality. 'high' uses the standard model ($0.30/sec output + $0.09/sec per input video second). 'basic' uses the fast model (~2x speed, $0.21/sec output + $0.063/sec per input video second). Video reference inputs incur an additional 30% surcharge based on their combined duration."
+      },
+      "duration": {
+        "type": "int",
+        "title": "Duration (seconds)",
+        "name": "duration",
+        "description": "Video duration in seconds (4–15).",
+        "default": 5,
+        "minValue": 4,
+        "maxValue": 15,
+        "step": 1
+      }
+    }
+  },
+  {
+    "id": "seedance-2-omni-reference-no-video-fast",
+    "name": "Seedance 2 Omni Reference No Video Fast",
+    "endpoint": "seedance-2-omni-reference-no-video-fast",
+    "family": "sd-2",
+    "imageField": "images_list",
+    "inputs": {
+      "prompt": {
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt",
+        "description": "Video description. Use @image1…@image9 to reference images and @audio1…@audio3 for audio. To use a character sheet, reference it with @character:<request_id> (from a completed Seedance 2 Character generation). To use a trained Omni Reference character, reference it with @omni-character:<character_id> where character_id is the value returned by Omni Reference Train Character (e.g. char_1775422630065_4vbana). Both methods can be combined in the same prompt. Multiple characters are supported. Example: '@omni-character:char_1775422630065_4vbana walking through a neon-lit city at night'."
+      },
+      "aspect_ratio": {
+        "enum": [
+          "16:9",
+          "9:16",
+          "4:3",
+          "3:4"
+        ],
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "type": "string",
+        "default": "16:9",
+        "description": "Output video aspect ratio."
+      },
+      "duration": {
+        "type": "int",
+        "title": "Duration (seconds)",
+        "name": "duration",
+        "description": "Video duration in seconds (4–15).",
+        "default": 5,
+        "minValue": 4,
+        "maxValue": 15,
+        "step": 1
+      }
+    }
+  },
+  {
+    "id": "seedance-2-spicy-image-to-video",
+    "name": "Seedance 2 Spicy",
+    "endpoint": "seedance-2-spicy-image-to-video",
+    "family": "sd-2",
+    "imageField": "images_list",
+    "inputs": {
+      "prompt": {
+        "name": "prompt",
+        "type": "string",
+        "title": "Prompt",
+        "description": "Text description guiding the video animation. Use @character:<id> to reference a completed Seedance 2 Character generation. Use @omni-character:<char_id> for a trained Kinovi character."
+      },
+      "aspect_ratio": {
+        "enum": [
+          "21:9",
+          "16:9",
+          "4:3",
+          "1:1",
+          "3:4",
+          "9:16"
+        ],
+        "name": "aspect_ratio",
+        "type": "string",
+        "title": "Aspect Ratio",
+        "default": "16:9",
+        "description": "Output video aspect ratio."
+      },
+      "duration": {
+        "name": "duration",
+        "step": 1,
+        "type": "int",
+        "title": "Duration (seconds)",
+        "default": 5,
+        "maxValue": 15,
+        "minValue": 4,
+        "description": "Video duration in seconds."
+      }
+    }
+  },
+  {
+    "id": "seedance-2-vip-first-last-frame",
+    "name": "Seedance 2 VIP",
+    "endpoint": "seedance-2-vip-first-last-frame",
+    "family": "sd-2",
+    "imageField": "images_list",
+    "inputs": {
+      "prompt": {
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt",
+        "description": "Text description guiding the transition between frames."
+      },
+      "aspect_ratio": {
+        "enum": [
+          "adaptive",
+          "21:9",
+          "16:9",
+          "4:3",
+          "1:1",
+          "3:4",
+          "9:16"
+        ],
+        "type": "string",
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "description": "Output video aspect ratio. 'adaptive' matches the reference image (recommended); concrete ratios may crop or pad.",
+        "default": "adaptive"
+      },
+      "duration": {
+        "type": "int",
+        "title": "Duration (seconds)",
+        "name": "duration",
+        "description": "Video duration in seconds.",
+        "default": 5,
+        "minValue": 4,
+        "maxValue": 15,
+        "step": 1
+      }
+    }
+  },
+  {
+    "id": "seedance-2-spicy-image-to-video-fast",
+    "name": "Seedance 2 Spicy Fast",
+    "endpoint": "seedance-2-spicy-image-to-video-fast",
+    "family": "sd-2",
+    "imageField": "images_list",
+    "inputs": {
+      "prompt": {
+        "name": "prompt",
+        "type": "string",
+        "title": "Prompt",
+        "description": "Text description guiding the video animation. Use @character:<id> to reference a completed Seedance 2 Character generation. Use @omni-character:<char_id> for a trained Kinovi character."
+      },
+      "aspect_ratio": {
+        "enum": [
+          "21:9",
+          "16:9",
+          "4:3",
+          "1:1",
+          "3:4",
+          "9:16"
+        ],
+        "name": "aspect_ratio",
+        "type": "string",
+        "title": "Aspect Ratio",
+        "default": "16:9",
+        "description": "Output video aspect ratio."
+      },
+      "duration": {
+        "name": "duration",
+        "step": 1,
+        "type": "int",
+        "title": "Duration (seconds)",
+        "default": 5,
+        "maxValue": 15,
+        "minValue": 4,
+        "description": "Video duration in seconds."
+      }
+    }
+  },
+  {
+    "id": "seedance-2-vip-first-last-frame-1080p",
+    "name": "Seedance 2 VIP 1080p",
+    "endpoint": "seedance-2-vip-first-last-frame-1080p",
+    "family": "sd-2",
+    "imageField": "images_list",
+    "inputs": {
+      "prompt": {
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt",
+        "description": "Text description guiding the transition between frames."
+      },
+      "aspect_ratio": {
+        "enum": [
+          "adaptive",
+          "21:9",
+          "16:9",
+          "4:3",
+          "1:1",
+          "3:4",
+          "9:16"
+        ],
+        "type": "string",
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "description": "Output video aspect ratio. 'adaptive' matches the reference image (recommended); concrete ratios may crop or pad.",
+        "default": "adaptive"
+      },
+      "duration": {
+        "type": "int",
+        "title": "Duration (seconds)",
+        "name": "duration",
+        "description": "Video duration in seconds.",
+        "default": 5,
+        "minValue": 4,
+        "maxValue": 15,
+        "step": 1
+      }
+    }
+  },
+  {
+    "id": "seedance-2-vip-first-last-frame-fast",
+    "name": "Seedance 2 VIP Fast",
+    "endpoint": "seedance-2-vip-first-last-frame-fast",
+    "family": "sd-2",
+    "imageField": "images_list",
+    "inputs": {
+      "prompt": {
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt",
+        "description": "Text description guiding the transition between frames."
+      },
+      "aspect_ratio": {
+        "enum": [
+          "adaptive",
+          "21:9",
+          "16:9",
+          "4:3",
+          "1:1",
+          "3:4",
+          "9:16"
+        ],
+        "type": "string",
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "description": "Output video aspect ratio. 'adaptive' matches the reference image (recommended); concrete ratios may crop or pad.",
+        "default": "adaptive"
+      },
+      "duration": {
+        "type": "int",
+        "title": "Duration (seconds)",
+        "name": "duration",
+        "description": "Video duration in seconds.",
+        "default": 5,
+        "minValue": 4,
+        "maxValue": 15,
+        "step": 1
+      }
+    }
+  },
+  {
+    "id": "seedance-2-vip-first-last-frame-4k",
+    "name": "Seedance 2 VIP 4K",
+    "endpoint": "seedance-2-vip-first-last-frame-4k",
+    "family": "sd-2",
+    "imageField": "images_list",
+    "inputs": {
+      "prompt": {
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt",
+        "description": "Text description guiding the transition between frames."
+      },
+      "aspect_ratio": {
+        "enum": [
+          "adaptive",
+          "21:9",
+          "16:9",
+          "4:3",
+          "1:1",
+          "3:4",
+          "9:16"
+        ],
+        "type": "string",
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "description": "Output video aspect ratio. ‘adaptive’ matches the reference image (recommended); concrete ratios may crop or pad.",
+        "default": "adaptive"
+      },
+      "duration": {
+        "type": "int",
+        "title": "Duration (seconds)",
+        "name": "duration",
+        "description": "Video duration in seconds.",
+        "default": 5,
+        "minValue": 4,
+        "maxValue": 15,
+        "step": 1
+      }
+    }
+  },
+  {
+    "id": "seedance-2-vip-image-to-video",
+    "name": "Seedance 2 VIP (2)",
+    "endpoint": "seedance-2-vip-image-to-video",
+    "family": "sd-2",
+    "imageField": "images_list",
+    "inputs": {
+      "prompt": {
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt",
+        "description": "Text description guiding the video animation. Use @character:<id> to reference a completed Seedance 2 Character generation. Use @omni-character:<char_id> for a trained Kinovi character."
+      },
+      "aspect_ratio": {
+        "enum": [
+          "21:9",
+          "16:9",
+          "4:3",
+          "1:1",
+          "3:4",
+          "9:16"
+        ],
+        "type": "string",
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "description": "Output video aspect ratio.",
+        "default": "16:9"
+      },
+      "duration": {
+        "type": "int",
+        "title": "Duration (seconds)",
+        "name": "duration",
+        "description": "Video duration in seconds.",
+        "default": 5,
+        "minValue": 4,
+        "maxValue": 15,
+        "step": 1
+      }
+    }
+  },
+  {
+    "id": "seedance-2-vip-image-to-video-1080p",
+    "name": "Seedance 2 VIP 1080p (2)",
+    "endpoint": "seedance-2-vip-image-to-video-1080p",
+    "family": "sd-2",
+    "imageField": "images_list",
+    "inputs": {
+      "prompt": {
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt",
+        "description": "Optional text description guiding the video motion."
+      },
+      "aspect_ratio": {
+        "enum": [
+          "21:9",
+          "16:9",
+          "4:3",
+          "1:1",
+          "3:4",
+          "9:16"
+        ],
+        "type": "string",
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "description": "Output video aspect ratio.",
+        "default": "16:9"
+      },
+      "duration": {
+        "type": "int",
+        "title": "Duration (seconds)",
+        "name": "duration",
+        "description": "Video duration in seconds.",
+        "default": 5,
+        "minValue": 4,
+        "maxValue": 15,
+        "step": 1
+      }
+    }
+  },
+  {
+    "id": "seedance-2-vip-image-to-video-4k",
+    "name": "Seedance 2 VIP 4K (2)",
+    "endpoint": "seedance-2-vip-image-to-video-4k",
+    "family": "sd-2",
+    "imageField": "images_list",
+    "inputs": {
+      "prompt": {
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt",
+        "description": "Optional text description guiding the video motion."
+      },
+      "aspect_ratio": {
+        "enum": [
+          "21:9",
+          "16:9",
+          "4:3",
+          "1:1",
+          "3:4",
+          "9:16"
+        ],
+        "type": "string",
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "description": "Output video aspect ratio.",
+        "default": "16:9"
+      },
+      "duration": {
+        "type": "int",
+        "title": "Duration (seconds)",
+        "name": "duration",
+        "description": "Video duration in seconds.",
+        "default": 5,
+        "minValue": 4,
+        "maxValue": 15,
+        "step": 1
+      }
+    }
+  },
+  {
+    "id": "seedance-2-vip-image-to-video-fast",
+    "name": "Seedance 2 VIP Fast (2)",
+    "endpoint": "seedance-2-vip-image-to-video-fast",
+    "family": "sd-2",
+    "imageField": "images_list",
+    "inputs": {
+      "prompt": {
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt",
+        "description": "Text description guiding the video animation. Use @character:<id> to reference a completed Seedance 2 Character generation. Use @omni-character:<char_id> for a trained Kinovi character."
+      },
+      "aspect_ratio": {
+        "enum": [
+          "21:9",
+          "16:9",
+          "4:3",
+          "1:1",
+          "3:4",
+          "9:16"
+        ],
+        "type": "string",
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "description": "Output video aspect ratio.",
+        "default": "16:9"
+      },
+      "duration": {
+        "type": "int",
+        "title": "Duration (seconds)",
+        "name": "duration",
+        "description": "Video duration in seconds.",
+        "default": 5,
+        "minValue": 4,
+        "maxValue": 15,
+        "step": 1
+      }
+    }
+  },
+  {
+    "id": "seedance-2-vip-omni-reference",
+    "name": "Seedance 2 VIP Omni Reference",
+    "endpoint": "seedance-2-vip-omni-reference",
+    "family": "sd-2",
+    "imageField": "images_list",
+    "inputs": {
+      "prompt": {
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt",
+        "description": "Video description. Use @image1…@image9 to reference images, @video1…@video3 for videos, and @audio1…@audio3 for audio. Use @character:<request_id> for a Seedance 2 character sheet or @omni-character:<char_id> for a trained Kinovi character. Multiple characters are supported."
+      },
+      "aspect_ratio": {
+        "enum": [
+          "21:9",
+          "16:9",
+          "4:3",
+          "1:1",
+          "3:4",
+          "9:16"
+        ],
+        "type": "string",
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "description": "Output video aspect ratio.",
+        "default": "16:9"
+      },
+      "duration": {
+        "type": "int",
+        "title": "Duration (seconds)",
+        "name": "duration",
+        "description": "Video duration in seconds.",
+        "default": 5,
+        "minValue": 4,
+        "maxValue": 15,
+        "step": 1
+      }
+    }
+  },
+  {
+    "id": "seedance-2.1-image-to-video",
+    "name": "Seedance 2.1",
+    "endpoint": "seedance-2.1-image-to-video",
+    "family": "seedance-2.1",
+    "imageField": "image_url",
+    "lastImageField": "last_image",
+    "inputs": {
+      "prompt": {
+        "description": "Text prompt describing the video motion and style.",
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt"
+      },
+      "aspect_ratio": {
+        "enum": [
+          "16:9",
+          "9:16",
+          "1:1",
+          "3:4",
+          "4:3",
+          "21:9"
+        ],
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "type": "string",
+        "description": "Aspect ratio of the output video.",
+        "default": "16:9"
+      },
+      "resolution": {
+        "enum": [
+          "480p",
+          "720p",
+          "1080p"
+        ],
+        "title": "Resolution",
+        "name": "resolution",
+        "type": "string",
+        "description": "Output video resolution.",
+        "default": "720p"
+      },
+      "duration": {
+        "title": "Duration",
+        "name": "duration",
+        "type": "int",
+        "description": "The duration of the generated video in seconds.",
+        "default": 5,
+        "minValue": 4,
+        "maxValue": 12,
+        "step": 1
+      }
+    }
+  },
+  {
+    "id": "seedance-2-vip-omni-reference-fast",
+    "name": "Seedance 2 VIP Omni Reference Fast",
+    "endpoint": "seedance-2-vip-omni-reference-fast",
+    "family": "sd-2",
+    "imageField": "images_list",
+    "inputs": {
+      "prompt": {
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt",
+        "description": "Video description. Use @image1…@image9 to reference images, @video1…@video3 for videos, and @audio1…@audio3 for audio. Use @character:<request_id> for a Seedance 2 character sheet or @omni-character:<char_id> for a trained Kinovi character. Multiple characters are supported."
+      },
+      "aspect_ratio": {
+        "enum": [
+          "21:9",
+          "16:9",
+          "4:3",
+          "1:1",
+          "3:4",
+          "9:16"
+        ],
+        "type": "string",
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "description": "Output video aspect ratio.",
+        "default": "16:9"
+      },
+      "duration": {
+        "type": "int",
+        "title": "Duration (seconds)",
+        "name": "duration",
+        "description": "Video duration in seconds.",
+        "default": 5,
+        "minValue": 4,
+        "maxValue": 15,
+        "step": 1
+      }
+    }
+  },
+  {
+    "id": "seedance-2-vip-omni-reference-4k",
+    "name": "Seedance 2 VIP Omni Reference 4K",
+    "endpoint": "seedance-2-vip-omni-reference-4k",
+    "family": "sd-2",
+    "imageField": "images_list",
+    "inputs": {
+      "prompt": {
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt",
+        "description": "Video description. Use @image1…@image9 to reference images, @video1…@video3 for videos, and @audio1…@audio3 for audio. Use @character:<request_id> for a Seedance 2 character sheet or @omni-character:<char_id> for a trained Kinovi character. Multiple characters are supported."
+      },
+      "aspect_ratio": {
+        "enum": [
+          "21:9",
+          "16:9",
+          "4:3",
+          "1:1",
+          "3:4",
+          "9:16"
+        ],
+        "type": "string",
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "description": "Output video aspect ratio.",
+        "default": "16:9"
+      },
+      "duration": {
+        "type": "int",
+        "title": "Duration (seconds)",
+        "name": "duration",
+        "description": "Video duration in seconds.",
+        "default": 5,
+        "minValue": 4,
+        "maxValue": 15,
+        "step": 1
+      }
+    }
+  },
+  {
+    "id": "seedance-2-vip-omni-reference-1080p",
+    "name": "Seedance 2 VIP Omni Reference 1080p",
+    "endpoint": "seedance-2-vip-omni-reference-1080p",
+    "family": "sd-2",
+    "imageField": "images_list",
+    "inputs": {
+      "prompt": {
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt",
+        "description": "Video description. Use @image1…@image9 to reference images, @video1…@video3 for videos, and @audio1…@audio3 for audio. Use @character:<request_id> for a Seedance 2 character sheet or @omni-character:<char_id> for a trained Kinovi character. Multiple characters are supported."
+      },
+      "aspect_ratio": {
+        "enum": [
+          "21:9",
+          "16:9",
+          "4:3",
+          "1:1",
+          "3:4",
+          "9:16"
+        ],
+        "type": "string",
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "description": "Output video aspect ratio.",
+        "default": "16:9"
+      },
+      "duration": {
+        "type": "int",
+        "title": "Duration (seconds)",
+        "name": "duration",
+        "description": "Video duration in seconds.",
+        "default": 5,
+        "minValue": 4,
+        "maxValue": 15,
+        "step": 1
+      }
+    }
+  },
+  {
+    "id": "seedance-2.5-first-last-frame",
+    "name": "Seedance 2.5",
+    "endpoint": "seedance-2.5-first-last-frame",
+    "family": "seedance-2.5",
+    "imageField": "images_list",
+    "inputs": {
+      "prompt": {
+        "description": "Text prompt describing the transition and motion.",
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt"
+      },
+      "aspect_ratio": {
+        "enum": [
+          "16:9",
+          "9:16",
+          "1:1",
+          "4:3",
+          "3:4",
+          "21:9",
+          "9:21"
+        ],
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "type": "string",
+        "description": "Aspect ratio of the output video.",
+        "default": "16:9"
+      },
+      "duration": {
+        "title": "Duration",
+        "name": "duration",
+        "type": "int",
+        "description": "The duration of the generated video in seconds.",
+        "default": 5,
+        "minValue": 4,
+        "maxValue": 30,
+        "step": 1
+      }
+    }
+  },
+  {
+    "id": "seedance-2.5-first-last-frame-1080p",
+    "name": "Seedance 2.5 1080p",
+    "endpoint": "seedance-2.5-first-last-frame-1080p",
+    "family": "seedance-2.5",
+    "imageField": "images_list",
+    "inputs": {
+      "prompt": {
+        "description": "Text prompt describing the transition and motion.",
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt"
+      },
+      "aspect_ratio": {
+        "enum": [
+          "16:9",
+          "9:16",
+          "1:1",
+          "4:3",
+          "3:4",
+          "21:9",
+          "9:21"
+        ],
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "type": "string",
+        "description": "Aspect ratio of the output video.",
+        "default": "16:9"
+      },
+      "duration": {
+        "title": "Duration",
+        "name": "duration",
+        "type": "int",
+        "description": "The duration of the generated video in seconds.",
+        "default": 5,
+        "minValue": 4,
+        "maxValue": 30,
+        "step": 1
+      }
+    }
+  },
+  {
+    "id": "seedance-2.5-first-last-frame-4k",
+    "name": "Seedance 2.5 4K",
+    "endpoint": "seedance-2.5-first-last-frame-4k",
+    "family": "seedance-2.5",
+    "imageField": "images_list",
+    "inputs": {
+      "prompt": {
+        "description": "Text prompt describing the transition and motion.",
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt"
+      },
+      "aspect_ratio": {
+        "enum": [
+          "16:9",
+          "9:16",
+          "1:1",
+          "4:3",
+          "3:4",
+          "21:9",
+          "9:21"
+        ],
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "type": "string",
+        "description": "Aspect ratio of the output video.",
+        "default": "16:9"
+      },
+      "duration": {
+        "title": "Duration",
+        "name": "duration",
+        "type": "int",
+        "description": "The duration of the generated video in seconds.",
+        "default": 5,
+        "minValue": 4,
+        "maxValue": 30,
+        "step": 1
+      }
+    }
+  },
+  {
+    "id": "seedance-2.5-image-to-video",
+    "name": "Seedance 2.5 (2)",
+    "endpoint": "seedance-2.5-image-to-video",
+    "family": "seedance-2.5",
+    "imageField": "image_url",
+    "inputs": {
+      "prompt": {
+        "description": "Text prompt describing the desired motion and style.",
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt"
+      },
+      "aspect_ratio": {
+        "enum": [
+          "16:9",
+          "9:16",
+          "1:1",
+          "4:3",
+          "3:4",
+          "21:9",
+          "9:21"
+        ],
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "type": "string",
+        "description": "Aspect ratio of the output video.",
+        "default": "16:9"
+      },
+      "duration": {
+        "title": "Duration",
+        "name": "duration",
+        "type": "int",
+        "description": "The duration of the generated video in seconds.",
+        "default": 5,
+        "minValue": 4,
+        "maxValue": 30,
+        "step": 1
+      }
+    }
+  },
+  {
+    "id": "seedance-2.5-omni-reference-1080p",
+    "name": "Seedance 2.5 Omni Reference 1080p",
+    "endpoint": "seedance-2.5-omni-reference-1080p",
+    "family": "seedance-2.5",
+    "imageField": "images_list",
+    "inputs": {
+      "prompt": {
+        "description": "Text prompt describing the desired video, referencing the provided images, video clips, and audio as environment, motion, and mood cues.",
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt"
+      },
+      "aspect_ratio": {
+        "enum": [
+          "16:9",
+          "9:16",
+          "1:1",
+          "4:3",
+          "3:4",
+          "21:9",
+          "9:21"
+        ],
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "type": "string",
+        "description": "Aspect ratio of the output video.",
+        "default": "16:9"
+      },
+      "duration": {
+        "title": "Duration",
+        "name": "duration",
+        "type": "int",
+        "description": "The duration of the generated video in seconds.",
+        "default": 5,
+        "minValue": 4,
+        "maxValue": 30,
+        "step": 1
+      }
+    }
+  },
+  {
+    "id": "seedance-2.5-image-to-video-4k",
+    "name": "Seedance 2.5 4K (2)",
+    "endpoint": "seedance-2.5-image-to-video-4k",
+    "family": "seedance-2.5",
+    "imageField": "image_url",
+    "inputs": {
+      "prompt": {
+        "description": "Text prompt describing the desired motion and style.",
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt"
+      },
+      "aspect_ratio": {
+        "enum": [
+          "16:9",
+          "9:16",
+          "1:1",
+          "4:3",
+          "3:4",
+          "21:9",
+          "9:21"
+        ],
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "type": "string",
+        "description": "Aspect ratio of the output video.",
+        "default": "16:9"
+      },
+      "duration": {
+        "title": "Duration",
+        "name": "duration",
+        "type": "int",
+        "description": "The duration of the generated video in seconds.",
+        "default": 5,
+        "minValue": 4,
+        "maxValue": 30,
+        "step": 1
+      }
+    }
+  },
+  {
+    "id": "seedance-2.5-first-last-frame-480p",
+    "name": "Seedance 2.5 480p",
+    "endpoint": "seedance-2.5-first-last-frame-480p",
+    "family": "seedance-2.5",
+    "imageField": "images_list",
+    "inputs": {
+      "prompt": {
+        "description": "Text prompt describing the transition and motion.",
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt"
+      },
+      "aspect_ratio": {
+        "enum": [
+          "16:9",
+          "9:16",
+          "1:1",
+          "4:3",
+          "3:4",
+          "21:9",
+          "9:21"
+        ],
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "type": "string",
+        "description": "Aspect ratio of the output video.",
+        "default": "16:9"
+      },
+      "duration": {
+        "title": "Duration",
+        "name": "duration",
+        "type": "int",
+        "description": "The duration of the generated video in seconds.",
+        "default": 5,
+        "minValue": 4,
+        "maxValue": 30,
+        "step": 1
+      }
+    }
+  },
+  {
+    "id": "seedance-2.5-image-to-video-480p",
+    "name": "Seedance 2.5 480p (2)",
+    "endpoint": "seedance-2.5-image-to-video-480p",
+    "family": "seedance-2.5",
+    "imageField": "image_url",
+    "inputs": {
+      "prompt": {
+        "description": "Text prompt describing the desired motion and style.",
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt"
+      },
+      "aspect_ratio": {
+        "enum": [
+          "16:9",
+          "9:16",
+          "1:1",
+          "4:3",
+          "3:4",
+          "21:9",
+          "9:21"
+        ],
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "type": "string",
+        "description": "Aspect ratio of the output video.",
+        "default": "16:9"
+      },
+      "duration": {
+        "title": "Duration",
+        "name": "duration",
+        "type": "int",
+        "description": "The duration of the generated video in seconds.",
+        "default": 5,
+        "minValue": 4,
+        "maxValue": 30,
+        "step": 1
+      }
+    }
+  },
+  {
+    "id": "seedance-2.5-image-to-video-1080p",
+    "name": "Seedance 2.5 1080p (2)",
+    "endpoint": "seedance-2.5-image-to-video-1080p",
+    "family": "seedance-2.5",
+    "imageField": "image_url",
+    "inputs": {
+      "prompt": {
+        "description": "Text prompt describing the desired motion and style.",
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt"
+      },
+      "aspect_ratio": {
+        "enum": [
+          "16:9",
+          "9:16",
+          "1:1",
+          "4:3",
+          "3:4",
+          "21:9",
+          "9:21"
+        ],
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "type": "string",
+        "description": "Aspect ratio of the output video.",
+        "default": "16:9"
+      },
+      "duration": {
+        "title": "Duration",
+        "name": "duration",
+        "type": "int",
+        "description": "The duration of the generated video in seconds.",
+        "default": 5,
+        "minValue": 4,
+        "maxValue": 30,
+        "step": 1
+      }
+    }
+  },
+  {
+    "id": "seedance-2.5-omni-reference",
+    "name": "Seedance 2.5 Omni Reference",
+    "endpoint": "seedance-2.5-omni-reference",
+    "family": "seedance-2.5",
+    "imageField": "images_list",
+    "inputs": {
+      "prompt": {
+        "description": "Text prompt describing the desired video, referencing the provided images, video clips, and audio as environment, motion, and mood cues.",
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt"
+      },
+      "aspect_ratio": {
+        "enum": [
+          "16:9",
+          "9:16",
+          "1:1",
+          "4:3",
+          "3:4",
+          "21:9",
+          "9:21"
+        ],
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "type": "string",
+        "description": "Aspect ratio of the output video.",
+        "default": "16:9"
+      },
+      "duration": {
+        "title": "Duration",
+        "name": "duration",
+        "type": "int",
+        "description": "The duration of the generated video in seconds.",
+        "default": 5,
+        "minValue": 4,
+        "maxValue": 30,
+        "step": 1
+      }
+    }
+  },
+  {
+    "id": "seedance-2.5-omni-reference-480p",
+    "name": "Seedance 2.5 Omni Reference 480p",
+    "endpoint": "seedance-2.5-omni-reference-480p",
+    "family": "seedance-2.5",
+    "imageField": "images_list",
+    "inputs": {
+      "prompt": {
+        "description": "Text prompt describing the desired video, referencing the provided images, video clips, and audio as environment, motion, and mood cues.",
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt"
+      },
+      "aspect_ratio": {
+        "enum": [
+          "16:9",
+          "9:16",
+          "1:1",
+          "4:3",
+          "3:4",
+          "21:9",
+          "9:21"
+        ],
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "type": "string",
+        "description": "Aspect ratio of the output video.",
+        "default": "16:9"
+      },
+      "duration": {
+        "title": "Duration",
+        "name": "duration",
+        "type": "int",
+        "description": "The duration of the generated video in seconds.",
+        "default": 5,
+        "minValue": 4,
+        "maxValue": 30,
+        "step": 1
+      }
+    }
+  },
+  {
+    "id": "seedance-2.5-omni-reference-4k",
+    "name": "Seedance 2.5 Omni Reference 4K",
+    "endpoint": "seedance-2.5-omni-reference-4k",
+    "family": "seedance-2.5",
+    "imageField": "images_list",
+    "inputs": {
+      "prompt": {
+        "description": "Text prompt describing the desired video, referencing the provided images, video clips, and audio as environment, motion, and mood cues.",
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt"
+      },
+      "aspect_ratio": {
+        "enum": [
+          "16:9",
+          "9:16",
+          "1:1",
+          "4:3",
+          "3:4",
+          "21:9",
+          "9:21"
+        ],
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "type": "string",
+        "description": "Aspect ratio of the output video.",
+        "default": "16:9"
+      },
+      "duration": {
+        "title": "Duration",
+        "name": "duration",
+        "type": "int",
+        "description": "The duration of the generated video in seconds.",
+        "default": 5,
+        "minValue": 4,
+        "maxValue": 30,
+        "step": 1
+      }
+    }
+  },
+  {
+    "id": "vidu-q3-pro-image-to-video",
+    "name": "Vidu Q3 Pro",
+    "endpoint": "vidu-q3-pro-image-to-video",
+    "family": "vidu-q3-pro",
+    "imageField": "image_url",
+    "inputs": {
+      "prompt": {
+        "description": "Text prompt describing the motion.",
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt"
+      },
+      "aspect_ratio": {
+        "enum": [
+          "16:9",
+          "9:16",
+          "4:3",
+          "3:4",
+          "1:1"
+        ],
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "type": "string",
+        "description": "Aspect ratio of the output video.",
+        "default": "16:9"
+      },
+      "resolution": {
+        "enum": [
+          "360p",
+          "540p",
+          "720p",
+          "1080p"
+        ],
+        "title": "Resolution",
+        "name": "resolution",
+        "type": "string",
+        "description": "The resolution of the generated video.",
+        "default": "720p"
+      },
+      "duration": {
+        "title": "Duration",
+        "name": "duration",
+        "type": "int",
+        "description": "The duration of the generated video in seconds.",
+        "default": 5,
+        "minValue": 1,
+        "maxValue": 16,
+        "step": 1
+      }
+    }
+  },
+  {
+    "id": "seedance-2.5-spicy-image-to-video",
+    "name": "Seedance 2.5 Spicy",
+    "endpoint": "seedance-2.5-spicy-image-to-video",
+    "family": "seedance-2.5",
+    "imageField": "image_url",
+    "lastImageField": "last_image",
+    "inputs": {
+      "prompt": {
+        "name": "prompt",
+        "type": "string",
+        "title": "Prompt",
+        "description": "Text prompt describing the video motion and style. Spicy mode favors bolder, higher-contrast, more expressive results."
+      },
+      "aspect_ratio": {
+        "enum": [
+          "16:9",
+          "9:16",
+          "1:1",
+          "3:4",
+          "4:3",
+          "21:9"
+        ],
+        "name": "aspect_ratio",
+        "type": "string",
+        "title": "Aspect Ratio",
+        "default": "16:9",
+        "description": "Aspect ratio of the output video."
+      },
+      "resolution": {
+        "enum": [
+          "480p",
+          "720p",
+          "1080p",
+          "4K"
+        ],
+        "name": "resolution",
+        "type": "string",
+        "title": "Resolution",
+        "default": "1080p",
+        "description": "Output video resolution."
+      },
+      "duration": {
+        "name": "duration",
+        "step": 1,
+        "type": "int",
+        "title": "Duration",
+        "default": 5,
+        "maxValue": 16,
+        "minValue": 4,
+        "description": "The duration of the generated video in seconds."
+      }
+    }
+  },
+  {
+    "id": "veo-4-image-to-video",
+    "name": "Veo 4",
+    "endpoint": "veo-4-image-to-video",
+    "family": "veo-4",
+    "imageField": "images_list",
+    "inputs": {
+      "prompt": {
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt",
+        "description": "Optional text description guiding the motion and camera movement."
+      },
+      "aspect_ratio": {
+        "enum": [
+          "16:9",
+          "9:16",
+          "1:1"
+        ],
+        "type": "string",
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "description": "Output video aspect ratio.",
+        "default": "16:9"
+      },
+      "duration": {
+        "type": "int",
+        "title": "Duration (seconds)",
+        "name": "duration",
+        "description": "Video duration in seconds.",
+        "default": 8,
+        "minValue": 5,
+        "maxValue": 30,
+        "step": 1
+      }
+    }
+  },
+  {
+    "id": "vidu-q2-pro-image-to-video",
+    "name": "Vidu Q2 Pro",
+    "endpoint": "vidu-q2-pro-image-to-video",
+    "family": "vidu-q2",
+    "imageField": "image_url",
+    "inputs": {
+      "prompt": {
+        "description": "Text prompt describing the motion.",
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt"
+      },
+      "aspect_ratio": {
+        "enum": [
+          "16:9",
+          "9:16",
+          "1:1"
+        ],
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "type": "string",
+        "description": "Aspect ratio of the output video. Match this to your source image to avoid cropping.",
+        "default": "16:9"
+      },
+      "resolution": {
+        "enum": [
+          "720p",
+          "1080p"
+        ],
+        "title": "Resolution",
+        "name": "resolution",
+        "type": "string",
+        "description": "The resolution of the generated video.",
+        "default": "720p"
+      },
+      "duration": {
+        "title": "Duration",
+        "name": "duration",
+        "type": "int",
+        "description": "The duration of the generated video in seconds.",
+        "default": 5,
+        "minValue": 2,
+        "maxValue": 8,
+        "step": 1
+      }
+    }
+  },
+  {
+    "id": "vidu-q2-turbo-image-to-video",
+    "name": "Vidu Q2 Turbo",
+    "endpoint": "vidu-q2-turbo-image-to-video",
+    "family": "vidu-q2",
+    "imageField": "image_url",
+    "inputs": {
+      "prompt": {
+        "description": "Text prompt describing the motion.",
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt"
+      },
+      "aspect_ratio": {
+        "enum": [
+          "16:9",
+          "9:16",
+          "1:1"
+        ],
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "type": "string",
+        "description": "Aspect ratio of the output video. Match this to your source image to avoid cropping.",
+        "default": "16:9"
+      },
+      "resolution": {
+        "enum": [
+          "720p",
+          "1080p"
+        ],
+        "title": "Resolution",
+        "name": "resolution",
+        "type": "string",
+        "description": "The resolution of the generated video.",
+        "default": "720p"
+      },
+      "duration": {
+        "title": "Duration",
+        "name": "duration",
+        "type": "int",
+        "description": "The duration of the generated video in seconds.",
+        "default": 5,
+        "minValue": 2,
+        "maxValue": 8,
+        "step": 1
+      }
+    }
+  },
+  {
+    "id": "vidu-q3-pro-first-last-frames",
+    "name": "Vidu Q3 Pro S",
+    "endpoint": "vidu-q3-pro-first-last-frames",
+    "family": "vidu-q3-pro",
+    "imageField": "image_url",
+    "lastImageField": "last_image",
+    "inputs": {
+      "prompt": {
+        "description": "Text prompt describing the transition.",
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt"
+      },
+      "aspect_ratio": {
+        "enum": [
+          "16:9",
+          "9:16",
+          "4:3",
+          "3:4",
+          "1:1"
+        ],
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "type": "string",
+        "description": "Aspect ratio of the output video.",
+        "default": "16:9"
+      },
+      "resolution": {
+        "enum": [
+          "360p",
+          "540p",
+          "720p",
+          "1080p"
+        ],
+        "title": "Resolution",
+        "name": "resolution",
+        "type": "string",
+        "description": "The resolution of the generated video.",
+        "default": "720p"
+      },
+      "duration": {
+        "title": "Duration",
+        "name": "duration",
+        "type": "int",
+        "description": "The duration of the generated video in seconds.",
+        "default": 5,
+        "minValue": 1,
+        "maxValue": 16,
+        "step": 1
+      }
+    }
+  },
+  {
+    "id": "vidu-q3-turbo-first-last-frames",
+    "name": "Vidu Q3 Turbo S",
+    "endpoint": "vidu-q3-turbo-first-last-frames",
+    "family": "vidu-q3-turbo",
+    "imageField": "image_url",
+    "lastImageField": "last_image",
+    "inputs": {
+      "prompt": {
+        "description": "Text prompt describing the transition.",
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt"
+      },
+      "aspect_ratio": {
+        "enum": [
+          "16:9",
+          "9:16",
+          "4:3",
+          "3:4",
+          "1:1"
+        ],
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "type": "string",
+        "description": "Aspect ratio of the output video.",
+        "default": "16:9"
+      },
+      "resolution": {
+        "enum": [
+          "360p",
+          "540p",
+          "720p",
+          "1080p"
+        ],
+        "title": "Resolution",
+        "name": "resolution",
+        "type": "string",
+        "description": "The resolution of the generated video.",
+        "default": "720p"
+      },
+      "duration": {
+        "title": "Duration",
+        "name": "duration",
+        "type": "int",
+        "description": "The duration of the generated video in seconds.",
+        "default": 5,
+        "minValue": 1,
+        "maxValue": 16,
+        "step": 1
+      }
+    }
+  },
+  {
+    "id": "vidu-q3-turbo-image-to-video",
+    "name": "Vidu Q3 Turbo",
+    "endpoint": "vidu-q3-turbo-image-to-video",
+    "family": "vidu-q3-turbo",
+    "imageField": "image_url",
+    "inputs": {
+      "prompt": {
+        "description": "Text prompt describing the motion.",
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt"
+      },
+      "aspect_ratio": {
+        "enum": [
+          "16:9",
+          "9:16",
+          "4:3",
+          "3:4",
+          "1:1"
+        ],
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "type": "string",
+        "description": "Aspect ratio of the output video.",
+        "default": "16:9"
+      },
+      "resolution": {
+        "enum": [
+          "360p",
+          "540p",
+          "720p",
+          "1080p"
+        ],
+        "title": "Resolution",
+        "name": "resolution",
+        "type": "string",
+        "description": "The resolution of the generated video.",
+        "default": "720p"
+      },
+      "duration": {
+        "title": "Duration",
+        "name": "duration",
+        "type": "int",
+        "description": "The duration of the generated video in seconds.",
+        "default": 5,
+        "minValue": 1,
+        "maxValue": 16,
+        "step": 1
+      }
+    }
+  },
+  {
+    "id": "wan3.0-spicy-image-to-video",
+    "name": "Wan3.0 Spicy",
+    "endpoint": "wan3.0-spicy-image-to-video",
+    "family": "wan3.0",
+    "imageField": "image_url",
+    "inputs": {
+      "prompt": {
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt",
+        "description": "Describe the motion and scene you want to create with the Spicy variant."
+      }
+    }
+  },
+  {
+    "id": "wan2.7-image-to-video",
+    "name": "Wan2.7",
+    "endpoint": "wan2.7-image-to-video",
+    "family": "wan2.7",
+    "imageField": "image_url",
+    "lastImageField": "last_image",
+    "inputs": {
+      "prompt": {
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt",
+        "description": "Text description"
+      },
+      "resolution": {
+        "enum": [
+          "720p",
+          "1080p"
+        ],
+        "type": "string",
+        "title": "Resolution",
+        "name": "resolution",
+        "default": "720p"
+      },
+      "duration": {
+        "type": "int",
+        "title": "Duration",
+        "name": "duration",
+        "description": "Video duration in seconds (2-15).",
+        "default": 5,
+        "minValue": 2,
+        "maxValue": 15,
+        "step": 1
+      }
+    }
+  },
+  {
+    "id": "wan3.0-image-to-video",
+    "name": "Wan3.0",
+    "endpoint": "wan3.0-image-to-video",
+    "family": "wan3.0",
+    "imageField": "image_url",
+    "inputs": {
+      "prompt": {
+        "name": "prompt",
+        "type": "string",
+        "title": "Prompt",
+        "description": "Describe the motion and scene you want to create."
+      }
+    }
+  },
+  {
+    "id": "wan2.7-reference-to-video",
+    "name": "Wan2.7 (2)",
+    "endpoint": "wan2.7-reference-to-video",
+    "family": "wan2.7",
+    "imageField": "images_list",
+    "inputs": {
+      "prompt": {
+        "type": "string",
+        "title": "Prompt",
+        "name": "prompt",
+        "description": "Text description of the desired motion and scene."
+      },
+      "aspect_ratio": {
+        "enum": [
+          "16:9",
+          "9:16",
+          "1:1",
+          "4:3",
+          "3:4"
+        ],
+        "type": "string",
+        "title": "Aspect Ratio",
+        "name": "aspect_ratio",
+        "description": "The aspect ratio of the generated video.",
+        "default": "16:9"
+      },
+      "resolution": {
+        "enum": [
+          "720p",
+          "1080p"
+        ],
+        "type": "string",
+        "title": "Resolution",
+        "name": "resolution",
+        "description": "Output resolution",
+        "default": "720p"
+      },
+      "duration": {
+        "type": "int",
+        "title": "Duration",
+        "name": "duration",
+        "description": "Video duration in seconds (2-10).",
+        "default": 5,
+        "minValue": 2,
+        "maxValue": 10
+      }
+    }
   }
 ];
 
@@ -8071,6 +14714,68 @@ export const lipsyncModels = [
         "default": "480p"
       }
     }
+  },
+  // ── Newly added: synced from the live Muapi model catalog ──
+  {
+    "id": "kling-v2-avatar-pro",
+    "name": "Kling v2 Avatar Pro",
+    "endpoint": "kling-v2-avatar-pro",
+    "family": "kling-v2",
+    "category": "image",
+    "hasPrompt": true,
+    "description": "AI-Avatar v2 Pro takes a reference image of a person/character and an audio dialogue clip, then generates a realistic talking-avatar video. It preserves identity, lip syncs accurately to the audio, adds natural head movement, eye motion, expressions, and cinematic lighting.",
+    "inputs": {}
+  },
+  {
+    "id": "kling-v1-avatar-standard",
+    "name": "Kling v1 Avatar Standard",
+    "endpoint": "kling-v1-avatar-standard",
+    "family": "kling-v1",
+    "category": "image",
+    "hasPrompt": true,
+    "description": "Kling AI Avatar Standard creates talking avatar videos from a single image + audio input. It supports realistic humans, animals, or stylized characters, producing lip-synced avatar videos easily.",
+    "inputs": {}
+  },
+  {
+    "id": "omnihuman-1-5",
+    "name": "Omnihuman 1 5",
+    "endpoint": "omnihuman-1-5",
+    "family": "omnihuman",
+    "category": "image",
+    "hasPrompt": true,
+    "description": "Generate realistic talking head video from portrait image and audio using KIE OmniHuman 1.5.",
+    "inputs": {
+      "resolution": {
+        "type": "string",
+        "title": "Resolution",
+        "name": "resolution",
+        "enum": [
+          "720",
+          "1080"
+        ],
+        "default": "1080"
+      }
+    }
+  },
+  {
+    "id": "kling-v1-avatar-pro",
+    "name": "Kling v1 Avatar Pro",
+    "endpoint": "kling-v1-avatar-pro",
+    "family": "kling-v1",
+    "category": "image",
+    "hasPrompt": true,
+    "description": "Kling AI Avatar Pro is the premium tier for making high-quality talking avatars. You upload a character image plus an audio file, and the model generates a realistic avatar video with lip-sync.",
+    "inputs": {}
+  },
+  {
+    "id": "kling-v2-avatar-standard",
+    "name": "Kling v2 Avatar Standard",
+    "endpoint": "kling-v2-avatar-standard",
+    "family": "kling-v2",
+    "category": "image",
+    "hasPrompt": true,
+    "description": "AI-Avatar v2 Standard generates a talking-avatar video from a reference image and an audio dialogue. It performs accurate lip-sync, natural facial expressions, subtle head motion, blinking, and light emotional cues based on voice tone. This Standard version focuses on speed and natural realism.",
+    "inputs": {}
   }
 ];
 
