@@ -1,0 +1,10 @@
+{
+  "name": "Open Generative AI",
+  "install": "bash .cursor/install.sh",
+  "terminals": [
+    {
+      "name": "next-dev",
+      "command": "npm run dev"
+    }
+  ]
+}
